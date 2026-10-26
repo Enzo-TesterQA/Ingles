@@ -1,0 +1,198 @@
+{
+ "cache": {
+  "suena": "KASH",
+  "error": "\"ca-CHÉ\""
+ },
+ "queue": {
+  "suena": "KYOO (igual que la letra Q)",
+  "error": "\"ku-É-u\""
+ },
+ "suite": {
+  "suena": "SWEET",
+  "error": "\"SUIT\" (eso es traje)"
+ },
+ "data": {
+  "suena": "DÉI-ta o DA-ta",
+  "error": "Las dos formas son correctas; el error es decir \"da-TA\""
+ },
+ "api": {
+  "suena": "ei-pi-AI (letra por letra)",
+  "error": "\"A-pi\""
+ },
+ "sql": {
+  "suena": "ES-kiu-el o SII-kwel",
+  "error": "\"es-ku-ELE\""
+ },
+ "linux": {
+  "suena": "LI-nuks",
+  "error": "\"LAI-nuks\""
+ },
+ "gui": {
+  "suena": "GUU-i",
+  "error": "\"gu-I\""
+ },
+ "json": {
+  "suena": "YEI-son",
+  "error": "\"YOT-son\""
+ },
+ "yaml": {
+  "suena": "YA-mel",
+  "error": "\"ya-MAL\""
+ },
+ "azure": {
+  "suena": "A-zher",
+  "error": "\"a-SU-re\""
+ },
+ "kubernetes": {
+  "suena": "kuu-ber-NE-tis",
+  "error": "\"ku-ber-NE-tes\""
+ },
+ "nginx": {
+  "suena": "EN-yin-EKS",
+  "error": "\"en-GINKS\""
+ },
+ "sudo": {
+  "suena": "SUU-du",
+  "error": "\"SU-do\""
+ },
+ "agile": {
+  "suena": "A-yail o A-yel",
+  "error": "\"a-YIL\""
+ },
+ "debug": {
+  "suena": "dii-BAG",
+  "error": "\"de-BUG\""
+ },
+ "deploy": {
+  "suena": "di-PLOI",
+  "error": "\"DE-ploi\""
+ },
+ "automation": {
+  "suena": "o-to-MEI-shon",
+  "error": "\"au-to-ma-SION\""
+ },
+ "environment": {
+  "suena": "en-VAI-ron-ment",
+  "error": "\"en-vi-RON-ment\""
+ },
+ "development": {
+  "suena": "di-VE-lop-ment",
+  "error": "\"de-ve-LOP-ment\""
+ },
+ "architecture": {
+  "suena": "AR-ki-tek-cher",
+  "error": "\"ar-chi-tec-TU-re\""
+ },
+ "requirement": {
+  "suena": "ri-KWAIR-ment",
+  "error": "\"re-ki-RE-ment\""
+ },
+ "feature": {
+  "suena": "FII-cher",
+  "error": "\"fea-TU-re\""
+ },
+ "issue": {
+  "suena": "I-shuu",
+  "error": "\"I-siu\""
+ },
+ "schedule": {
+  "suena": "SKE-yul (US)",
+  "error": "\"sche-DU-le\""
+ },
+ "width": {
+  "suena": "width: WIDZ (th suave al final) / height: JAIT",
+  "error": "\"JEIGT\" (la gh no suena)"
+ },
+ "height": {
+  "suena": "width: WIDZ (th suave al final) / height: JAIT",
+  "error": "\"JEIGT\" (la gh no suena)"
+ },
+ "results": {
+  "suena": "ri-ZALTS",
+  "error": "\"re-SULTS\""
+ },
+ "hierarchy": {
+  "suena": "JAI-rar-ki",
+  "error": "\"je-RAR-kia\""
+ },
+ "algorithm": {
+  "suena": "AL-go-ri-dhem",
+  "error": "\"al-go-RIT-mo\""
+ },
+ "wednesday": {
+  "suena": "WENZ-dei",
+  "error": "\"WED-nes-dei\""
+ },
+ "technology": {
+  "suena": "tek-NO-lo-yi",
+  "error": "acento como en español (tecnología)"
+ },
+ "analysis": {
+  "suena": "a-NA-li-sis",
+  "error": "acento como en español (análisis)"
+ },
+ "analyze": {
+  "suena": "A-na-laiz",
+  "error": "acento como en español (analizar)"
+ },
+ "category": {
+  "suena": "KA-te-go-ri",
+  "error": "acento como en español (categoría)"
+ },
+ "component": {
+  "suena": "com-PO-nent",
+  "error": "acento como en español (componente)"
+ },
+ "infrastructure": {
+  "suena": "IN-fra-struc-cher",
+  "error": "acento como en español (infraestructura)"
+ },
+ "performance": {
+  "suena": "per-FOR-mans",
+  "error": "acento como en español (rendimiento)"
+ },
+ "priority": {
+  "suena": "prai-O-ri-ti",
+  "error": "acento como en español (prioridad)"
+ },
+ "reliability": {
+  "suena": "ri-lai-a-BI-li-ti",
+  "error": "acento como en español (confiabilidad)"
+ },
+ "scalability": {
+  "suena": "skei-la-BI-li-ti",
+  "error": "acento como en español (escalabilidad)"
+ },
+ "maintenance": {
+  "suena": "MEIN-te-nans",
+  "error": "acento como en español (mantenimiento)"
+ },
+ "validate": {
+  "suena": "VA-li-deit",
+  "error": "acento como en español (validar)"
+ },
+ "integrate": {
+  "suena": "IN-te-greit",
+  "error": "acento como en español (integrar)"
+ },
+ "implement": {
+  "suena": "IM-ple-ment",
+  "error": "acento como en español (implementar)"
+ },
+ "interesting": {
+  "suena": "IN-tres-ting",
+  "error": "acento como en español (interesante)"
+ },
+ "comfortable": {
+  "suena": "KAMF-ter-bel",
+  "error": "acento como en español (cómodo)"
+ },
+ "determine": {
+  "suena": "de-TER-min",
+  "error": "acento como en español (determinar)"
+ },
+ "specific": {
+  "suena": "spe-SI-fik",
+  "error": "acento como en español (específico)"
+ }
+}

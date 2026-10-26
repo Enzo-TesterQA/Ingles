@@ -1,0 +1,24 @@
+H6 · Tell me about a time you had to learn something new.
+
+── Reporte · H6 ────────────────────────────────────────
+Duración     0:25   (objetivo 1:30 a 3:00: corta)
+Palabras     13 · 42 por minuto · lento: está bien pensar, pero buscá más fluidez
+Muletillas   0
+
+Tiempos verbales que usaste (aproximado)
+  Present Simple 2
+  Tu respuesta modelo usa: past simple para toda la historia (joined, saw, took, practiced, became), present simple para hoy (I enjoy).
+
+No encontré errores de los que el coach sabe detectar. Igual pasale la respuesta a Claude.
+
+Palabras clave del modelo: usaste ninguna
+  Podés sumar: Accusys, Codo, Selenium, Java, Python
+
+Lo que dijiste
+Well, when I start to work in courses, I come from a banking...
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+H6: Well, when I start to work in courses, I come from a banking...
+(Pregunta: Tell me about a time you had to learn something new. · 0:25 · 42 palabras por minuto · respuesta hablada, transcripta con el coach)

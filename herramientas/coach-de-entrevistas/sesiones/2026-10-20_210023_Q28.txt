@@ -1,0 +1,20 @@
+Q28 · Tell me about a time you pushed back on a release.
+
+── Reporte · Q28 ───────────────────────────────────────
+Duración     1:13   (objetivo 1:30 a 3:00: corta)
+Palabras     166 · 138 por minuto · buen ritmo
+Muletillas   1: kind of / sort of x1
+
+Tiempos verbales que usaste (aproximado)
+  Past Simple 12 · Present Simple 3 · Present Perfect 2 · Past Perfect 1
+
+No encontré errores de los que el coach sabe detectar. Igual pasale la respuesta a Claude.
+
+Lo que dijiste
+Last quarter, we were about to release a new version of our RISC score and tool to production. I was the QA automation engineer and I was responsible for the final regulation. During the last tests, I found a critical bug. The release reset every user's RISC score to zero, so people would have lost all their configurations data. I was in the go-no-go meeting with the Dutch engineering leads and the CTO, and I told them we had just stopped the release. I showed them the filing test and the exact steps to reproduce it. I said that staying quiet would have been much more expensive than a one-day redilay. They agreed, and we postponed the release. The developers fixed the bug the next day, I rerun the full regression, and we reset safely. As a result, we avoid data loss for all our users, and the team adds a new check to the pipeline to catch the kind of issue earlier.
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+Q28: Last quarter, we were about to release a new version of our RISC score and tool to production. I was the QA automation engineer and I was responsible for the final regulation. During the last tests, I found a critical bug. The release reset every user's RISC score to zero, so people would have lost all their configurations data. I was in the go-no-go meeting with the Dutch engineering leads and the CTO, and I told them we had just stopped the release. I showed them the filing test and the exact steps to reproduce it. I said that staying quiet would have been much more expensive than a one-day redilay. They agreed, and we postponed the release. The developers fixed the bug the next day, I rerun the full regression, and we reset safely. As a result, we avoid data loss for all our users, and the team adds a new check to the pipeline to catch the kind of issue earlier.
+(Pregunta: Tell me about a time you pushed back on a release. · 1:13 · 138 palabras por minuto · respuesta hablada, transcripta con el coach)

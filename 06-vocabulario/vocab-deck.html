@@ -1,0 +1,428 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body><title>Vocab Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one index card at a time in the middle, deck filters above it, per-section progress below. Max 760px, one column. */
+:root {
+  --bg: #edf1ef;
+  --surface: #ffffff;
+  --ink: #17221d;
+  --muted: #56645d;
+  --line: #d3ddd8;
+  --accent: #1d6b4f;
+  --accent-ink: #ffffff;
+  --accent-soft: #dcefe6;
+  --rule: #d9534f;
+  --mark: #fff0a6;
+  --mark-ink: #17221d;
+  --good: #23774a;
+  --mid: #9a6a00;
+  --bad: #b23c32;
+  --font-ui: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101614; --surface: #18201d; --ink: #e3ebe7; --muted: #94a69d; --line: #2a3631;
+    --accent: #6fd0a6; --accent-ink: #101614; --accent-soft: #1d3329; --rule: #e57a73;
+    --mark: #5c4f12; --mark-ink: #fff6cf; --good: #6fd0a6; --mid: #f0c060; --bad: #ff8a7d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101614; --surface: #18201d; --ink: #e3ebe7; --muted: #94a69d; --line: #2a3631;
+  --accent: #6fd0a6; --accent-ink: #101614; --accent-soft: #1d3329; --rule: #e57a73;
+  --mark: #5c4f12; --mark-ink: #fff6cf; --good: #6fd0a6; --mid: #f0c060; --bad: #ff8a7d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 17px; line-height: 1.5; }
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; display: grid; gap: 22px; }
+p { margin: 0; }
+h1 { margin: 0; font-size: clamp(30px, 6vw, 42px); line-height: 1.05; letter-spacing: -.015em; text-wrap: balance; }
+.eyebrow, .label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.lead { color: var(--muted); max-width: 64ch; }
+header { display: grid; gap: 8px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.card:focus { outline: none; }
+.filters { display: grid; gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: inherit; font-size: 15px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.between { justify-content: space-between; }
+.tick { display: inline-flex; gap: 8px; align-items: center; font-size: 15px; }
+.tick input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 1px 0 var(--line), 0 10px 30px -18px rgba(0,0,0,.35); padding: 0 22px 22px; display: grid; gap: 16px; min-width: 0; position: relative; }
+.card-top { border-bottom: 2px solid var(--rule); margin-inline: -22px; padding: 12px 22px 10px; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.term { font-size: clamp(30px, 7vw, 44px); font-weight: 700; line-height: 1.1; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.term.sentence { font-size: clamp(22px, 5vw, 28px); font-weight: 400; }
+.prompt { color: var(--muted); }
+.answer { display: grid; gap: 10px; border-top: 1px dashed var(--line); padding-top: 14px; }
+.meaning { font-size: 22px; font-weight: 700; }
+.example { font-style: italic; }
+mark { background: var(--mark); color: var(--mark-ink); padding: 0 2px; border-radius: 2px; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; font-weight: 700; }
+.btn { font: inherit; font-weight: 700; font-size: 16px; border: 0; border-radius: 8px; padding: 11px 18px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.grades { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.grade { font: inherit; font-weight: 700; font-size: 15px; border-radius: 8px; padding: 11px 8px; cursor: pointer; background: var(--surface); border: 2px solid currentColor; }
+.grade.bad { color: var(--bad); } .grade.mid { color: var(--mid); } .grade.good { color: var(--good); }
+.grade:hover { background: var(--bg); }
+.count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.boxes { display: inline-flex; gap: 3px; align-items: center; }
+.boxes i { width: 8px; height: 8px; border-radius: 2px; background: var(--line); display: inline-block; }
+.boxes i.on { background: var(--accent); }
+.summary { display: grid; gap: 12px; }
+.tally { display: flex; gap: 18px; flex-wrap: wrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.tally b { font-size: 26px; display: block; font-family: var(--font-ui); }
+.review-list { margin: 0; padding-left: 20px; }
+.progress { display: grid; gap: 10px; }
+.prog-row { display: grid; grid-template-columns: minmax(0, 12em) 1fr 4.5em; gap: 10px; align-items: center; font-size: 15px; }
+.bar { height: 10px; background: var(--bg); border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--accent); }
+.num { font-family: var(--font-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 12px; }
+.note { font-size: 14px; color: var(--muted); }
+.toast { font-size: 14px; color: var(--good); font-weight: 700; min-height: 1.2em; }
+textarea.copy { font: inherit; font-size: 14px; width: 100%; min-height: 110px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--bg); color: var(--ink); }
+@media (max-width: 520px) { .prog-row { grid-template-columns: minmax(0, 1fr) 4.5em; } .prog-row .bar { grid-column: 1 / -1; grid-row: 2; } .card { padding: 0 16px 18px; } .card-top { margin-inline: -16px; padding-inline: 16px; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Punto 6 · Vocabulario técnico QA &amp; AI</p>
+    <h1>Vocab Deck</h1>
+    <p class="lead">Tarjetas con todo el apunte de vocabulario: 111 términos, 26 falsos amigos y 20 errores típicos. Decí la respuesta en voz alta antes de dar vuelta la tarjeta y calificate con honestidad: las que no sabés vuelven más seguido.</p>
+  </header>
+
+  <section class="filters" aria-label="Qué practicar">
+    <p class="label">Secciones</p>
+    <div class="chips" id="secChips"></div>
+    <div class="row between">
+      <div class="chips" id="dirChips" role="group" aria-label="Dirección de las tarjetas 1 a 5">
+        <button class="chip" data-dir="en" type="button">Inglés → español</button>
+        <button class="chip" data-dir="es" type="button">Español → inglés</button>
+      </div>
+      <label class="tick"><input type="checkbox" id="hardOnly"> Solo las que me cuestan</label>
+    </div>
+  </section>
+
+  <article class="card" id="card" aria-live="polite" tabindex="-1">
+    <div class="card-top">
+      <span class="label" id="cardSec"></span>
+      <span class="row"><span class="boxes" id="cardBoxes" title="Nivel de la tarjeta"></span><span class="count" id="cardCount"></span></span>
+    </div>
+    <div class="term" id="cardTerm"></div>
+    <p class="prompt" id="cardPrompt"></p>
+    <div class="answer" id="cardAnswer" hidden></div>
+    <div id="revealRow" class="row">
+      <button class="btn" id="revealBtn" type="button">Ver respuesta</button>
+      <span class="note">Atajo: barra espaciadora</span>
+    </div>
+    <div id="gradeRow" hidden>
+      <div class="grades">
+        <button class="grade bad" data-g="bad" type="button">No la sabía</button>
+        <button class="grade mid" data-g="mid" type="button">Más o menos</button>
+        <button class="grade good" data-g="good" type="button">La sabía</button>
+      </div>
+      <p class="note" style="margin-top:8px">Atajos: 1, 2 y 3</p>
+    </div>
+  </article>
+
+  <article class="card" id="emptyCard" hidden>
+    <div class="card-top"><span class="label">Sin tarjetas</span></div>
+    <p>No hay tarjetas que te cuesten en estas secciones. Sacá el filtro “Solo las que me cuestan” para practicar todas.</p>
+  </article>
+
+  <section class="panel summary" id="summary" hidden aria-live="polite">
+    <p class="label">Fin de la ronda</p>
+    <div class="tally" id="tally"></div>
+    <div id="reviewWrap" class="summary">
+      <p><b>Para repasar:</b></p>
+      <ul class="review-list" id="reviewList"></ul>
+      <div class="row">
+        <button class="btn ghost" id="copyBtn" type="button">Copiar para mi banco de palabras</button>
+        <span class="toast" id="toast"></span>
+      </div>
+      <p class="note">Se copian como filas de la tabla “Mi banco de palabras” del cuaderno. Completá tu oración en cada una.</p>
+      <textarea class="copy" id="copyArea" hidden readonly aria-label="Texto para copiar"></textarea>
+    </div>
+    <div class="row"><button class="btn" id="nextRound" type="button">Otra ronda</button></div>
+  </section>
+
+  <section class="panel" aria-label="Progreso">
+    <div class="row between">
+      <p class="label">Tu progreso</p>
+      <span class="count" id="seenCount"></span>
+    </div>
+    <div class="progress" id="progress"></div>
+    <p class="note">Cada tarjeta tiene 5 niveles. La primera vez entra en el nivel 3 si la sabías, en el 2 si más o menos y en el 1 si no. Después, “La sabía” la sube un nivel, “Más o menos” la deja igual y “No la sabía” la vuelve al 1. Las que no sabías se repiten una vez al final de la ronda. La barra cuenta las tarjetas en nivel 4 o 5, y “Solo las que me cuestan” muestra las de nivel 1 y 2. El progreso se guarda solo en este navegador.</p>
+    <div class="row" id="resetRow">
+      <button class="btn ghost" id="resetBtn" type="button">Borrar mi progreso</button>
+    </div>
+    <div class="row" id="confirmRow" hidden>
+      <span>¿Seguro? Se borran todos los niveles.</span>
+      <button class="btn" id="resetYes" type="button">Sí, borrar</button>
+      <button class="btn ghost" id="resetNo" type="button">Cancelar</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA = [{"s":1,"en":"test case","es":"caso de prueba","ex":"I wrote 30 test cases for the new checkout flow."},{"s":1,"en":"test suite","es":"conjunto de pruebas","ex":"The regression suite has around 400 tests."},{"s":1,"en":"test plan / test strategy","es":"plan / estrategia de pruebas","ex":"I shared the test plan with the team before the sprint started."},{"s":1,"en":"coverage","es":"cobertura","ex":"We increased API test coverage to 80%."},{"s":1,"en":"edge case","es":"caso límite","ex":"Empty carts are an edge case we often forget."},{"s":1,"en":"corner case","es":"caso extremo (varias condiciones límite juntas)","ex":"That bug only happens in a corner case with two discounts and a refund."},{"s":1,"en":"happy path","es":"flujo ideal sin errores","ex":"The happy path works, but the error messages are wrong."},{"s":1,"en":"negative testing","es":"pruebas con datos inválidos","ex":"Negative testing showed the API accepted negative quantities."},{"s":1,"en":"exploratory testing","es":"pruebas exploratorias","ex":"I found the issue during an exploratory testing session."},{"s":1,"en":"acceptance criteria","es":"criterios de aceptación","ex":"The story isn't ready because it has no acceptance criteria."},{"s":1,"en":"expected / actual result","es":"resultado esperado / obtenido","ex":"Expected result: an error message. Actual result: a blank page."},{"s":1,"en":"sign-off","es":"aprobación final","ex":"QA sign-off is required before every release."},{"s":1,"en":"go / no-go","es":"decisión de lanzar o no","ex":"I gave a no-go because of an open blocker."},{"s":1,"en":"shift-left","es":"probar más temprano en el ciclo","ex":"We're shifting left by reviewing stories before development."},{"s":1,"en":"test environment / staging","es":"entorno de pruebas","ex":"The bug only reproduces on staging."},{"s":1,"en":"load / stress testing","es":"pruebas de carga / estrés","ex":"We ran load tests with k6 before Black Friday."},{"s":1,"en":"usability","es":"usabilidad","ex":"Automation can't evaluate usability."},{"s":1,"en":"accessibility (a11y)","es":"accesibilidad","ex":"We added accessibility checks to the pipeline."},{"s":1,"en":"reliability","es":"confiabilidad","ex":"Flaky tests hurt the reliability of the suite."},{"s":2,"en":"framework","es":"estructura base de automatización","ex":"I built the framework with Playwright and TypeScript."},{"s":2,"en":"locator / selector","es":"localizador de un elemento","ex":"Use data-testid locators instead of CSS classes."},{"s":2,"en":"assertion","es":"verificación en un test","ex":"The test failed on the second assertion."},{"s":2,"en":"fixture","es":"datos o estado preparado para un test","ex":"Each test gets a fresh user from a fixture."},{"s":2,"en":"mock / stub","es":"simulación de un servicio","ex":"We mocked the payment provider to test errors."},{"s":2,"en":"flaky test","es":"test inestable (a veces pasa, a veces falla)","ex":"That flaky test failed three times this week."},{"s":2,"en":"wait (implicit / explicit)","es":"espera","ex":"Replace the hard-coded wait with an explicit wait."},{"s":2,"en":"headless","es":"sin interfaz gráfica","ex":"Tests run headless in CI."},{"s":2,"en":"pipeline","es":"flujo automatizado de build y deploy","ex":"The pipeline takes 12 minutes."},{"s":2,"en":"build","es":"compilación / versión generada","ex":"The build is broken since the last merge."},{"s":2,"en":"deploy / deployment","es":"despliegue","ex":"We deploy to production twice a week."},{"s":2,"en":"rollback / roll back","es":"volver a la versión anterior","ex":"We had to roll back the release."},{"s":2,"en":"hotfix","es":"arreglo urgente en producción","ex":"The hotfix went out the same afternoon."},{"s":2,"en":"merge","es":"integrar cambios","ex":"Don't merge until the checks are green."},{"s":2,"en":"pull request (PR) / merge request","es":"pedido de integración de código","ex":"I left two comments on your PR."},{"s":2,"en":"branch","es":"rama","ex":"I created a branch for the new tests."},{"s":2,"en":"green / red","es":"pasando / fallando","ex":"The pipeline is green again."},{"s":2,"en":"nightly run","es":"ejecución nocturna","ex":"The nightly run caught a regression."},{"s":2,"en":"parallel execution","es":"ejecución en paralelo","ex":"Parallel execution cut the time in half."},{"s":2,"en":"artifact","es":"archivo generado por el pipeline (reportes, binarios)","ex":"Download the test report from the job artifacts."},{"s":2,"en":"environment variable","es":"variable de entorno","ex":"The deploy failed because of a missing environment variable."},{"s":2,"en":"refactor","es":"reestructurar código sin cambiar comportamiento","ex":"I refactored the page objects to remove duplication."},{"s":2,"en":"maintainability","es":"facilidad de mantenimiento","ex":"The Page Object Model improves maintainability."},{"s":3,"en":"endpoint","es":"URL de un recurso de la API","ex":"The /orders endpoint returns a 500 error."},{"s":3,"en":"request / response","es":"pedido / respuesta","ex":"The response body is missing the total field."},{"s":3,"en":"payload","es":"contenido que se envía","ex":"The payload is too large for the endpoint."},{"s":3,"en":"status code","es":"código de estado HTTP","ex":"It should return 404, not 200."},{"s":3,"en":"header","es":"encabezado","ex":"The auth token goes in the Authorization header."},{"s":3,"en":"authentication / authorization","es":"quién sos / qué podés hacer","ex":"A normal user passed the authorization check for admin routes."},{"s":3,"en":"schema / contract","es":"estructura acordada de datos","ex":"The new version broke the contract with the mobile app."},{"s":3,"en":"latency / response time","es":"demora / tiempo de respuesta","ex":"Latency went up to 2 seconds after the deploy."},{"s":3,"en":"timeout","es":"tiempo de espera agotado","ex":"The test failed with a timeout."},{"s":3,"en":"bug / defect / issue","es":"error","ex":"I logged the issue in Jira."},{"s":3,"en":"blocker","es":"error que bloquea el release o el trabajo","ex":"That bug is a blocker for the release."},{"s":3,"en":"severity / priority","es":"gravedad / prioridad","ex":"High severity, but low priority because few users are affected."},{"s":3,"en":"root cause","es":"causa raíz","ex":"The root cause was a race condition."},{"s":3,"en":"race condition","es":"error por concurrencia","ex":"Two requests at the same time caused a race condition."},{"s":3,"en":"regression","es":"algo que funcionaba y se rompió","ex":"This is a regression from last week's release."},{"s":3,"en":"workaround","es":"solución provisoria","ex":"There's a workaround: refresh the page."},{"s":3,"en":"to reproduce (repro)","es":"reproducir","ex":"I can't reproduce it on Chrome."},{"s":3,"en":"intermittent","es":"intermitente","ex":"It's an intermittent issue, it fails 1 in 10 times."},{"s":3,"en":"log / logs","es":"registros","ex":"I attached the logs to the ticket."},{"s":3,"en":"stack trace","es":"traza del error","ex":"The stack trace points to the payment service."},{"s":3,"en":"triage","es":"clasificar y priorizar bugs","ex":"We triage new bugs every Monday."},{"s":3,"en":"outage / incident","es":"caída / incidente","ex":"There was a 20-minute outage last night."},{"s":3,"en":"post-mortem","es":"análisis después de un incidente","ex":"We wrote a post-mortem with action items."},{"s":4,"en":"LLM (large language model)","es":"modelo de lenguaje grande","ex":"We use an LLM to summarize bug reports."},{"s":4,"en":"prompt","es":"instrucción que se le da al modelo","ex":"A small change in the prompt changed the output a lot."},{"s":4,"en":"system prompt","es":"instrucciones fijas del sistema","ex":"The system prompt tells the agent which tools it can use."},{"s":4,"en":"token","es":"unidad de texto que procesa el modelo","ex":"Long documents use a lot of tokens."},{"s":4,"en":"context window","es":"cantidad de texto que el modelo puede leer a la vez","ex":"The whole log didn't fit in the context window."},{"s":4,"en":"temperature","es":"grado de aleatoriedad de la respuesta","ex":"We set the temperature to 0 for tests."},{"s":4,"en":"hallucination","es":"respuesta inventada","ex":"The model hallucinated an API endpoint that doesn't exist."},{"s":4,"en":"grounding","es":"basar la respuesta en fuentes","ex":"Grounding the answers in our docs reduced hallucinations."},{"s":4,"en":"RAG (retrieval-augmented generation)","es":"generación con documentos recuperados","ex":"Our support bot uses RAG over the help center."},{"s":4,"en":"embedding","es":"representación numérica del significado","ex":"We generate embeddings for every document."},{"s":4,"en":"vector database / vector store","es":"base de datos de embeddings","ex":"The vector store returns the five closest chunks."},{"s":4,"en":"chunk / chunking","es":"fragmento / dividir documentos","ex":"Smaller chunks improved retrieval."},{"s":4,"en":"agent","es":"sistema que decide pasos y usa herramientas","ex":"The agent opens a ticket when a test fails."},{"s":4,"en":"tool calling / function calling","es":"que el modelo llame funciones","ex":"Tool calling lets the agent query the database."},{"s":4,"en":"orchestration / orchestrator","es":"coordinación de varios agentes o pasos","ex":"The orchestrator splits the task between three agents."},{"s":4,"en":"MCP (Model Context Protocol)","es":"protocolo para conectar modelos con herramientas","ex":"We exposed our test runner as an MCP server."},{"s":4,"en":"eval / evaluation","es":"evaluación de calidad del modelo","ex":"Every prompt change has to pass the evals."},{"s":4,"en":"LLM-as-a-judge","es":"usar un modelo para calificar respuestas","ex":"We use an LLM as a judge to score relevance."},{"s":4,"en":"ground truth","es":"respuesta de referencia correcta","ex":"We built a ground truth dataset of 200 questions."},{"s":4,"en":"guardrails","es":"límites y controles de seguridad","ex":"Guardrails block answers with personal data."},{"s":4,"en":"prompt injection","es":"instrucciones maliciosas en la entrada","ex":"The agent followed a prompt injection hidden in a web page."},{"s":4,"en":"fine-tuning","es":"reentrenar un modelo con datos propios","ex":"We didn't need fine-tuning, RAG was enough."},{"s":4,"en":"latency / throughput","es":"demora / cantidad de pedidos por segundo","ex":"Streaming improved perceived latency."},{"s":4,"en":"non-deterministic","es":"no determinístico (no siempre da lo mismo)","ex":"LLM outputs are non-deterministic, so we test properties."},{"s":5,"en":"sprint","es":"iteración de trabajo","ex":"We work in two-week sprints."},{"s":5,"en":"backlog","es":"lista de trabajo pendiente","ex":"The bug went back to the backlog."},{"s":5,"en":"user story","es":"historia de usuario","ex":"Each user story has acceptance criteria."},{"s":5,"en":"stand-up / daily","es":"reunión diaria","ex":"I mentioned the blocker in the stand-up."},{"s":5,"en":"refinement / grooming","es":"refinamiento de historias","ex":"During refinement, I ask about edge cases."},{"s":5,"en":"retro (retrospective)","es":"retrospectiva","ex":"In the retro, we agreed to write tests earlier."},{"s":5,"en":"estimate / story points","es":"estimación / puntos","ex":"I estimated the testing effort at three points."},{"s":5,"en":"stakeholder","es":"persona interesada o afectada","ex":"We presented the results to the stakeholders."},{"s":5,"en":"deadline","es":"fecha límite","ex":"The deadline is next Friday."},{"s":5,"en":"scope","es":"alcance","ex":"Mobile is out of scope for this release."},{"s":5,"en":"handover / hand off","es":"traspaso de trabajo","ex":"I'll hand off the tests to the new QA next week."},{"s":5,"en":"ownership / to own","es":"responsabilidad / hacerse cargo","ex":"I own the end-to-end suite."},{"s":5,"en":"to follow up","es":"hacer seguimiento","ex":"I'll follow up with the dev team tomorrow."},{"s":5,"en":"to escalate","es":"escalar un problema","ex":"If it's not fixed today, I'll escalate it to the lead."},{"s":5,"en":"to sync / a quick sync","es":"coordinar / reunión corta","ex":"Can we have a quick sync after lunch?"},{"s":5,"en":"to be on the same page","es":"estar alineados","ex":"Let's make sure we're on the same page about the scope."},{"s":5,"en":"action items","es":"tareas que salen de una reunión","ex":"I'll send the action items after the meeting."},{"s":5,"en":"bandwidth","es":"capacidad / tiempo disponible","ex":"I don't have the bandwidth to test both features this sprint."},{"s":5,"en":"trade-off","es":"compromiso entre dos opciones","ex":"It's a trade-off between speed and coverage."},{"s":5,"en":"to push back","es":"oponerse con argumentos","ex":"I pushed back on releasing without regression tests."},{"s":5,"en":"heads-up","es":"aviso previo","ex":"Just a heads-up: staging will be down at 3 pm."},{"s":5,"en":"ETA","es":"tiempo estimado de llegada / entrega","ex":"What's the ETA for the fix?"},{"s":6,"en":"actually","es":"en realidad","no":"actualmente","use":"currently, right now"},{"s":6,"en":"eventually","es":"finalmente, con el tiempo","no":"eventualmente (quizás)","use":"possibly, at some point"},{"s":6,"en":"realize","es":"darse cuenta","no":"realizar","use":"do, carry out, run (tests)"},{"s":6,"en":"assist","es":"ayudar","no":"asistir (ir)","use":"attend (a meeting)"},{"s":6,"en":"attend","es":"asistir, ir a","no":"atender","use":"serve, deal with, take care of"},{"s":6,"en":"career","es":"carrera profesional","no":"carrera universitaria","use":"degree, studies"},{"s":6,"en":"support","es":"apoyar, dar soporte","no":"soportar (aguantar)","use":"stand, put up with"},{"s":6,"en":"sensible","es":"sensato","no":"sensible","use":"sensitive (sensitive data)"},{"s":6,"en":"library","es":"biblioteca (también de código)","no":"librería (negocio)","use":"bookstore"},{"s":6,"en":"exit","es":"salida","no":"éxito","use":"success"},{"s":6,"en":"succeed","es":"tener éxito","no":"suceder","use":"happen"},{"s":6,"en":"compromise","es":"acuerdo / concesión; también comprometer la seguridad","no":"compromiso (obligación)","use":"commitment"},{"s":6,"en":"discussion","es":"conversación, debate","no":"discusión (pelea)","use":"argument"},{"s":6,"en":"argument","es":"discusión fuerte o argumento","no":"solo argumento","use":"point, reason (para argumento)"},{"s":6,"en":"demand","es":"exigir","no":"demandar (judicialmente)","use":"sue"},{"s":6,"en":"lecture","es":"clase magistral, charla","no":"lectura","use":"reading"},{"s":6,"en":"advice","es":"consejo","no":"aviso","use":"warning, notice, heads-up"},{"s":6,"en":"resume / résumé","es":"retomar / CV","no":"resumir","use":"summarize, sum up"},{"s":6,"en":"particular","es":"específico","no":"privado / particular de una persona","use":"private, personal"},{"s":6,"en":"topic","es":"tema","no":"tópico (lugar común)","use":"cliché"},{"s":6,"en":"embarrassed","es":"avergonzado","no":"embarazada","use":"pregnant"},{"s":6,"en":"constipated","es":"estreñido","no":"resfriado","use":"have a cold"},{"s":6,"en":"quite","es":"bastante","no":"quitar","use":"remove"},{"s":6,"en":"deception","es":"engaño","no":"decepción","use":"disappointment"},{"s":6,"en":"pretend","es":"fingir","no":"pretender (aspirar)","use":"intend, aim, expect"},{"s":6,"en":"application","es":"aplicación / postulación a un trabajo","no":"solo app","use":"(contexto) I sent my application."},{"s":7,"wrong":"Is very important to test early.","right":"**It** is very important to test early.","rule":"En inglés el sujeto nunca se omite."},{"s":7,"wrong":"The people is happy with the release.","right":"The people **are** happy.","rule":"People es plural."},{"s":7,"wrong":"I received many feedbacks / informations / advices.","right":"I received a lot of **feedback / information / advice**.","rule":"Incontables: sin plural y sin \"a\"."},{"s":7,"wrong":"I have experience in testing of APIs.","right":"I have experience **in API testing**.","rule":"El sustantivo que describe va adelante."},{"s":7,"wrong":"The automation is important for the companies.","right":"Automation is important for companies.","rule":"Hablando en general, sin \"the\"."},{"s":7,"wrong":"I'm working in Globant.","right":"I work **at** Globant.","rule":"At + empresa. In + ciudad / equipo / área."},{"s":7,"wrong":"The meeting is in Monday at the 10.","right":"The meeting is **on** Monday **at** 10.","rule":"On + día, at + hora, in + mes / año."},{"s":7,"wrong":"Make a test / make a deploy.","right":"**Run** a test / **do** a deploy / **deploy**.","rule":"Collocations: run tests, do a review, make a decision."},{"s":7,"wrong":"He said me that it was fixed.","right":"He **told me** / He **said** that it was fixed.","rule":"Tell + persona; say sin persona."},{"s":7,"wrong":"Where is the log? I can't find.","right":"I can't find **it**.","rule":"Los verbos transitivos necesitan objeto."},{"s":7,"wrong":"More easy / more fast.","right":"**Easier / faster**.","rule":"Adjetivos cortos: -er."},{"s":7,"wrong":"What means \"flaky\"?","right":"What **does** \"flaky\" **mean**?","rule":"Preguntas con do / does."},{"s":7,"wrong":"Can you tell me where is the report?","right":"Can you tell me where **the report is**?","rule":"En preguntas indirectas no se invierte."},{"s":7,"wrong":"I didn't see nothing.","right":"I didn't see **anything**.","rule":"No hay doble negación."},{"s":7,"wrong":"I like very much testing.","right":"I **really like** testing. / I like testing a lot.","rule":"Very much no va entre el verbo y el objeto."},{"s":7,"wrong":"If I would have time, I would automate it.","right":"If I **had** time, I would automate it.","rule":"Después de if, nunca would."},{"s":7,"wrong":"I'm boring in long meetings.","right":"I'm **bored** in long meetings.","rule":"-ed = cómo te sentís; -ing = cómo es algo."},{"s":7,"wrong":"Two years ago I work at X.","right":"Two years ago I **worked** at X.","rule":"Ago siempre con Past Simple."},{"s":7,"wrong":"I know him since 2020.","right":"I've **known** him since 2020.","rule":"Since con algo que sigue: Present Perfect."},{"s":7,"wrong":"One of the best tester.","right":"One of the best **testers**.","rule":"One of the + plural."}];
+const SECTIONS = {
+  1: ["Testing", "Testing y calidad"],
+  2: ["Automatización", "Automatización, código y CI/CD"],
+  3: ["APIs y bugs", "APIs, backend y bugs"],
+  4: ["IA y LLMs", "IA y LLMs"],
+  5: ["Agile", "Agile, reuniones y colaboración"],
+  6: ["Falsos amigos", "Falsos amigos"],
+  7: ["Errores típicos", "Errores típicos de hispanohablantes"]
+};
+const ROUND = 10;
+const KEY = "vocabDeck.v1";
+
+// Stable ids: section + position inside the section.
+const cards = [];
+const perSec = {};
+DATA.forEach(d => {
+  perSec[d.s] = (perSec[d.s] || 0) + 1;
+  cards.push(Object.assign({ id: d.s + "-" + String(perSec[d.s]).padStart(2, "0") }, d));
+});
+
+let store = { cards: {}, prefs: { secs: [1, 2, 3, 4, 5, 6, 7], hard: false, dir: "en" } };
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) {
+    const parsed = JSON.parse(raw);
+    if (parsed && parsed.cards) store.cards = parsed.cards;
+    if (parsed && parsed.prefs) Object.assign(store.prefs, parsed.prefs);
+  }
+} catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} }
+function st(id) { return store.cards[id] || { box: 0, seen: 0 }; }
+
+const $ = id => document.getElementById(id);
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function bold(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>"); }
+function plain(s) { return String(s).replace(/\*\*/g, ""); }
+
+// Highlight the term inside its example. Tries the whole term with flexible endings (follow up → followed up),
+// then the parenthesis contents (PR), then the longest single words cut short (hallucination → hallucinated).
+function markTerm(example, term) {
+  const out = esc(example);
+  const rx = w => esc(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const alts = [];
+  term.replace(/\(.*?\)/g, "").split("/").forEach(t => { t = t.trim().replace(/^to (be )?/i, ""); if (t) alts.push(t); });
+  term.replace(/\((.*?)\)/g, (m, x) => { x.split("/").forEach(t => { t = t.trim(); if (t) alts.push(t); }); return m; });
+  const tries = alts.map(a => a.split(/[\s-]+/).map(w => rx(w.length > 3 ? w.replace(/[ey]$/i, "") : w) + "\\w*").join("[\\s-]+"));
+  const words = [];
+  alts.forEach(a => a.split(/[\s-]+/).forEach(w => { if (w.length >= 4) words.push(w); }));
+  words.sort((a, b) => b.length - a.length).forEach(w => tries.push(rx(w.slice(0, Math.max(4, Math.ceil(w.length * 0.7)))) + "\\w*"));
+  for (const t of tries) {
+    const re = new RegExp("\\b" + t, "i");
+    if (re.test(out)) return out.replace(re, m => "<mark>" + m + "</mark>");
+  }
+  return out;
+}
+
+let round = [], queue = [], pos = 0, results = {}, requeued = {};
+
+function pool() {
+  return cards.filter(c => store.prefs.secs.includes(c.s) && (!store.prefs.hard || (st(c.id).box > 0 && st(c.id).box <= 2)));
+}
+// Level 1 first, then new cards, then 2..5; inside a level, the least recently seen first.
+function rank(c) { const b = st(c.id).box; return b === 1 ? 0 : b === 0 ? 1 : b; }
+function startRound() {
+  const p = pool().map(c => ({ c, r: rank(c), t: st(c.id).seen, x: Math.random() }));
+  p.sort((a, b) => a.r - b.r || a.t - b.t || a.x - b.x);
+  round = p.slice(0, ROUND).map(o => o.c);
+  for (let i = round.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [round[i], round[j]] = [round[j], round[i]]; }
+  queue = round.slice(); pos = 0; results = {}; requeued = {};
+  $("summary").hidden = true;
+  $("copyArea").hidden = true;
+  $("toast").textContent = "";
+  $("emptyCard").hidden = round.length > 0;
+  $("card").hidden = round.length === 0;
+  if (round.length) showCard();
+}
+
+function boxesHtml(b) { let h = ""; for (let i = 1; i <= 5; i++) h += '<i class="' + (i <= b ? "on" : "") + '"></i>'; return h; }
+
+function showCard() {
+  const c = queue[pos];
+  const s = st(c.id);
+  $("cardSec").textContent = "Sección " + c.s + " · " + SECTIONS[c.s][1];
+  $("cardBoxes").innerHTML = boxesHtml(s.box);
+  $("cardBoxes").setAttribute("aria-label", s.box ? "Nivel " + s.box + " de 5" : "Tarjeta nueva");
+  $("cardBoxes").title = s.box ? "Nivel " + s.box + " de 5" : "Tarjeta nueva";
+  const done = Object.keys(results).length;
+  $("cardCount").textContent = (requeued[c.id] && results[c.id] ? "Repaso · " : "") + Math.min(done + (results[c.id] ? 0 : 1), round.length) + " / " + round.length;
+  const term = $("cardTerm"), prompt = $("cardPrompt"), ans = $("cardAnswer");
+  term.className = "term";
+  if (c.s === 7) {
+    term.className = "term sentence";
+    term.textContent = c.wrong;
+    prompt.textContent = "Esta oración tiene un error típico. Decí la versión correcta en voz alta.";
+    ans.innerHTML = '<p class="label">Correcta</p><p class="meaning">' + bold(c.right) + '</p><p>' + esc(c.rule) + '</p>';
+  } else if (c.s === 6) {
+    term.textContent = c.en;
+    prompt.textContent = "Falso amigo. ¿Qué significa de verdad y qué palabra usás para lo que parece?";
+    ans.innerHTML = '<dl class="kv"><dt>Significa</dt><dd>' + esc(c.es) + '</dd><dt>No significa</dt><dd>' + esc(c.no) + '</dd><dt>Para eso usá</dt><dd>' + esc(c.use) + '</dd></dl>';
+  } else if (store.prefs.dir === "es") {
+    term.className = "term sentence";
+    term.textContent = c.es;
+    prompt.textContent = "¿Cómo se dice en inglés? Decilo en una oración.";
+    ans.innerHTML = '<p class="meaning">' + esc(c.en) + '</p><p class="example">' + markTerm(c.ex, c.en) + '</p>';
+  } else {
+    term.textContent = c.en;
+    prompt.textContent = "¿Qué significa? Decí una oración tuya en inglés con la palabra.";
+    ans.innerHTML = '<p class="meaning">' + esc(c.es) + '</p><p class="example">' + markTerm(c.ex, c.en) + '</p>';
+  }
+  ans.hidden = true;
+  $("revealRow").hidden = false;
+  $("gradeRow").hidden = true;
+  $("revealBtn").focus({ preventScroll: true });
+}
+
+function reveal() {
+  if ($("card").hidden || !$("cardAnswer").hidden) return;
+  $("cardAnswer").hidden = false;
+  $("revealRow").hidden = true;
+  $("gradeRow").hidden = false;
+  $("card").focus({ preventScroll: true });
+}
+
+function grade(g) {
+  if ($("card").hidden || $("gradeRow").hidden) return;
+  const c = queue[pos];
+  const s = Object.assign({ box: 0, seen: 0 }, store.cards[c.id]);
+  if (g === "good") s.box = Math.min(5, s.box + 1);
+  else if (g === "mid") s.box = s.box || 2;
+  else s.box = 1;
+  if (g === "good" && s.box === 1 && !store.cards[c.id]) s.box = 3;
+  s.seen = Date.now();
+  store.cards[c.id] = s;
+  save();
+  if (!results[c.id]) results[c.id] = g;
+  // A missed card comes back once at the end of the round.
+  if (g === "bad" && !requeued[c.id]) { requeued[c.id] = true; queue.push(c); }
+  pos++;
+  renderProgress();
+  if (pos < queue.length) showCard(); else endRound();
+}
+
+function endRound() {
+  $("card").hidden = true;
+  const n = { good: 0, mid: 0, bad: 0 };
+  Object.values(results).forEach(g => n[g]++);
+  $("tally").innerHTML =
+    '<span><b>' + n.good + '</b>La sabía</span><span><b>' + n.mid + '</b>Más o menos</span><span><b>' + n.bad + '</b>No la sabía</span>';
+  const miss = round.filter(c => results[c.id] !== "good");
+  $("reviewWrap").hidden = miss.length === 0;
+  $("reviewList").innerHTML = miss.map(c => {
+    if (c.s === 7) return "<li>" + esc(c.wrong) + " → " + bold(c.right) + "</li>";
+    if (c.s === 6) return "<li><b>" + esc(c.en) + "</b> = " + esc(c.es) + ". No es: " + esc(c.no) + ".</li>";
+    return "<li><b>" + esc(c.en) + "</b> = " + esc(c.es) + "</li>";
+  }).join("");
+  // Rows for the "Mi banco de palabras" table in the cuaderno: Palabra | Mi oración | La usé hablando.
+  $("copyArea").value = miss.map(c => {
+    if (c.s === 7) return "| " + plain(c.right) + " (" + c.rule + ") |  |  |";
+    if (c.s === 6) return "| " + c.en + " (= " + c.es + "; no es " + c.no + ") |  |  |";
+    return "| " + c.en + " (= " + c.es + ") |  |  |";
+  }).join("\n");
+  $("summary").hidden = false;
+  $("nextRound").focus({ preventScroll: true });
+}
+
+function renderProgress() {
+  let seen = 0;
+  const rows = Object.keys(SECTIONS).map(k => {
+    const list = cards.filter(c => c.s === +k);
+    const ok = list.filter(c => st(c.id).box >= 4).length;
+    seen += list.filter(c => st(c.id).box > 0).length;
+    const pct = Math.round(ok / list.length * 100);
+    return '<div class="prog-row"><span>' + k + ". " + esc(SECTIONS[k][1]) + '</span><div class="bar" role="img" aria-label="' + ok + ' de ' + list.length + ' dominadas"><span style="width:' + pct + '%"></span></div><span class="num">' + ok + "/" + list.length + "</span></div>";
+  });
+  $("progress").innerHTML = rows.join("");
+  $("seenCount").textContent = "Vistas: " + seen + " de " + cards.length;
+}
+
+function renderChips() {
+  const secs = store.prefs.secs;
+  const all = secs.length === 7;
+  let h = '<button class="chip" type="button" data-sec="all" aria-pressed="' + all + '">Todas</button>';
+  Object.keys(SECTIONS).forEach(k => {
+    h += '<button class="chip" type="button" data-sec="' + k + '" aria-pressed="' + (!all && secs.includes(+k)) + '">' + k + " " + esc(SECTIONS[k][0]) + "</button>";
+  });
+  $("secChips").innerHTML = h;
+  document.querySelectorAll("#dirChips .chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.dir === store.prefs.dir)));
+  $("hardOnly").checked = !!store.prefs.hard;
+}
+
+$("secChips").addEventListener("click", e => {
+  const b = e.target.closest("[data-sec]");
+  if (!b) return;
+  const v = b.dataset.sec;
+  let secs = store.prefs.secs.slice();
+  if (v === "all") secs = [1, 2, 3, 4, 5, 6, 7];
+  else if (secs.length === 7) secs = [+v];
+  else if (secs.includes(+v)) secs = secs.filter(x => x !== +v);
+  else secs.push(+v);
+  if (!secs.length) secs = [1, 2, 3, 4, 5, 6, 7];
+  store.prefs.secs = secs.sort();
+  save(); renderChips(); startRound();
+});
+$("dirChips").addEventListener("click", e => {
+  const b = e.target.closest("[data-dir]");
+  if (!b || b.dataset.dir === store.prefs.dir) return;
+  store.prefs.dir = b.dataset.dir;
+  save(); renderChips();
+  if (!$("card").hidden && $("cardAnswer").hidden) showCard();
+});
+$("hardOnly").addEventListener("change", e => { store.prefs.hard = e.target.checked; save(); startRound(); });
+$("revealBtn").addEventListener("click", reveal);
+document.querySelectorAll(".grade").forEach(b => b.addEventListener("click", () => grade(b.dataset.g)));
+$("nextRound").addEventListener("click", startRound);
+$("copyBtn").addEventListener("click", () => {
+  const text = $("copyArea").value;
+  const fallback = () => {
+    $("copyArea").hidden = false;
+    $("copyArea").focus();
+    $("copyArea").select();
+    $("toast").textContent = "Seleccioné el texto: copialo con Ctrl+C.";
+  };
+  try {
+    navigator.clipboard.writeText(text).then(() => { $("toast").textContent = "Copiado. Pegalo en tu banco de palabras."; }, fallback);
+  } catch (e) { fallback(); }
+});
+$("resetBtn").addEventListener("click", () => { $("resetRow").hidden = true; $("confirmRow").hidden = false; });
+$("resetNo").addEventListener("click", () => { $("resetRow").hidden = false; $("confirmRow").hidden = true; });
+$("resetYes").addEventListener("click", () => {
+  store.cards = {}; save();
+  $("resetRow").hidden = false; $("confirmRow").hidden = true;
+  renderProgress(); startRound();
+});
+document.addEventListener("keydown", e => {
+  const t = e.target;
+  if ((t.closest && t.closest("textarea, input")) || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === " " || e.key === "Enter") {
+    const free = t === document.body || t === $("card") || t === $("revealBtn");
+    if (free && !$("card").hidden && $("cardAnswer").hidden) { e.preventDefault(); reveal(); }
+    return;
+  }
+  if (["1", "2", "3"].includes(e.key)) grade({ 1: "bad", 2: "mid", 3: "good" }[e.key]);
+});
+
+renderChips();
+renderProgress();
+startRound();
+</script>
+</body></html>

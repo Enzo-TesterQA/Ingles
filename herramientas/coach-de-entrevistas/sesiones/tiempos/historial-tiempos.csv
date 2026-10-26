@@ -1,0 +1,6 @@
+﻿fecha,serie,nivel,id,tiempo,resultado,dije,corregido_a_mano,modelo
+2026-10-20 21:25,2026-10-20_212501,1,fp1,futp,mal,By Friday we will fix all the blockers.,,By Friday we will have fixed all the blockers.
+2026-10-20 21:26,2026-10-20_212649,1,pc4,ps,bien,I know python and typescript,,I know Python and TypeScript.
+2026-10-20 21:26,2026-10-20_212649,1,pa1,past,bien,Last sprint we found a memory leak in the payment service,,Last sprint we found a memory leak in the payment service.
+2026-10-20 21:26,2026-10-20_212649,1,fp1,futp,bien,By Friday we will have fixed all the blockers,,By Friday we will have fixed all the blockers.
+2026-10-20 21:26,2026-10-20_212649,1,w3,will,casi,"When the ball finish, I'll deploy",,"When the build finishes, I'll deploy."

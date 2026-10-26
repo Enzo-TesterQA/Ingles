@@ -1,0 +1,67 @@
+# Palabras técnicas que no están en el diccionario CMU (mismo formato ARPAbet).
+kubernetes K UW2 B ER0 N EH1 T IY0 Z
+nginx EH1 N JH IH0 N EH2 K S
+json JH EY1 S AH0 N
+yaml Y AE1 M AH0 L
+appium AE1 P IY0 AH0 M
+gitlab G IH1 T L AE2 B
+jira JH IH1 R AH0
+redis R EH1 D IH0 S
+grafana G R AH0 F AA1 N AH0
+datadog D EY1 T AH0 D AO2 G
+argocd AA1 R G OW0 S IY1 D IY1
+terraform T EH1 R AH0 F AO2 R M
+ansible AE1 N S AH0 B AH0 L
+sudo S UW1 D UW0
+gui G UW1 IY0
+typescript T AY1 P S K R IH2 P T
+pytest P AY1 T EH2 S T
+junit JH EY1 Y UW2 N IH0 T
+testng T EH1 S T EH2 N JH IY1
+webdriver W EH1 B D R AY2 V ER0
+jmeter JH EY1 M IY2 T ER0
+graphql G R AE1 F K Y UW1 EH1 L
+oauth OW1 AO2 TH
+jwt JH EY2 D AH2 B AH0 L Y UW0 T IY1
+devops D EH1 V AA2 P S
+mongodb M AA1 NG G OW0 D IY1 B IY1
+postgres P OW1 S T G R EH2 S
+mysql M AY1 EH1 S K Y UW1 EH1 L
+aws EY2 D AH2 B AH0 L Y UW0 EH1 S
+gcp JH IY2 S IY2 P IY1
+llm EH2 L EH2 L EH1 M
+langgraph L AE1 NG G R AE2 F
+langchain L AE1 NG CH EY2 N
+openai OW1 P AH0 N EY1 AY1
+chatbot CH AE1 T B AA2 T
+frontend F R AH1 N T EH2 N D
+middleware M IH1 D AH0 L W EH2 R
+microservices M AY1 K R OW0 S ER2 V IH0 S IH0 Z
+localhost L OW1 K AH0 L HH OW2 S T
+async EY1 S IH2 NG K
+regex R EH1 JH EH2 K S
+refactor R IY0 F AE1 K T ER0
+linter L IH1 N T ER0
+webhook W EH1 B HH UH2 K
+npm EH2 N P IY2 EH1 M
+xray EH1 K S R EY2
+testmo T EH1 S T M OW0
+browserstack B R AW1 Z ER0 S T AE2 K
+gherkin G ER1 K IH0 N
+mockito M AA0 K IY1 T OW0
+k8s K EY2 EY1 T S
+ci S IY2 AY1
+cd S IY2 D IY1
+qa K Y UW2 EY1
+api EY2 P IY2 AY1
+sql EH2 S K Y UW2 EH1 L
+sql(2) S IY1 K W AH0 L
+ui Y UW2 AY1
+ux Y UW2 EH1 K S
+url Y UW2 AA2 R EH1 L
+http EY2 CH T IY2 T IY2 P IY1
+saas S AE1 S
+ai EY2 AY1
+qe K Y UW2 IY1
+uat Y UW2 EY2 T IY1
+pr P IY2 AA1 R

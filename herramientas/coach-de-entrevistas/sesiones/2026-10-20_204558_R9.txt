@@ -1,0 +1,25 @@
+R9 · What's the difference between black-box and white-box testing?
+
+── Reporte · R9 ────────────────────────────────────────
+Duración     2:25   (objetivo 0:40 a 2:00: larga)
+Palabras     192 · 80 por minuto · lento: está bien pensar, pero buscá más fluidez
+Muletillas   0
+Pausas largas 2: 2.0 s antes de "coverage", 23.1 s antes de "Well"
+
+Tiempos verbales que usaste (aproximado)
+  Present Simple 11 · Present Continuous 1 · Past Simple 1
+  Tu respuesta modelo usa: present simple para la definición, past simple para tu ejemplo (I did, read, used). Read en pasado se pronuncia "red".
+
+No encontré errores de los que el coach sabe detectar. Igual pasale la respuesta a Claude.
+
+Palabras clave del modelo: usaste ninguna
+  Podés sumar: Accusys, Java, C#
+
+Lo que dijiste
+Okay, in a black box testing you don't see the code that executes what you are doing. So, you have to understand the input and the output, but you can't see the code, so you have to use different waves to understand it. So, if you do assume a 2 plus 2, you want to see the form in the result you don't see the logic that do the zoom so that's black box testing you have multiple forms of that for example you have the coverage testing you can see the border cases and you want to understand for example and yeah I don't know you can I guess I don't remember to give me a moment Well, that's all about black box testing and in the white box testing you see the code and you want to understand and validate that all what the code do works like it have to do okay so you put you use 10 you can see for example a variable and you want to execute that variable for see if it really do what it have to do that's different between black box and white box testing
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+R9: Okay, in a black box testing you don't see the code that executes what you are doing. So, you have to understand the input and the output, but you can't see the code, so you have to use different waves to understand it. So, if you do assume a 2 plus 2, you want to see the form in the result you don't see the logic that do the zoom so that's black box testing you have multiple forms of that for example you have the coverage testing you can see the border cases and you want to understand for example and yeah I don't know you can I guess I don't remember to give me a moment Well, that's all about black box testing and in the white box testing you see the code and you want to understand and validate that all what the code do works like it have to do okay so you put you use 10 you can see for example a variable and you want to execute that variable for see if it really do what it have to do that's different between black box and white box testing
+(Pregunta: What's the difference between black-box and white-box testing? · 2:25 · 80 palabras por minuto · respuesta hablada, transcripta con el coach)

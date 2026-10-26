@@ -1,0 +1,44 @@
+Práctica de tiempos verbales · 2026-10-20 21:26 · Nivel 1 · 4 respuestas
+Resultado del coach: 3 bien, 1 casi, 0 mal
+
+1. [Present Simple] I ___ Python and TypeScript.  (know / am knowing / knowing)
+   Dije: I know python and typescript
+   Coach: BIEN. Correcto: know.
+   Modelo: I know Python and TypeScript.
+
+2. [Past Simple] Last sprint we ___ (find) a memory leak in the payment service.
+   Dije: Last sprint we found a memory leak in the payment service
+   Coach: BIEN. Correcto: found.
+   Modelo: Last sprint we found a memory leak in the payment service.
+
+3. [Future Perfect] By Friday we ___ (fix) all the blockers.
+   Dije: By Friday we will have fixed all the blockers
+   Coach: BIEN. Correcto: will have fixed.
+   Modelo: By Friday we will have fixed all the blockers.
+
+4. [Futuro con will] When the build will finish, I'll deploy.
+   Dije: When the ball finish, I'll deploy
+   Coach: CASI. El tiempo está bien (Futuro con will), pero la forma esperada era: When the build finishes, I'll deploy..
+   Modelo: When the build finishes, I'll deploy.
+
+
+Para pegar en el chat:
+
+Corregime esta serie de tiempos verbales (unidad 2). Son respuestas habladas de una oración, transcriptas por el coach; la transcripción puede tener errores de Whisper.
+
+1. (Present Simple) I ___ Python and TypeScript.  (know / am knowing / knowing)
+   Dije: I know python and typescript
+   El coach dijo: BIEN
+
+2. (Past Simple) Last sprint we ___ (find) a memory leak in the payment service.
+   Dije: Last sprint we found a memory leak in the payment service
+   El coach dijo: BIEN
+
+3. (Future Perfect) By Friday we ___ (fix) all the blockers.
+   Dije: By Friday we will have fixed all the blockers
+   El coach dijo: BIEN
+
+4. (Futuro con will) When the build will finish, I'll deploy.
+   Dije: When the ball finish, I'll deploy
+   El coach dijo: CASI
+

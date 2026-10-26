@@ -1,0 +1,26 @@
+R9 · What's the difference between black-box and white-box testing?
+
+── Reporte · R9 ────────────────────────────────────────
+Duración     1:15   (objetivo 0:40 a 2:00: bien)
+Palabras     116 · 95 por minuto · un poco lento
+Muletillas   1: uh x1
+
+Tiempos verbales que usaste (aproximado)
+  Present Simple 8 · Past Simple 1
+  Tu respuesta modelo usa: present simple para la definición, past simple para tu ejemplo (I did, read, used). Read en pasado se pronuncia "red".
+
+Para revisar (1)
+  [TIEMPO] (posible) "it have different ways of testing with a b..."
+     Con he, she, it o un sujeto singular, el presente lleva -s: the pipeline runs, it works.
+
+Palabras clave del modelo: usaste ninguna
+  Podés sumar: Accusys, Java, C#
+
+Lo que dijiste
+Okay, in the black box testing you don't see the code that executes what you want to do. And you have to understand it by the results of the input and the output. That's the only thing you can see. it have different ways of testing with a black box so you have a key balance partitioning that what you do is you separate the songs about something you want to execute and you understand the values of that and the results. You put the positive, negative and invalid things and you have to decide what is the results, that it's a possible way of the code or the uh... Kitarians acceptance and there you no
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+R9: Okay, in the black box testing you don't see the code that executes what you want to do. And you have to understand it by the results of the input and the output. That's the only thing you can see. it have different ways of testing with a black box so you have a key balance partitioning that what you do is you separate the songs about something you want to execute and you understand the values of that and the results. You put the positive, negative and invalid things and you have to decide what is the results, that it's a possible way of the code or the uh... Kitarians acceptance and there you no
+(Pregunta: What's the difference between black-box and white-box testing? · 1:15 · 95 palabras por minuto · respuesta hablada, transcripta con el coach)

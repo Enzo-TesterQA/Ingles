@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tense Runner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a test-runner console. Pick a suite, run 10 cases, read the report. One column, max 760px. */
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --ink: #17212d;
+  --muted: #5a6778;
+  --line: #dbe1e8;
+  --accent: #2354c4;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6edfb;
+  --pass: #1b7a4c;
+  --pass-bg: #e5f4ec;
+  --fail: #be3a30;
+  --fail-bg: #fbe9e7;
+  --font-ui: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141b; --surface: #161d27; --ink: #e5eaf1; --muted: #93a0b2; --line: #273241;
+    --accent: #7ea3ff; --accent-ink: #0f141b; --accent-soft: #1d2a45;
+    --pass: #57c792; --pass-bg: #15291f; --fail: #ff8077; --fail-bg: #331a19;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141b; --surface: #161d27; --ink: #e5eaf1; --muted: #93a0b2; --line: #273241;
+  --accent: #7ea3ff; --accent-ink: #0f141b; --accent-soft: #1d2a45;
+  --pass: #57c792; --pass-bg: #15291f; --fail: #ff8077; --fail-bg: #331a19;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 56px; display: grid; gap: 22px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-size: clamp(28px, 6vw, 38px); line-height: 1.1; margin: 0; letter-spacing: -.02em; text-wrap: balance; }
+h2 { font-size: 18px; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.lead { color: var(--muted); max-width: 62ch; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.group { display: grid; gap: 8px; }
+.group-label { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: inherit; font-size: 14px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); padding: 7px 12px; border-radius: 999px; cursor: pointer; display: inline-flex; gap: 8px; align-items: center; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.chip .rate { font-family: var(--font-mono); font-size: 11px; opacity: .8; font-variant-numeric: tabular-nums; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btn { font: inherit; font-weight: 600; border: 0; background: var(--accent); color: var(--accent-ink); padding: 11px 18px; border-radius: 8px; cursor: pointer; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.meta { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bar { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .25s ease; }
+.case-id { font-family: var(--font-mono); font-size: 13px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; }
+.case-id[hidden] { display: none; }
+.tag { font-family: var(--font-mono); font-size: 11px; padding: 2px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.task { font-size: 14px; color: var(--muted); }
+.sentence { font-size: clamp(19px, 4.4vw, 23px); line-height: 1.45; font-weight: 500; text-wrap: pretty; }
+.sentence .gap { display: inline-block; min-width: 4.5em; border-bottom: 2px solid var(--accent); }
+.sentence .hint { color: var(--muted); font-weight: 400; }
+.wrong { text-decoration: line-through; text-decoration-color: var(--fail); text-decoration-thickness: 2px; }
+input[type="text"] { font: inherit; font-size: 18px; width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.options { display: grid; gap: 8px; }
+.opt { font: inherit; text-align: left; border: 1px solid var(--line); background: var(--bg); color: var(--ink); padding: 12px 14px; border-radius: 8px; cursor: pointer; font-size: 17px; }
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt:disabled { cursor: default; }
+.opt.is-right { border-color: var(--pass); background: var(--pass-bg); }
+.opt.is-wrong { border-color: var(--fail); background: var(--fail-bg); }
+.verdict { border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; }
+.verdict.pass { background: var(--pass-bg); }
+.verdict.fail { background: var(--fail-bg); }
+.verdict .status { font-family: var(--font-mono); font-weight: 600; font-size: 13px; letter-spacing: .06em; }
+.verdict.pass .status { color: var(--pass); }
+.verdict.fail .status { color: var(--fail); }
+.verdict .rule { color: var(--ink); }
+.summary { font-family: var(--font-mono); font-size: 15px; display: flex; gap: 14px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.summary .p { color: var(--pass); } .summary .f { color: var(--fail); }
+.report { display: grid; gap: 10px; }
+.report-item { border-top: 1px solid var(--line); padding-top: 10px; display: grid; gap: 4px; }
+.report-item .k { font-family: var(--font-mono); font-size: 12px; color: var(--fail); }
+.report-item.ok .k { color: var(--pass); }
+.small { font-size: 13px; color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); }
+kbd { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">QA &amp; AI English · verb tenses</span>
+    <h1>Tense Runner</h1>
+    <p class="lead">Elegí una suite, corré 10 casos y mirá el reporte. Cada error trae la regla en una línea. Los casos que fallás vuelven en la suite "Mis errores" hasta que los aciertes dos veces seguidas.</p>
+  </header>
+
+  <section id="home" class="panel" aria-labelledby="home-title">
+    <h2 id="home-title">Elegí qué practicar</h2>
+    <div class="group">
+      <span class="group-label">Repaso</span>
+      <div class="chips" id="chips-special"></div>
+    </div>
+    <div class="group">
+      <span class="group-label">Comparaciones</span>
+      <div class="chips" id="chips-cmp"></div>
+    </div>
+    <div class="group">
+      <span class="group-label">Por tiempo verbal</span>
+      <div class="chips" id="chips-tense"></div>
+    </div>
+    <div class="row">
+      <span class="meta" id="pool-info">0 casos disponibles</span>
+      <button class="btn" id="start" type="button">Correr 10 casos</button>
+    </div>
+    <p class="note" id="store-note">Tu progreso se guarda para que Claude pueda armarte ejercicios con lo que más fallás.</p>
+  </section>
+
+  <section id="run" class="panel" hidden aria-live="polite">
+    <div class="row">
+      <span class="meta" id="run-count">Case 1 / 10</span>
+      <span class="meta" id="run-score">0 passed · 0 failed</span>
+    </div>
+    <div class="bar"><i id="run-bar"></i></div>
+    <div class="case-id" id="case-tags"></div>
+    <p class="task" id="case-task"></p>
+    <p class="sentence" id="case-sentence"></p>
+    <div id="case-input"></div>
+    <div id="case-verdict"></div>
+    <div class="row">
+      <button class="btn ghost" id="quit" type="button">Salir</button>
+      <button class="btn" id="next" type="button" hidden>Siguiente</button>
+    </div>
+  </section>
+
+  <section id="result" class="panel" hidden>
+    <h2>Reporte de la corrida</h2>
+    <div class="summary" id="sum"></div>
+    <div class="report" id="report"></div>
+    <div class="row">
+      <button class="btn ghost" id="home-btn" type="button">Elegir otra suite</button>
+      <button class="btn" id="again" type="button">Correr otra vez</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const TOPICS = {
+  ps: "Present Simple", pc: "Present Continuous", pp: "Present Perfect", ppc: "Present Perfect Continuous",
+  past: "Past Simple", pastc: "Past Continuous", pastp: "Past Perfect", pastpc: "Past Perfect Continuous",
+  will: "will", goingto: "going to", futc: "Future Continuous", futp: "Future Perfect", futpc: "Future Perfect Continuous",
+  usedto: "used to / would"
+};
+const CMPS = {
+  "pp-past": "Present Perfect vs Past Simple",
+  "past-pastc": "Past Simple vs Past Continuous",
+  "pp-ppc": "Present Perfect vs Perfect Continuous",
+  "will-goingto": "will vs going to",
+  "ps-pc": "Present Simple vs Continuous",
+  "usedto": "used to vs would"
+};
+
+// type f = fill the gap (typed), c = choose, x = pick the corrected sentence
+const ITEMS = [
+  // Present Simple
+  {id:"ps1", t:["ps"], k:"f", s:"Our pipeline usually ___ (take) about 20 minutes.", a:["takes"], r:"Rutina + he/she/it: verbo + s."},
+  {id:"ps2", t:["ps"], k:"f", s:"The QA team ___ (not / work) on weekends.", a:["doesn't work","does not work"], r:"Negativa en tercera persona: doesn't + verbo base."},
+  {id:"ps3", t:["ps"], k:"f", s:"___ (the suite / run) in parallel?", a:["does the suite run"], r:"Pregunta en Present Simple: Does + sujeto + verbo base."},
+  {id:"ps4", t:["ps"], k:"c", s:"The agent ___ the vector store before it answers.", o:["checks","is checking","has checked"], c:0, r:"Para describir cómo funciona un sistema se usa Present Simple."},
+  {id:"ps5", t:["ps"], k:"x", s:"She don't write unit tests.", o:["She doesn't write unit tests.","She doesn't writes unit tests.","She not write unit tests."], c:0, r:"he/she/it lleva doesn't, y el verbo queda en base (sin s)."},
+  {id:"ps6", t:["ps"], k:"f", s:"I usually ___ (write) API tests with RestAssured.", a:["write"], r:"Frecuencia (usually) con I: verbo base."},
+  {id:"ps7", t:["ps"], k:"x", s:"The test fail on Safari but not on Chrome.", o:["The test fails on Safari but not on Chrome.","The test failing on Safari but not on Chrome.","The test is fail on Safari but not on Chrome."], c:0, r:"Sujeto singular (the test) en presente: fails."},
+  // Present Continuous
+  {id:"pc1", t:["pc"], k:"f", s:"Hold on, I ___ (run) the smoke tests right now.", a:["am running"], r:"Algo que pasa ahora mismo: am/is/are + -ing."},
+  {id:"pc2", t:["pc"], k:"f", s:"This sprint we ___ (migrate) our tests to Playwright.", a:["are migrating"], r:"Algo temporal de esta etapa (this sprint): Present Continuous."},
+  {id:"pc3", t:["pc"], k:"f", s:"The build ___ (not / pass) at the moment.", a:["isn't passing","is not passing"], r:"Negativa en continuo: isn't / aren't + -ing."},
+  {id:"pc4", t:["pc"], k:"c", s:"I ___ Python and TypeScript.", o:["know","am knowing","knowing"], c:0, r:"Know es un verbo de estado: no se usa en continuo."},
+  {id:"pc5", t:["pc"], k:"c", s:"I ___ the product owner tomorrow at 10, it's in my calendar.", o:["am meeting","meet","met"], c:0, r:"Plan con día y hora en agenda: Present Continuous."},
+  {id:"pc6", t:["pc"], k:"x", s:"I working on the flaky test.", o:["I'm working on the flaky test.","I am work on the flaky test.","I works on the flaky test."], c:0, r:"El continuo necesita el verbo to be: I'm working."},
+  {id:"pc7", t:["pc"], k:"f", s:"___ (you / work) on the payment module this sprint?", a:["are you working"], r:"Pregunta en continuo: Are + sujeto + -ing."},
+  // ps vs pc
+  {id:"spc1", t:["ps","pc"], m:"ps-pc", k:"c", s:"The pipeline ___ on every pull request.", o:["runs","is running"], c:0, r:"Algo que pasa siempre: Present Simple."},
+  {id:"spc2", t:["ps","pc"], m:"ps-pc", k:"c", s:"Don't merge yet, the pipeline ___.", o:["is running","runs"], c:0, r:"Algo en curso en este momento: Present Continuous."},
+  {id:"spc3", t:["ps","pc"], m:"ps-pc", k:"c", s:"I ___ as a QA Automation Engineer at a fintech company.", o:["work","am work"], c:0, r:"Tu rol estable: Present Simple."},
+  {id:"spc4", t:["ps","pc"], m:"ps-pc", k:"c", s:"More teams ___ AI agents for test generation these days.", o:["are adopting","adopt every day"], c:0, r:"Tendencia actual (these days): Present Continuous."},
+  // Present Perfect
+  {id:"pp1", t:["pp"], k:"f", s:"I ___ (automate) more than 300 test cases so far.", a:["have automated"], r:"Logro acumulado hasta hoy (so far): have + participio."},
+  {id:"pp2", t:["pp"], k:"f", s:"We ___ (not / find) the root cause yet.", a:["haven't found","have not found"], r:"Yet en negativa va con Present Perfect: haven't + participio."},
+  {id:"pp3", t:["pp"], k:"f", s:"___ (you / ever / work) with Kubernetes?", a:["have you ever worked"], r:"Ever (alguna vez en tu vida): Have + sujeto + ever + participio."},
+  {id:"pp4", t:["pp"], k:"f", s:"I ___ (just / fix) the checkout test, you can rerun the pipeline.", a:["have just fixed"], r:"Just = recién, con resultado ahora: have just + participio."},
+  {id:"pp5", t:["pp"], k:"f", s:"Someone ___ (break) the staging build, nothing deploys.", a:["has broken"], r:"Acción reciente con resultado visible ahora: has + participio (break-broke-broken)."},
+  {id:"pp6", t:["pp"], k:"f", s:"The fix ___ (not / be) deployed yet.", a:["hasn't been","has not been"], r:"Todavía no (yet): hasn't been + participio."},
+  // Past Simple
+  {id:"pa1", t:["past"], k:"f", s:"Last sprint we ___ (find) a memory leak in the payment service.", a:["found"], r:"Momento terminado (last sprint): Past Simple. find-found."},
+  {id:"pa2", t:["past"], k:"f", s:"The deploy ___ (fail) last night because of a missing env variable.", a:["failed"], r:"Last night: Past Simple, verbo regular + ed."},
+  {id:"pa3", t:["past"], k:"f", s:"I ___ (not / write) the test plan yesterday.", a:["didn't write","did not write"], r:"Negativa en pasado: didn't + verbo base."},
+  {id:"pa4", t:["past"], k:"f", s:"___ (you / run) the smoke tests after the release?", a:["did you run"], r:"Pregunta en pasado: Did + sujeto + verbo base."},
+  {id:"pa5", t:["past"], k:"f", s:"At my previous company I ___ (lead) the migration to GitHub Actions.", a:["led"], r:"Trabajo anterior: Past Simple. lead-led."},
+  {id:"pa6", t:["past"], k:"x", s:"Did you fixed the bug?", o:["Did you fix the bug?","Do you fixed the bug?","Did you fixing the bug?"], c:0, r:"Did ya marca el pasado: el verbo va en base (fix)."},
+  {id:"pa7", t:["past"], k:"x", s:"I didn't found the issue.", o:["I didn't find the issue.","I not found the issue.","I didn't founded the issue."], c:0, r:"Después de didn't, verbo base: find."},
+  {id:"pa8", t:["past"], k:"f", s:"We ___ (catch) the bug before it reached production.", a:["caught"], r:"catch-caught-caught (irregular)."},
+  {id:"pa9", t:["past"], k:"f", s:"I ___ (write) a script to clean the test data last week.", a:["wrote"], r:"write-wrote-written (irregular)."},
+  {id:"pa10", t:["past"], k:"f", s:"The new commit ___ (break) the login flow on Monday.", a:["broke"], r:"break-broke-broken (irregular)."},
+  {id:"pa11", t:["past"], k:"f", s:"We ___ (choose) Playwright because of its auto-waiting.", a:["chose"], r:"choose-chose-chosen (irregular)."},
+  // Present Perfect vs Past Simple
+  {id:"cpp1", t:["pp","past"], m:"pp-past", k:"c", s:"I ___ the bug yesterday.", o:["fixed","have fixed"], c:0, r:"Yesterday es un momento terminado: Past Simple."},
+  {id:"cpp2", t:["pp","past"], m:"pp-past", k:"c", s:"In my last project I ___ the regression time by 60%.", o:["reduced","have reduced"], c:0, r:"In my last project es un período cerrado: Past Simple."},
+  {id:"cpp3", t:["pp","past"], m:"pp-past", k:"c", s:"___ with LLM evaluations?", o:["Have you ever worked","Did you ever work"], c:0, r:"Ever, experiencia hasta hoy: Present Perfect."},
+  {id:"cpp4", t:["pp","past"], m:"pp-past", k:"c", s:"We ___ three critical bugs this sprint, and it isn't over yet.", o:["have found","found"], c:0, r:"Período abierto (this sprint): Present Perfect."},
+  {id:"cpp5", t:["pp","past"], m:"pp-past", k:"c", s:"We ___ three critical bugs last sprint.", o:["found","have found"], c:0, r:"Last sprint terminó: Past Simple."},
+  {id:"cpp6", t:["pp","past"], m:"pp-past", k:"c", s:"I ___ in QA since 2019.", o:["have worked","worked","work"], c:0, r:"Since + punto de inicio que llega hasta hoy: Present Perfect."},
+  {id:"cpp7", t:["pp","past"], m:"pp-past", k:"c", s:"I ___ in QA from 2015 to 2019, then I switched to development.", o:["worked","have worked"], c:0, r:"Período con principio y fin en el pasado: Past Simple."},
+  {id:"cpp8", t:["pp","past"], m:"pp-past", k:"c", s:"When ___ automation?", o:["did you start","have you started"], c:0, r:"When pregunta por un momento concreto: Past Simple."},
+  {id:"cpp9", t:["pp","past"], m:"pp-past", k:"x", s:"I have joined the company in 2021.", o:["I joined the company in 2021.","I have join the company in 2021.","I was joined the company in 2021."], c:0, r:"Con una fecha (in 2021) va Past Simple."},
+  {id:"cpp10", t:["pp","past"], m:"pp-past", k:"x", s:"I work here since five years.", o:["I've worked here for five years.","I work here for five years.","I'm working here since five years."], c:0, r:"Hace X que... = Present Perfect + for (duración) / since (inicio)."},
+  {id:"cpp11", t:["pp","past"], m:"pp-past", k:"c", s:"I ___ the release notes. Do you want to review them?", o:["have finished","finished yesterday at"], c:0, r:"Resultado que importa ahora, sin fecha: Present Perfect."},
+  // Past Continuous
+  {id:"pc_1", t:["pastc"], k:"f", s:"I ___ (review) the logs when the alert went off.", a:["was reviewing"], r:"Acción en progreso interrumpida: was/were + -ing."},
+  {id:"pc_2", t:["pastc"], k:"f", s:"What ___ (you / test) when the app crashed?", a:["were you testing"], r:"Pregunta en Past Continuous: Was/Were + sujeto + -ing."},
+  {id:"pc_3", t:["pastc"], k:"f", s:"The monitoring ___ (not / work) during the outage.", a:["wasn't working","was not working"], r:"Negativa: wasn't / weren't + -ing."},
+  {id:"pc_4", t:["pastc"], k:"f", s:"At 9 pm we ___ (still / deploy) the hotfix.", a:["were still deploying"], r:"En progreso en un momento exacto del pasado: were + -ing."},
+  // Past Simple vs Past Continuous
+  {id:"cpc1", t:["past","pastc"], m:"past-pastc", k:"c", s:"We ___ the regression suite when the server went down.", o:["were running","ran"], c:0, r:"La acción larga de fondo va en Past Continuous."},
+  {id:"cpc2", t:["past","pastc"], m:"past-pastc", k:"c", s:"The server ___ while we were running the tests.", o:["crashed","was crashing"], c:0, r:"La acción corta que interrumpe va en Past Simple."},
+  {id:"cpc3", t:["past","pastc"], m:"past-pastc", k:"c", s:"At my old job I ___ tests every day.", o:["wrote","was writing"], c:0, r:"Hábito del pasado: Past Simple (o used to), no continuo."},
+  {id:"cpc4", t:["past","pastc"], m:"past-pastc", k:"c", s:"While I ___ the test cases, the devs fixed the API.", o:["was writing","wrote"], c:0, r:"While + acción en progreso: Past Continuous."},
+  {id:"cpc5", t:["past","pastc"], m:"past-pastc", k:"c", s:"I ___ on a fintech app when I first used Cypress.", o:["was working","worked"], c:0, r:"Contexto de fondo de una historia: Past Continuous."},
+  // Past Perfect
+  {id:"ppf1", t:["pastp"], k:"f", s:"When I joined, the company ___ (never / use) any automation framework.", a:["had never used"], r:"Antes de otro pasado (when I joined): had + participio."},
+  {id:"ppf2", t:["pastp"], k:"f", s:"The release failed because someone ___ (change) the config manually.", a:["had changed"], r:"La causa ocurrió antes del fallo: Past Perfect."},
+  {id:"ppf3", t:["pastp"], k:"f", s:"By the time the PM asked, I ___ (already / report) the issue.", a:["had already reported"], r:"By the time + pasado: had already + participio."},
+  {id:"ppf4", t:["pastp","past"], k:"c", s:"In 2019 I ___ in QA.", o:["started","had started"], c:0, r:"Sin otro pasado de referencia alcanza con Past Simple."},
+  {id:"ppf5", t:["pastp"], k:"c", s:"The bug ___ production before we caught it.", o:["had reached","has reached"], c:0, r:"Pasó antes de otro pasado (we caught it): Past Perfect."},
+  // Present Perfect Continuous
+  {id:"ppc1", t:["ppc"], k:"f", s:"I ___ (work) with Playwright since 2022.", a:["have been working","have worked"], r:"Since + acción que sigue: Present Perfect Continuous (o Present Perfect)."},
+  {id:"ppc2", t:["ppc"], k:"f", s:"Sorry for the delay, I ___ (debug) the CI runners all morning.", a:["have been debugging"], r:"Actividad que explica el estado actual (all morning): have been + -ing."},
+  {id:"ppc3", t:["ppc"], k:"f", s:"How long ___ (you / work) in QA?", a:["have you been working","have you worked"], r:"How long + hasta hoy: Have you been + -ing."},
+  {id:"ppc4", t:["ppc"], k:"f", s:"This test ___ (fail) intermittently for a week.", a:["has been failing"], r:"Problema que viene durando: has been + -ing."},
+  // pp vs ppc
+  {id:"cppc1", t:["pp","ppc"], m:"pp-ppc", k:"c", s:"I ___ 50 test cases today.", o:["have written","have been writing"], c:0, r:"Cantidad o resultado: Present Perfect."},
+  {id:"cppc2", t:["pp","ppc"], m:"pp-ppc", k:"c", s:"I ___ test cases all day, I'm exhausted.", o:["have been writing","have written"], c:0, r:"Duración o proceso: Present Perfect Continuous."},
+  {id:"cppc3", t:["pp","ppc"], m:"pp-ppc", k:"c", s:"I ___ our tech lead for years.", o:["have known","have been knowing"], c:0, r:"Know es de estado: nunca en continuo."},
+  {id:"cppc4", t:["pp","ppc"], m:"pp-ppc", k:"c", s:"We ___ 80% of the suite so far.", o:["have migrated","have been migrating"], c:0, r:"Porcentaje o cantidad terminada: Present Perfect."},
+  {id:"cppc5", t:["pp","ppc"], m:"pp-ppc", k:"c", s:"We ___ the suite since July and we're not done yet.", o:["have been migrating","have migrated"], c:0, r:"Proceso que sigue: Present Perfect Continuous."},
+  // Past Perfect Continuous
+  {id:"ppfc1", t:["pastpc"], k:"f", s:"The test ___ (fail) for days before anyone noticed.", a:["had been failing"], r:"Duración antes de otro pasado: had been + -ing."},
+  {id:"ppfc2", t:["pastpc"], k:"f", s:"I ___ (work) as a manual tester for two years when I moved to automation.", a:["had been working"], r:"Venía haciéndolo hasta otro momento pasado: had been + -ing."},
+  {id:"ppfc3", t:["pastpc"], k:"c", s:"The pipeline was slow because the tests ___ sequentially for months.", o:["had been running","have been running"], c:0, r:"Referencia en pasado (was slow): had been + -ing."},
+  // will
+  {id:"w1", t:["will"], m:"will-goingto", k:"c", s:"The build is red? OK, I ___ a look right now.", o:["'ll take","'m going to take"], c:0, r:"Decisión tomada en el momento: will."},
+  {id:"w2", t:["will"], k:"f", s:"Don't worry, this change ___ (not / affect) the existing tests.", a:["won't affect","will not affect"], r:"Promesa o predicción negativa: won't + verbo base."},
+  {id:"w3", t:["will"], k:"x", s:"When the build will finish, I'll deploy.", o:["When the build finishes, I'll deploy.","When the build will finishes, I'll deploy.","When the build finish, I'll deploy."], c:0, r:"Después de when / if con sentido futuro se usa presente."},
+  {id:"w4", t:["will"], k:"c", s:"I think AI agents ___ how we write tests.", o:["will change","change"], c:0, r:"Predicción u opinión (I think): will."},
+  {id:"w5", t:["will"], k:"f", s:"I ___ (send) you the test report by the end of the day, I promise.", a:["will send"], r:"Promesa: will + verbo base."},
+  // going to
+  {id:"g1", t:["goingto"], m:"will-goingto", k:"c", s:"We ___ contract testing next quarter, it's already in the roadmap.", o:["are going to adopt","will adopt"], c:0, r:"Plan ya decidido: going to."},
+  {id:"g2", t:["goingto"], m:"will-goingto", k:"c", s:"Look at those error rates! The deploy ___.", o:["is going to fail","will fail"], c:0, r:"Predicción con evidencia que ves ahora: going to."},
+  {id:"g3", t:["goingto"], k:"f", s:"I ___ (refactor) the page objects this week, I decided it yesterday.", a:["am going to refactor"], r:"Intención decidida antes de hablar: am/is/are going to + verbo."},
+  {id:"g4", t:["goingto"], k:"x", s:"I going to test it tomorrow.", o:["I'm going to test it tomorrow.","I going test it tomorrow.","I'm go to test it tomorrow."], c:0, r:"Going to necesita el verbo to be: I'm going to."},
+  {id:"g5", t:["goingto"], k:"f", s:"___ (you / automate) the mobile flows too?", a:["are you going to automate"], r:"Pregunta: Are + sujeto + going to + verbo."},
+  {id:"g6", t:["goingto","will"], m:"will-goingto", k:"c", s:"\"Can someone review my PR?\" \"Sure, I ___ it.\"", o:["'ll review","'m going to review"], c:0, r:"Ofrecimiento espontáneo: will."},
+  // Future Continuous
+  {id:"fc1", t:["futc"], k:"f", s:"At 10 am we ___ (deploy) to production, so avoid merging.", a:["will be deploying"], r:"En progreso en un momento futuro: will be + -ing."},
+  {id:"fc2", t:["futc"], k:"c", s:"___ the staging environment this afternoon?", o:["Will you be using","Will you using"], c:0, r:"Pregunta amable sobre planes: Will + sujeto + be + -ing."},
+  {id:"fc3", t:["futc"], k:"x", s:"I will working on it tomorrow.", o:["I'll be working on it tomorrow.","I'll working on it tomorrow.","I will be work on it tomorrow."], c:0, r:"Future Continuous: will + be + -ing."},
+  // Future Perfect
+  {id:"fp1", t:["futp"], k:"f", s:"By Friday we ___ (fix) all the blockers.", a:["will have fixed"], r:"By + momento futuro, algo terminado: will have + participio."},
+  {id:"fp2", t:["futp"], k:"f", s:"We ___ (not / finish) the migration by the release date.", a:["won't have finished","will not have finished"], r:"Negativa: won't have + participio."},
+  {id:"fp3", t:["futp"], k:"c", s:"By the end of the sprint, I ___ the whole checkout flow.", o:["will have automated","will be automating"], c:0, r:"Deadline (by the end of...): Future Perfect."},
+  // Future Perfect Continuous
+  {id:"fpc1", t:["futpc"], k:"f", s:"In March I ___ (work) in QA for five years.", a:["will have been working"], r:"Duración hasta un momento futuro: will have been + -ing."},
+  {id:"fpc2", t:["futpc"], k:"c", s:"By Friday this bug ___ us for two weeks.", o:["will have been blocking","will block"], c:0, r:"By + futuro + for + duración: will have been + -ing."},
+  // used to / would
+  {id:"u1", t:["usedto"], m:"usedto", k:"c", s:"We ___ a dedicated QA environment, but they shut it down.", o:["used to have","would have"], c:0, r:"Estado del pasado (have): used to, nunca would."},
+  {id:"u2", t:["usedto"], m:"usedto", k:"x", s:"I use to write my test cases in Jira.", o:["I usually write my test cases in Jira.","I'm use to write my test cases in Jira.","I used write my test cases in Jira."], c:0, r:"Para hábitos actuales se usa usually, no use to."},
+  {id:"u3", t:["usedto"], m:"usedto", k:"x", s:"We didn't used to have CI.", o:["We didn't use to have CI.","We didn't used have CI.","We not used to have CI."], c:0, r:"Con didn't, use to va sin d."},
+  {id:"u4", t:["usedto"], m:"usedto", k:"c", s:"Every release, we ___ spend two days on manual regression.", o:["would","used"], c:0, r:"Acción repetida en una historia del pasado: would (o used to)."},
+  {id:"u5", t:["usedto"], m:"usedto", k:"c", s:"I ___ a manual tester before I moved to automation.", o:["used to be","would be"], c:0, r:"Estado (be): used to."},
+  {id:"u6", t:["usedto"], m:"usedto", k:"x", s:"I'm used to work with tight deadlines.", o:["I'm used to working with tight deadlines.","I used to working with tight deadlines.","I'm use to work with tight deadlines."], c:0, r:"Be used to (estar acostumbrado) + -ing."},
+  {id:"u7", t:["usedto"], m:"usedto", k:"f", s:"Our pipeline ___ (take) over an hour, now it takes 15 minutes. (use: used to)", a:["used to take"], r:"Algo que antes era así y ya no: used to + verbo base."}
+];
+
+// ---------- answer matching ----------
+function baseNorm(s) {
+  return s.toLowerCase().replace(/[‘’`´]/g, "'").replace(/[.!?,"]/g, " ").replace(/\s+/g, " ").trim()
+    .replace(/\b(do|does|did|is|are|was|were|have|has|had|would|could|should)nt\b/g, "$1n't")
+    .replace(/\bwont\b/g, "won't").replace(/\bcant\b/g, "can't")
+    .replace(/\bim\b/g, "i'm").replace(/\b(i|you|we|they)ve\b/g, "$1've");
+}
+function expand(s) {
+  let out = [baseNorm(s)
+    .replace(/\bwon't\b/g, "will not").replace(/\bcan't\b/g, "can not").replace(/\bcannot\b/g, "can not")
+    .replace(/n't\b/g, " not").replace(/'m\b/g, " am").replace(/'re\b/g, " are")
+    .replace(/'ve\b/g, " have").replace(/'ll\b/g, " will")];
+  for (const [c, alts] of [["'s", [" is", " has"]], ["'d", [" had", " would"]]]) {
+    const next = [];
+    for (const v of out) {
+      if (!v.includes(c)) { next.push(v); continue; }
+      for (const alt of alts) next.push(v.split(c).join(alt));
+    }
+    out = next;
+  }
+  return new Set(out.map(v => v.replace(/\s+/g, " ").trim()));
+}
+// `before` is the sentence text before the gap: if the viewer retyped the
+// subject ("I've automated" for "I ___"), it is stripped before comparing.
+function matches(input, answers, before = "") {
+  const u = expand(input);
+  const words = [...expand(before)][0].split(" ").filter(Boolean);
+  for (const v of [...u]) {
+    for (let n = 1; n <= Math.min(3, words.length); n++) {
+      const prefix = words.slice(-n).join(" ") + " ";
+      if (v.startsWith(prefix)) u.add(v.slice(prefix.length));
+    }
+  }
+  return answers.some(a => [...expand(a)].some(v => u.has(v)));
+}
+
+// ---------- storage: db if available, localStorage otherwise ----------
+const LS_KEY = "tense-runner-stats-v1";
+let stats = {};
+let db = null;
+try { stats = JSON.parse(localStorage.getItem(LS_KEY) || "{}") || {}; } catch (e) { stats = {}; }
+function saveLocal() { try { localStorage.setItem(LS_KEY, JSON.stringify(stats)); } catch (e) {} }
+const writing = {};
+async function recordAttempt(item, ok, answer) {
+  const prev = stats[item.id] || { item: item.id, topics: item.t, right: 0, wrong: 0, streak: 0 };
+  const next = {
+    item: item.id, topics: item.t, sentence: item.s,
+    right: prev.right + (ok ? 1 : 0), wrong: prev.wrong + (ok ? 0 : 1),
+    streak: ok ? (prev.streak || 0) + 1 : 0,
+    last: ok ? "pass" : "fail", lastAnswer: String(answer).slice(0, 200),
+    updatedAt: new Date().toISOString()
+  };
+  stats[item.id] = next;
+  saveLocal();
+  if (db) {
+    try {
+      await (writing[item.id] || Promise.resolve());
+      writing[item.id] = db.collection("stats").doc(item.id).set(next);
+      await writing[item.id];
+    } catch (e) { /* local copy still holds it */ }
+  }
+}
+async function recordRun(label, results) {
+  if (!db) return;
+  try {
+    await db.collection("runs").add({
+      at: new Date().toISOString(), suite: label,
+      total: results.length, passed: results.filter(r => r.ok).length,
+      failed: results.filter(r => !r.ok).map(r => r.item.id)
+    });
+  } catch (e) {}
+}
+function isWeak(id) { const s = stats[id]; return s && s.wrong > 0 && (s.streak || 0) < 2; }
+
+// ---------- suites ----------
+const SPECIAL = [
+  { key: "mixed", label: "Mezclado", pick: () => ITEMS },
+  { key: "weak", label: "Mis errores", pick: () => ITEMS.filter(i => isWeak(i.id)) }
+];
+let selected = { kind: "special", key: "mixed" };
+function poolFor(sel) {
+  if (sel.kind === "special") return SPECIAL.find(s => s.key === sel.key).pick();
+  if (sel.kind === "cmp") return ITEMS.filter(i => i.m === sel.key);
+  return ITEMS.filter(i => i.t.includes(sel.key));
+}
+function labelFor(sel) {
+  if (sel.kind === "special") return SPECIAL.find(s => s.key === sel.key).label;
+  if (sel.kind === "cmp") return CMPS[sel.key];
+  return TOPICS[sel.key];
+}
+function rateFor(pool) {
+  let r = 0, w = 0;
+  for (const i of pool) { const s = stats[i.id]; if (s) { r += s.right; w += s.wrong; } }
+  return r + w ? Math.round(100 * r / (r + w)) + "%" : "";
+}
+function chip(sel, text, pool, container) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip";
+  b.setAttribute("aria-pressed", String(sel.kind === selected.kind && sel.key === selected.key));
+  const name = document.createElement("span"); name.textContent = text; b.append(name);
+  const rate = rateFor(pool);
+  const meta = document.createElement("span"); meta.className = "rate";
+  meta.textContent = sel.key === "weak" ? String(pool.length) : rate;
+  if (meta.textContent) b.append(meta);
+  b.onclick = () => { selected = sel; renderHome(); };
+  container.append(b);
+}
+function renderHome() {
+  const sp = document.getElementById("chips-special"), cm = document.getElementById("chips-cmp"), te = document.getElementById("chips-tense");
+  sp.replaceChildren(); cm.replaceChildren(); te.replaceChildren();
+  for (const s of SPECIAL) chip({ kind: "special", key: s.key }, s.label, s.pick(), sp);
+  for (const [k, v] of Object.entries(CMPS)) chip({ kind: "cmp", key: k }, v, ITEMS.filter(i => i.m === k), cm);
+  for (const [k, v] of Object.entries(TOPICS)) chip({ kind: "tense", key: k }, v, ITEMS.filter(i => i.t.includes(k)), te);
+  const pool = poolFor(selected);
+  document.getElementById("pool-info").textContent = pool.length
+    ? `${pool.length} casos en "${labelFor(selected)}" · ${pool.filter(i => stats[i.id]).length} ya vistos (primero salen los que no viste)`
+    : (selected.key === "weak" ? "Todavía no tenés errores pendientes. Corré otra suite primero." : "Sin casos");
+  const start = document.getElementById("start");
+  start.disabled = pool.length === 0;
+  start.textContent = `Correr ${Math.min(10, pool.length) || 10} casos`;
+}
+
+// ---------- run ----------
+let run = null;
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function lastSeen(id) { const s = stats[id]; return s && s.updatedAt ? Date.parse(s.updatedAt) || 0 : 0; }
+function startRun() {
+  const pool = poolFor(selected);
+  if (!pool.length) return;
+  // never-seen cases first, then the ones seen longest ago (random among ties);
+  // pending errors live in "Mis errores", so they don't jump the queue here
+  const ordered = shuffle(pool).sort((a, b) => lastSeen(a.id) - lastSeen(b.id));
+  run = { label: labelFor(selected), items: ordered.slice(0, 10), i: 0, results: [] };
+  show("run"); renderCase();
+}
+function show(id) { for (const s of ["home", "run", "result"]) document.getElementById(s).hidden = s !== id; window.scrollTo({ top: 0 }); }
+const TASKS = { f: "Completá el espacio con la forma correcta del verbo.", c: "Elegí la opción correcta.", x: "Esta oración tiene un error. Elegí la versión corregida." };
+function sentenceNode(item) {
+  const p = document.getElementById("case-sentence");
+  p.replaceChildren();
+  if (item.k === "x") { const s = document.createElement("span"); s.className = "wrong"; s.textContent = item.s; p.append(s); return; }
+  const [before, after] = item.s.split("___");
+  p.append(document.createTextNode(before));
+  const gap = document.createElement("span"); gap.className = "gap"; gap.id = "gap"; gap.innerHTML = "&nbsp;"; p.append(gap);
+  const m = (after || "").match(/^(\s*\([^)]*\))(.*)$/);
+  if (m) { const h = document.createElement("span"); h.className = "hint"; h.textContent = m[1]; p.append(h, document.createTextNode(m[2])); }
+  else p.append(document.createTextNode(after || ""));
+}
+function renderCase() {
+  const item = run.items[run.i];
+  const passed = run.results.filter(r => r.ok).length, failed = run.results.length - passed;
+  document.getElementById("run-count").textContent = `Case ${run.i + 1} / ${run.items.length}`;
+  document.getElementById("run-score").textContent = `${passed} passed · ${failed} failed`;
+  document.getElementById("run-bar").style.width = (100 * run.i / run.items.length) + "%";
+  // tags name the tense, so they stay hidden until the case is answered
+  const tags = document.getElementById("case-tags"); tags.replaceChildren(); tags.hidden = true;
+  const idn = document.createElement("span"); idn.textContent = "#" + item.id; tags.append(idn);
+  for (const t of item.t) { const s = document.createElement("span"); s.className = "tag"; s.textContent = TOPICS[t]; tags.append(s); }
+  document.getElementById("case-task").textContent = TASKS[item.k];
+  sentenceNode(item);
+  const box = document.getElementById("case-input"); box.replaceChildren();
+  document.getElementById("case-verdict").replaceChildren();
+  document.getElementById("next").hidden = true;
+  if (item.k === "f") {
+    const form = document.createElement("form"); form.className = "options";
+    const input = document.createElement("input"); input.type = "text"; input.id = "answer"; input.autocomplete = "off"; input.spellcheck = false;
+    input.setAttribute("autocapitalize", "off"); input.placeholder = "Escribí tu respuesta"; input.setAttribute("aria-label", "Tu respuesta");
+    const btn = document.createElement("button"); btn.className = "btn"; btn.type = "submit"; btn.textContent = "Comprobar";
+    form.append(input, btn);
+    form.onsubmit = (e) => { e.preventDefault(); if (!input.value.trim()) return; input.disabled = true; btn.disabled = true; judge(item, matches(input.value, item.a, item.s.split("___")[0]), input.value); };
+    box.append(form);
+    setTimeout(() => input.focus(), 30);
+  } else {
+    const wrap = document.createElement("div"); wrap.className = "options";
+    const order = shuffle(item.o.map((text, idx) => ({ text, idx })));
+    for (const o of order) {
+      const b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = o.text; b.dataset.idx = o.idx;
+      b.onclick = () => {
+        for (const x of wrap.children) { x.disabled = true; if (+x.dataset.idx === item.c) x.classList.add("is-right"); }
+        if (o.idx !== item.c) b.classList.add("is-wrong");
+        judge(item, o.idx === item.c, o.text);
+      };
+      wrap.append(b);
+    }
+    box.append(wrap);
+  }
+}
+function expected(item) { return item.k === "f" ? item.a[0] : item.o[item.c]; }
+function judge(item, ok, answer) {
+  run.results.push({ item, ok, answer });
+  recordAttempt(item, ok, answer);
+  document.getElementById("case-tags").hidden = false;
+  if (item.k === "f") { const g = document.getElementById("gap"); if (g) g.textContent = ok ? answer.trim() : expected(item); }
+  const v = document.createElement("div"); v.className = "verdict " + (ok ? "pass" : "fail");
+  const st = document.createElement("span"); st.className = "status"; st.textContent = ok ? "PASS" : "FAIL"; v.append(st);
+  if (!ok) { const e = document.createElement("span"); e.textContent = "Esperado: " + expected(item); v.append(e); }
+  const r = document.createElement("span"); r.className = "rule"; r.textContent = item.r; v.append(r);
+  document.getElementById("case-verdict").replaceChildren(v);
+  const next = document.getElementById("next"); next.hidden = false;
+  next.textContent = run.i + 1 < run.items.length ? "Siguiente" : "Ver reporte";
+  next.focus();
+}
+function nextCase() {
+  if (run.i + 1 < run.items.length) { run.i++; renderCase(); } else finishRun();
+}
+function finishRun() {
+  const passed = run.results.filter(r => r.ok).length, failed = run.results.length - passed;
+  const sum = document.getElementById("sum"); sum.replaceChildren();
+  const mk = (cls, txt) => { const s = document.createElement("span"); if (cls) s.className = cls; s.textContent = txt; return s; };
+  sum.append(mk("", `Ran ${run.results.length} cases`), mk("p", `${passed} passed`), mk("f", `${failed} failed`), mk("", `Suite: ${run.label}`));
+  const rep = document.getElementById("report"); rep.replaceChildren();
+  const ordered = [...run.results.filter(r => !r.ok), ...run.results.filter(r => r.ok)];
+  for (const res of ordered) {
+    const d = document.createElement("div"); d.className = "report-item" + (res.ok ? " ok" : "");
+    d.append(mk("k", (res.ok ? "PASS " : "FAIL ") + "#" + res.item.id));
+    d.append(mk("", res.item.s.replace("___", "____")));
+    if (!res.ok) { d.append(mk("small", "Tu respuesta: " + res.answer)); d.append(mk("small", "Correcto: " + expected(res.item))); }
+    d.append(mk("small", res.item.r));
+    rep.append(d);
+  }
+  recordRun(run.label, run.results);
+  show("result");
+}
+
+document.getElementById("start").onclick = startRun;
+document.getElementById("next").onclick = nextCase;
+document.getElementById("quit").onclick = () => { renderHome(); show("home"); };
+document.getElementById("home-btn").onclick = () => { renderHome(); show("home"); };
+document.getElementById("again").onclick = startRun;
+renderHome();
+
+// Light up the shared store when the viewer provides it.
+(async () => {
+  try {
+    const d = window.claude && await window.claude.use("db");
+    if (!d) { document.getElementById("store-note").textContent = "Tu progreso se guarda en este navegador."; return; }
+    db = d;
+    const snap = await db.collection("stats").get();
+    for (const doc of snap.docs) { const v = doc.data(); if (v) stats[doc.id] = { ...v }; }
+    saveLocal();
+    if (!document.getElementById("home").hidden) renderHome();
+  } catch (e) {
+    document.getElementById("store-note").textContent = "Tu progreso se guarda en este navegador.";
+  }
+})();
+</script>

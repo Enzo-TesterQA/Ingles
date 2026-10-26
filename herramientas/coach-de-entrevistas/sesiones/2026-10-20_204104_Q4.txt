@@ -1,0 +1,23 @@
+Q4 · How do you deal with flaky tests?
+
+── Reporte · Q4 ────────────────────────────────────────
+Duración     0:52   (objetivo 0:40 a 2:00: bien)
+Palabras     108 · 127 por minuto · buen ritmo
+Muletillas   0
+
+Tiempos verbales que usaste (aproximado)
+  Present Simple 7 · Past Simple 2 · Present Continuous 1
+
+No encontré errores de los que el coach sabe detectar. Igual pasale la respuesta a Claude.
+
+Palabras clave del modelo: usaste flaky, root cause, quarantine, block the pipeline
+  Podés sumar: retries, timing issues, fixed waits / explicit waits
+
+Lo que dijiste
+Okay, the first thing is to reproduce, to try to reproduce the failure by running the test several times, locally and in in CI. To confirm it's really flaky test and not a real bug. Then I look for the root cause. Usually it's time in issues share a state between test or on a scalable test data. For example, I once replaced fixed weights with explicit weights and the failures disappear. While I'm fixing it I quarantine the test so it doesn't block the pipeline. Finally I monitor it for a few runs. If the test no longer adds value I delete it instead of keeping it.
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+Q4: Okay, the first thing is to reproduce, to try to reproduce the failure by running the test several times, locally and in in CI. To confirm it's really flaky test and not a real bug. Then I look for the root cause. Usually it's time in issues share a state between test or on a scalable test data. For example, I once replaced fixed weights with explicit weights and the failures disappear. While I'm fixing it I quarantine the test so it doesn't block the pipeline. Finally I monitor it for a few runs. If the test no longer adds value I delete it instead of keeping it.
+(Pregunta: How do you deal with flaky tests? · 0:52 · 127 palabras por minuto · respuesta hablada, transcripta con el coach)

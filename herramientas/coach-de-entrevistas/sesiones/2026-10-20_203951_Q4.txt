@@ -1,0 +1,23 @@
+Q4 · How do you deal with flaky tests?
+
+── Reporte · Q4 ────────────────────────────────────────
+Duración     0:17   (objetivo 0:40 a 2:00: corta)
+Palabras     23 · 82 por minuto · lento: está bien pensar, pero buscá más fluidez
+Muletillas   0
+
+Tiempos verbales que usaste (aproximado)
+  Present Simple 2
+
+No encontré errores de los que el coach sabe detectar. Igual pasale la respuesta a Claude.
+
+Palabras clave del modelo: usaste ninguna
+  Podés sumar: flaky, root cause, retries, timing issues, fixed waits / explicit waits, quarantine, block the pipeline
+
+Lo que dijiste
+Okay, first I try to reproduce the failure by ruining the test several times. I think it's... it's have... it's... Okay, the first...
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+Q4: Okay, first I try to reproduce the failure by ruining the test several times. I think it's... it's have... it's... Okay, the first...
+(Pregunta: How do you deal with flaky tests? · 0:17 · 82 palabras por minuto · respuesta hablada, transcripta con el coach)

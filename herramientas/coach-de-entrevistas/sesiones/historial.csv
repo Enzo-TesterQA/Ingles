@@ -1,0 +1,11 @@
+﻿fecha,id,fuente,pregunta,segundos,palabras,ppm,muletillas,pausas_largas,errores_tiempo,errores_otros,reglas,audio,reporte
+2026-10-20 20:34,Q4,Banco,How do you deal with flaky tests?,87,131,91,0,0,0,0,,2026-10-20_203420_Q4.wav,2026-10-20_203420_Q4.txt
+2026-10-20 20:39,Q4,Banco,How do you deal with flaky tests?,17,23,82,0,0,0,0,,2026-10-20_203951_Q4.wav,2026-10-20_203951_Q4.txt
+2026-10-20 20:41,Q4,Banco,How do you deal with flaky tests?,52,108,127,0,0,0,0,,2026-10-20_204104_Q4.wav,2026-10-20_204104_Q4.txt
+2026-10-20 20:42,R9,Mis respuestas,What's the difference between black-box and white-box testing?,45,44,72,0,0,0,0,,2026-10-20_204233_R9.wav,2026-10-20_204233_R9.txt
+2026-10-20 20:45,R9,Mis respuestas,What's the difference between black-box and white-box testing?,145,192,80,0,2,0,0,,2026-10-20_204558_R9.wav,2026-10-20_204558_R9.txt
+2026-10-20 20:50,R9,Mis respuestas,What's the difference between black-box and white-box testing?,75,116,95,1,0,1,0,T-3RD,2026-10-20_205015_R9.wav,2026-10-20_205015_R9.txt
+2026-10-20 20:52,R9,Mis respuestas,What's the difference between black-box and white-box testing?,112,181,98,0,0,0,0,,2026-10-20_205221_R9.wav,2026-10-20_205221_R9.txt
+2026-10-20 20:57,Q28,Banco,Tell me about a time you pushed back on a release.,155,188,75,0,1,0,0,,2026-10-20_205713_Q28.wav,2026-10-20_205713_Q28.txt
+2026-10-20 21:00,Q28,Banco,Tell me about a time you pushed back on a release.,73,166,138,1,0,0,0,,2026-10-20_210023_Q28.wav,2026-10-20_210023_Q28.txt
+2026-10-20 21:02,H6,Mis respuestas,Tell me about a time you had to learn something new.,25,13,42,0,0,0,0,,2026-10-20_210209_H6.wav,2026-10-20_210209_H6.txt

@@ -1,0 +1,471 @@
+<title>Cuadro comparativo — Tiempos verbales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+:root {
+  --bg: #f7f6f3;
+  --surface: #ffffff;
+  --border: #e0dbd3;
+  --fg: #1c1915;
+  --fg-2: #5a5248;
+  --fg-3: #9a928a;
+
+  --p-bg: #eff4ff;
+  --p-hd: #1d4ed8;
+  --p-border: #bfdbfe;
+  --p-code: #dbeafe;
+
+  --t-bg: #fff8ec;
+  --t-hd: #92400e;
+  --t-border: #fde68a;
+  --t-code: #fef3c7;
+
+  --f-bg: #ecfdf5;
+  --f-hd: #065f46;
+  --f-border: #a7f3d0;
+  --f-code: #d1fae5;
+
+  --asp-bg: #f0ece6;
+  --asp-fg: #3a332b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #18160f;
+    --surface: #211e16;
+    --border: #33302a;
+    --fg: #ede8e0;
+    --fg-2: #a89f90;
+    --fg-3: #6e6558;
+    --p-bg: #12213a;
+    --p-hd: #7aa2f7;
+    --p-border: #1e3a6e;
+    --p-code: #1a2d4f;
+    --t-bg: #2a1e00;
+    --t-hd: #fbbf24;
+    --t-border: #4a3200;
+    --t-code: #3a2800;
+    --f-bg: #001f14;
+    --f-hd: #34d399;
+    --f-border: #004026;
+    --f-code: #002e1c;
+    --asp-bg: #27231a;
+    --asp-fg: #c0b8a8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #18160f;
+  --surface: #211e16;
+  --border: #33302a;
+  --fg: #ede8e0;
+  --fg-2: #a89f90;
+  --fg-3: #6e6558;
+  --p-bg: #12213a;
+  --p-hd: #7aa2f7;
+  --p-border: #1e3a6e;
+  --p-code: #1a2d4f;
+  --t-bg: #2a1e00;
+  --t-hd: #fbbf24;
+  --t-border: #4a3200;
+  --t-code: #3a2800;
+  --f-bg: #001f14;
+  --f-hd: #34d399;
+  --f-border: #004026;
+  --f-code: #002e1c;
+  --asp-bg: #27231a;
+  --asp-fg: #c0b8a8;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  padding-inline: 16px;
+  padding-block: 28px;
+}
+
+.wrap { max-width: 1280px; margin: 0 auto; }
+
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  text-wrap: balance;
+  margin-bottom: 5px;
+}
+
+.intro {
+  font-size: 13px;
+  color: var(--fg-2);
+  margin-bottom: 20px;
+}
+
+.legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.leg {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--fg-2);
+  font-weight: 500;
+}
+
+.leg-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.leg-dot.p { background: var(--p-hd); }
+.leg-dot.t { background: var(--t-hd); }
+.leg-dot.f { background: var(--f-hd); }
+
+.tbl-outer {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,.07);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+  background: var(--surface);
+}
+
+thead th {
+  padding: 13px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--border);
+  text-align: left;
+}
+
+.th-asp {
+  background: var(--asp-bg);
+  color: var(--asp-fg);
+  width: 80px;
+  text-align: center;
+}
+
+.th-p { background: var(--p-bg); color: var(--p-hd); }
+.th-t { background: var(--t-bg); color: var(--t-hd); }
+.th-f { background: var(--f-bg); color: var(--f-hd); }
+
+.asp-cell {
+  background: var(--asp-bg);
+  color: var(--asp-fg);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px 8px;
+  border-right: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  width: 80px;
+  overflow: hidden;
+}
+
+.asp-inner {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: inline-block;
+}
+
+td.cell {
+  padding: 15px 16px;
+  vertical-align: top;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  min-width: 0;
+}
+
+td.cell:last-child { border-right: none; }
+tr:last-child td { border-bottom: none; }
+
+td.cell.p { background: var(--p-bg); }
+td.cell.t { background: var(--t-bg); }
+td.cell.f { background: var(--f-bg); }
+
+.tense-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+.tense-name.p { color: var(--p-hd); }
+.tense-name.t { color: var(--t-hd); }
+.tense-name.f { color: var(--f-hd); }
+
+.struct {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--fg);
+  line-height: 1.5;
+  max-width: 100%;
+  word-break: break-word;
+}
+.cell.p .struct { background: var(--p-code); }
+.cell.t .struct { background: var(--t-code); }
+.cell.f .struct { background: var(--f-code); }
+
+.uso {
+  font-size: 12px;
+  color: var(--fg-2);
+  font-style: italic;
+  margin-bottom: 10px;
+  text-wrap: balance;
+}
+
+.ex {
+  border-left: 3px solid;
+  padding-left: 10px;
+  margin-top: 2px;
+}
+.cell.p .ex { border-color: var(--p-hd); }
+.cell.t .ex { border-color: var(--t-hd); }
+.cell.f .ex { border-color: var(--f-hd); }
+
+.ex-en {
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--fg);
+  margin-bottom: 3px;
+  line-height: 1.4;
+}
+
+.ex-es {
+  font-size: 11.5px;
+  color: var(--fg-3);
+  margin-bottom: 4px;
+}
+
+.ex-why {
+  font-size: 11px;
+  color: var(--fg-2);
+  line-height: 1.4;
+}
+
+tr.sep td {
+  height: 6px;
+  background: var(--bg);
+  border: none;
+  padding: 0;
+}
+
+.footer {
+  font-size: 11px;
+  color: var(--fg-3);
+  margin-top: 16px;
+  text-align: center;
+  line-height: 1.6;
+}
+</style>
+
+<div class="wrap">
+  <h1>Tiempos verbales en inglés</h1>
+  <p class="intro">Cuadro comparativo por aspecto — presente, pasado y futuro, en contexto QA</p>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-dot p"></div>Presente</div>
+    <div class="leg"><div class="leg-dot t"></div>Pasado</div>
+    <div class="leg"><div class="leg-dot f"></div>Futuro</div>
+  </div>
+
+  <div class="tbl-outer">
+    <table>
+      <thead>
+        <tr>
+          <th class="th-asp">Aspecto</th>
+          <th class="th-p">● Presente</th>
+          <th class="th-t">● Pasado</th>
+          <th class="th-f">● Futuro</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- SIMPLE -->
+        <tr>
+          <td class="asp-cell"><span class="asp-inner">Simple</span></td>
+
+          <td class="cell p">
+            <div class="tense-name p">Present Simple</div>
+            <code class="struct">S + V &nbsp;/&nbsp; S + V-s (3ª p.)</code>
+            <div class="uso">Hábitos, rutinas y verdades generales.</div>
+            <div class="ex">
+              <div class="ex-en">"The pipeline runs every night at 2 AM."</div>
+              <div class="ex-es">El pipeline corre todas las noches a las 2 AM.</div>
+              <div class="ex-why">Rutina automática repetida → presente simple.</div>
+            </div>
+          </td>
+
+          <td class="cell t">
+            <div class="tense-name t">Past Simple</div>
+            <code class="struct">S + V-ed &nbsp;/&nbsp; V (irreg.)</code>
+            <div class="uso">Acción completada en un momento específico del pasado.</div>
+            <div class="ex">
+              <div class="ex-en">"The developer merged the feature branch yesterday."</div>
+              <div class="ex-es">El desarrollador hizo merge de la rama ayer.</div>
+              <div class="ex-why">Acción terminada en un punto concreto del pasado.</div>
+            </div>
+          </td>
+
+          <td class="cell f">
+            <div class="tense-name f">Future Simple</div>
+            <code class="struct">S + will + V</code>
+            <div class="uso">Decisión espontánea, predicción o promesa.</div>
+            <div class="ex">
+              <div class="ex-en">"I will escalate this bug to the senior engineer."</div>
+              <div class="ex-es">Voy a escalar este bug al ingeniero senior.</div>
+              <div class="ex-why">Decisión tomada en el momento de hablar → will.</div>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="sep"><td colspan="4"></td></tr>
+
+        <!-- CONTINUOUS -->
+        <tr>
+          <td class="asp-cell"><span class="asp-inner">Continuous</span></td>
+
+          <td class="cell p">
+            <div class="tense-name p">Present Continuous</div>
+            <code class="struct">S + am/is/are + V-ing</code>
+            <div class="uso">Acción en progreso en este momento.</div>
+            <div class="ex">
+              <div class="ex-en">"The test suite is running against the staging environment."</div>
+              <div class="ex-es">El suite de tests está corriendo contra staging ahora mismo.</div>
+              <div class="ex-why">Ejecución activa en este instante → presente continuo.</div>
+            </div>
+          </td>
+
+          <td class="cell t">
+            <div class="tense-name t">Past Continuous</div>
+            <code class="struct">S + was/were + V-ing</code>
+            <div class="uso">Acción en progreso en un momento del pasado; suele ser interrumpida por otra.</div>
+            <div class="ex">
+              <div class="ex-en">"We were reviewing the test plan when the server went down."</div>
+              <div class="ex-es">Estábamos revisando el plan de tests cuando el servidor se cayó.</div>
+              <div class="ex-why">Acción en curso (were reviewing) interrumpida por otra (went down).</div>
+            </div>
+          </td>
+
+          <td class="cell f">
+            <div class="tense-name f">Future Continuous</div>
+            <code class="struct">S + will be + V-ing</code>
+            <div class="uso">Acción que estará en progreso en un momento futuro específico.</div>
+            <div class="ex">
+              <div class="ex-en">"By 3 PM, the QA team will be running the final acceptance tests."</div>
+              <div class="ex-es">A las 3 PM, el equipo de QA estará ejecutando los tests de aceptación.</div>
+              <div class="ex-why">La ejecución estará en curso en ese momento futuro → futuro continuo.</div>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="sep"><td colspan="4"></td></tr>
+
+        <!-- PERFECT -->
+        <tr>
+          <td class="asp-cell"><span class="asp-inner">Perfect</span></td>
+
+          <td class="cell p">
+            <div class="tense-name p">Present Perfect</div>
+            <code class="struct">S + have/has + V-pp</code>
+            <div class="uso">Acción pasada con relevancia o resultado en el presente.</div>
+            <div class="ex">
+              <div class="ex-en">"I have automated the regression suite for this sprint."</div>
+              <div class="ex-es">Automaticé el suite de regresión para este sprint (y ya está disponible).</div>
+              <div class="ex-why">La acción terminó, pero su resultado importa ahora → presente perfecto.</div>
+            </div>
+          </td>
+
+          <td class="cell t">
+            <div class="tense-name t">Past Perfect</div>
+            <code class="struct">S + had + V-pp</code>
+            <div class="uso">Acción completada antes de otra acción pasada ("el pasado del pasado").</div>
+            <div class="ex">
+              <div class="ex-en">"The team had already documented all test cases before the sprint review."</div>
+              <div class="ex-es">El equipo ya había documentado todos los casos antes de la revisión del sprint.</div>
+              <div class="ex-why">La documentación ocurrió antes de la revisión → pasado perfecto marca esa secuencia.</div>
+            </div>
+          </td>
+
+          <td class="cell f">
+            <div class="tense-name f">Future Perfect</div>
+            <code class="struct">S + will have + V-pp</code>
+            <div class="uso">Acción que estará completada antes de un momento futuro.</div>
+            <div class="ex">
+              <div class="ex-en">"By next Friday, we will have covered all the critical test scenarios."</div>
+              <div class="ex-es">Para el próximo viernes, habremos cubierto todos los escenarios críticos.</div>
+              <div class="ex-why">La cobertura se completará antes de ese viernes futuro → futuro perfecto.</div>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="sep"><td colspan="4"></td></tr>
+
+        <!-- PERFECT CONTINUOUS -->
+        <tr>
+          <td class="asp-cell"><span class="asp-inner">Perfect Continuous</span></td>
+
+          <td class="cell p">
+            <div class="tense-name p">Present Perfect Continuous</div>
+            <code class="struct">S + have/has + been + V-ing</code>
+            <div class="uso">Acción que comenzó en el pasado y continúa ahora; énfasis en la duración.</div>
+            <div class="ex">
+              <div class="ex-en">"She has been analyzing the flaky tests for the past two hours."</div>
+              <div class="ex-es">Lleva dos horas analizando los tests inestables.</div>
+              <div class="ex-why">Empezó antes y sigue ahora, la duración es relevante → presente perfecto continuo.</div>
+            </div>
+          </td>
+
+          <td class="cell t">
+            <div class="tense-name t">Past Perfect Continuous</div>
+            <code class="struct">S + had + been + V-ing</code>
+            <div class="uso">Acción en progreso durante un período, antes de otra acción pasada.</div>
+            <div class="ex">
+              <div class="ex-en">"The environment had been failing intermittently for a week before we identified the root cause."</div>
+              <div class="ex-es">El ambiente había estado fallando de forma intermitente por una semana antes de que encontráramos la causa raíz.</div>
+              <div class="ex-why">El fallo continuo precedió y duró hasta otro evento pasado → pasado perfecto continuo.</div>
+            </div>
+          </td>
+
+          <td class="cell f">
+            <div class="tense-name f">Future Perfect Continuous</div>
+            <code class="struct">S + will have + been + V-ing</code>
+            <div class="uso">Acción en progreso durante un período acumulado hasta un punto futuro.</div>
+            <div class="ex">
+              <div class="ex-en">"By the time we release, we will have been testing this feature for three sprints."</div>
+              <div class="ex-es">Para cuando lancemos, llevaremos tres sprints testeando esta funcionalidad.</div>
+              <div class="ex-why">Énfasis en la duración acumulada hasta un momento futuro → futuro perfecto continuo.</div>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <p class="footer">
+    S = Sujeto &nbsp;·&nbsp; V = Verbo base &nbsp;·&nbsp; V-s = V + s (3ª persona) &nbsp;·&nbsp; V-ed = Pasado regular &nbsp;·&nbsp; V-pp = Participio pasado &nbsp;·&nbsp; V-ing = Gerundio
+  </p>
+</div>

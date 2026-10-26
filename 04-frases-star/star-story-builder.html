@@ -1,0 +1,618 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>
+<title>STAR Story Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Martian+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: story picker on top; below, the story editor (one box per STAR part) beside a sticky side panel with the length meter, stopwatch and quick review. Stacks to one column under 880px. */
+:root {
+  --bg: #f2f4f8;
+  --surface: #ffffff;
+  --ink: #181c2a;
+  --muted: #5a6075;
+  --line: #d9dde8;
+  --accent: #3347c0;
+  --accent-ink: #ffffff;
+  --accent-soft: #e5e9fb;
+  --s: #6b7a99;
+  --t: #1c8a83;
+  --a: #3347c0;
+  --r: #2f8a4c;
+  --ok: #23774a;
+  --ok-bg: #e2f2e8;
+  --warn: #93600a;
+  --warn-bg: #fbf0d9;
+  --font-ui: "Onest", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11131b; --surface: #191c27; --ink: #e4e6f0; --muted: #959bb2; --line: #2a2e3d;
+    --accent: #8d9cf5; --accent-ink: #11131b; --accent-soft: #232a4a;
+    --s: #9aa6c2; --t: #5cc6bd; --a: #8d9cf5; --r: #6fcf8f;
+    --ok: #6fcf8f; --ok-bg: #16291e; --warn: #f0c060; --warn-bg: #2f2510;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11131b; --surface: #191c27; --ink: #e4e6f0; --muted: #959bb2; --line: #2a2e3d;
+  --accent: #8d9cf5; --accent-ink: #11131b; --accent-soft: #232a4a;
+  --s: #9aa6c2; --t: #5cc6bd; --a: #8d9cf5; --r: #6fcf8f;
+  --ok: #6fcf8f; --ok-bg: #16291e; --warn: #f0c060; --warn-bg: #2f2510;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1100px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; display: grid; gap: 22px; }
+p { margin: 0; }
+h1 { margin: 0; font-size: clamp(28px, 5.5vw, 40px); line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
+h2 { margin: 0; font-size: 20px; line-height: 1.25; text-wrap: balance; }
+h3 { margin: 0; font-size: 13px; font-family: var(--font-mono); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.lead { color: var(--muted); max-width: 68ch; }
+header { display: grid; gap: 8px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.picker { display: grid; gap: 10px; }
+.picker-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.picker-label { font-size: 13px; color: var(--muted); min-width: 9.5em; }
+@media (max-width: 560px) { .picker-label { flex-basis: 100%; } }
+.chip { font: inherit; font-size: 14px; display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.st { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid currentColor; opacity: .55; flex: none; }
+.st.written { background: var(--warn); border-color: var(--warn); opacity: 1; }
+.st.timed { background: var(--ok); border-color: var(--ok); opacity: 1; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 20px; align-items: start; }
+@media (max-width: 880px) { .layout { grid-template-columns: minmax(0, 1fr); } .side { position: static !important; } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.editor { gap: 18px; }
+.think { color: var(--muted); font-size: 15px; }
+.example { background: var(--warn-bg); color: var(--ink); border-radius: 10px; padding: 10px 12px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; font-size: 14px; }
+.parts { display: grid; gap: 16px; }
+.part { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 12px; }
+.badge { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 600; font-size: 15px; color: var(--surface); background: var(--muted); }
+.badge.S { background: var(--s); } .badge.T { background: var(--t); } .badge.A { background: var(--a); } .badge.R { background: var(--r); }
+.part-body { display: grid; gap: 6px; min-width: 0; }
+.part-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; align-items: baseline; }
+.part-name { font-weight: 600; }
+.part-tense { font-size: 13px; color: var(--muted); }
+.starter { font-size: 14px; color: var(--muted); font-style: italic; }
+textarea { font: inherit; font-size: 16px; line-height: 1.5; width: 100%; min-height: 84px; resize: vertical; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--bg); color: var(--ink); }
+textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+.wc { font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn { font: inherit; font-weight: 600; font-size: 15px; border: 0; border-radius: 9px; padding: 9px 15px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn.ghost:hover { border-color: var(--accent); }
+.btn.danger { background: transparent; color: var(--warn); border: 1px solid var(--warn); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.note { font-size: 13px; color: var(--muted); }
+
+.side { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 16px; }
+.meter { display: grid; gap: 10px; }
+.big { font-family: var(--font-mono); font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; line-height: 1; }
+.track { position: relative; height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.zone { position: absolute; top: 0; bottom: 0; background: var(--ok-bg); border-left: 1px dashed var(--ok); border-right: 1px dashed var(--ok); }
+.fill { position: absolute; top: 2px; bottom: 2px; left: 0; border-radius: 4px; background: var(--accent); transition: width .2s; }
+.scale { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.verdict { font-size: 14px; font-weight: 600; }
+.verdict.ok { color: var(--ok); } .verdict.warn { color: var(--warn); }
+.mix { display: flex; height: 22px; border-radius: 6px; overflow: hidden; background: var(--bg); border: 1px solid var(--line); position: relative; }
+.mix span { display: grid; place-items: center; white-space: nowrap; font-family: var(--font-mono); font-size: 10px; color: var(--surface); min-width: 0; overflow: hidden; transition: width .2s; }
+.mix .S { background: var(--s); } .mix .T { background: var(--t); } .mix .A { background: var(--a); } .mix .R { background: var(--r); }
+.timer { display: grid; gap: 10px; }
+.checks { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.checks li { font-size: 14px; padding: 8px 10px; border-radius: 8px; background: var(--warn-bg); }
+.checks li.clear { background: var(--ok-bg); }
+.checks em { font-style: italic; }
+.tick { display: flex; gap: 8px; align-items: center; font-size: 15px; }
+.tick input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+tr.pick { cursor: pointer; }
+tr.pick:hover td { background: var(--accent-soft); }
+.yes { color: var(--ok); font-weight: 600; }
+.no { color: var(--muted); }
+.copybox { display: grid; gap: 8px; }
+.copybox textarea { min-height: 140px; font-size: 14px; }
+.toast { font-size: 14px; color: var(--ok); font-weight: 600; min-height: 1.2em; }
+@media (prefers-reduced-motion: reduce) { .fill, .mix span { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Punto 4 del plan · Frases y STAR</p>
+    <h1>STAR Story Builder</h1>
+    <p class="lead">Escribí tus historias parte por parte, mirá cuánto duran y cronometrate diciéndolas en voz alta. Todo queda guardado en este navegador. Cuando termines una, copiala y mandámela para corregir.</p>
+  </header>
+
+  <nav class="picker" aria-label="Elegir historia">
+    <div class="picker-group" id="pick-tmay"><span class="picker-label">Tell me about yourself</span></div>
+    <div class="picker-group" id="pick-star"><span class="picker-label">Historias STAR</span></div>
+    <div class="legend"><span><i class="st"></i>Sin escribir</span><span><i class="st written"></i>Escrita</span><span><i class="st timed"></i>Cronometrada</span></div>
+  </nav>
+
+  <div class="layout">
+    <section class="panel editor" aria-live="polite">
+      <div style="display:grid;gap:6px">
+        <p class="eyebrow" id="ed-code"></p>
+        <h2 id="ed-question"></h2>
+        <p class="think" id="ed-think"></p>
+      </div>
+      <div class="example" id="ed-example" hidden>
+        <span>Esto es el ejemplo del documento de frases (una versión corta). Borralo y escribí tu propia historia.</span>
+        <button class="btn ghost" id="btn-clear-example" type="button">Borrar ejemplo</button>
+      </div>
+      <div class="parts" id="ed-parts"></div>
+      <p class="note" id="ed-tip"></p>
+      <div class="row">
+        <button class="btn" id="btn-copy" type="button">Copiar para mandar</button>
+        <button class="btn ghost" id="btn-copy-all" type="button">Copiar todas</button>
+        <button class="btn danger" id="btn-reset" type="button">Borrar esta historia</button>
+      </div>
+      <p class="toast" id="toast" role="status"></p>
+      <div class="copybox" id="copybox" hidden>
+        <p class="note">No se pudo copiar automáticamente. Seleccioná este texto y copialo.</p>
+        <textarea id="copy-text" readonly></textarea>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="panel meter">
+        <h3>Duración estimada</h3>
+        <div class="row" style="justify-content:space-between">
+          <span class="big" id="m-time">0:00</span>
+          <span class="note" id="m-words">0 palabras</span>
+        </div>
+        <div class="track"><div class="zone" id="m-zone"></div><div class="fill" id="m-fill"></div></div>
+        <div class="scale" id="m-scale"></div>
+        <p class="verdict" id="m-verdict"></p>
+        <p class="note">Estimado a 110 palabras por minuto, un ritmo tranquilo para contar una historia en inglés. El cronómetro de abajo es el que vale.</p>
+        <div id="m-mix-wrap" style="display:grid;gap:6px">
+          <h3>Peso de cada parte</h3>
+          <div class="mix" id="m-mix"></div>
+          <p class="note" id="m-mix-note"></p>
+        </div>
+      </section>
+
+      <section class="panel timer">
+        <h3>Cronómetro</h3>
+        <span class="big" id="t-display">0:00</span>
+        <div class="row">
+          <button class="btn" id="t-start" type="button">Empezar</button>
+          <button class="btn ghost" id="t-save" type="button" disabled>Guardar tiempo</button>
+          <button class="btn ghost" id="t-reset" type="button">Reiniciar</button>
+        </div>
+        <p class="note" id="t-last">Todavía no guardaste un tiempo para esta historia.</p>
+        <label class="tick"><input type="checkbox" id="c-corrected"> Corregida</label>
+        <label class="tick"><input type="checkbox" id="c-aloud"> Practicada en voz alta sin leer</label>
+      </section>
+
+      <section class="panel">
+        <h3>Revisión rápida</h3>
+        <ul class="checks" id="checks"></ul>
+        <p class="note">Busca errores típicos de hispanohablantes. No reemplaza la corrección: mandame la historia igual.</p>
+      </section>
+    </aside>
+  </div>
+
+  <section class="panel">
+    <h3>Hoja de seguimiento</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Historia</th><th>Escrita</th><th>Corregida</th><th>En voz alta</th><th>Tiempo</th></tr></thead>
+        <tbody id="tracker"></tbody>
+      </table>
+    </div>
+    <p class="note">Tocá una fila para abrir esa historia. Para pasar al punto 5 necesitás el Tell me about yourself y al menos 6 historias cronometradas.</p>
+  </section>
+</div>
+
+<script>
+(function () {
+  var WPM = 110;
+  var STAR_PARTS = function (s) {
+    return [
+      { k: 'S', name: 'Situation', tense: 'Past Simple + Past Continuous', starter: s[0] },
+      { k: 'T', name: 'Task', tense: 'Past Simple', starter: s[1] },
+      { k: 'A', name: 'Action', tense: 'Past Simple, en primera persona', starter: s[2] },
+      { k: 'R', name: 'Result', tense: 'Past Simple + Present Perfect', starter: s[3] },
+      { k: 'L', name: 'Aprendizaje', tense: 'Past Simple', starter: s[4] }
+    ];
+  };
+  var TMAY_PARTS = function (last) {
+    return [
+      { k: '1', name: 'Quién sos hoy', tense: 'Present Simple', starter: "I'm a ... with ... years of experience in ..." },
+      { k: '2', name: 'En qué estás ahora', tense: 'Present Continuous', starter: "Right now I'm working on ... / I'm currently focusing on ..." },
+      { k: '3', name: 'Experiencia acumulada', tense: 'Present Perfect', starter: "Over the past ... years, I've worked with ... and I've ..." },
+      { k: '4', name: 'Pasado concreto', tense: 'Past Simple', starter: 'Before that, I ... / In 2022, I moved to ...' },
+      { k: '5', name: 'Lo que venís haciendo con IA', tense: 'Present Perfect Continuous', starter: "Lately I've been ..." },
+      { k: '6', name: 'Por qué este rol', tense: 'Present Simple + would like', starter: last }
+    ];
+  };
+  var STORIES = [
+    { id: 'tmay-qa', group: 'tmay', chip: 'QA', code: 'TMAY QA', type: 'tmay', min: 60, max: 90,
+      q: 'Tell me about yourself. (Para un puesto de QA Automation)',
+      think: 'Empezá por el presente, no por la facultad. Tiene que tener al menos un número y terminar conectando con el puesto.',
+      parts: TMAY_PARTS("That's why this role caught my attention: ...") },
+    { id: 'tmay-ai', group: 'tmay', chip: 'AI', code: 'TMAY AI', type: 'tmay', min: 60, max: 90,
+      q: 'Tell me about yourself. (Para un puesto de AI Engineering)',
+      think: 'Casi igual que la versión de QA. Cambia la parte 5 y sobre todo la 6: por qué querés combinar testing e IA.',
+      parts: TMAY_PARTS("I'd like to combine my testing background with ...") },
+    { id: 'h1', group: 'star', chip: '1', code: 'Historia 1', short: 'Bug crítico', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a time you found a critical bug.',
+      think: '¿Qué estabas testeando? ¿Cómo lo encontraste? ¿Qué hubiera pasado en producción? ¿Qué hiciste además de reportarlo?',
+      parts: STAR_PARTS(['I was testing ... when I noticed that ...', 'My job was to ... before ...', 'First, I reproduced ... Then I ... I also ...', 'As a result, ... Since then, the team has ...', 'What I learned was that ...']) },
+    { id: 'h2', group: 'star', chip: '2', code: 'Historia 2', short: 'Desacuerdo con un dev', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a time you disagreed with a developer.',
+      think: '¿En qué no estaban de acuerdo? ¿Qué datos usaste? ¿Cómo quedó la relación después?',
+      parts: STAR_PARTS(['A developer on my team thought that ..., but I believed that ...', 'I needed to ... without ...', 'Instead of arguing, I ... I showed the developer ... We agreed to ...', "In the end, ... Since then, we've ...", 'It taught me that ...']) },
+    { id: 'h3', group: 'star', chip: '3', code: 'Historia 3', short: 'Un error mío', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a mistake you made at work.',
+      think: '¿Qué error fue? ¿Cómo te diste cuenta? ¿Qué hiciste para arreglarlo? ¿Qué cambiaste para que no vuelva a pasar?',
+      parts: STAR_PARTS(["A few months into my role, I had to ..., and I didn't ...", 'When I realized ..., I needed to ...', 'The first thing I did was ... I told my lead right away. Then I ...', "We fixed it ... Since then, I've always ...", 'The lesson for me was ...']) },
+    { id: 'h4', group: 'star', chip: '4', code: 'Historia 4', short: 'Deadline ajustado', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a time you worked under a tight deadline.',
+      think: '¿Cuánto tiempo tenían y cuánto hacía falta? ¿Qué priorizaste y qué dejaste afuera? ¿Cómo comunicaste los riesgos?',
+      parts: STAR_PARTS(['We had only ... days to ... The release was going to be on ...', 'I had to make sure that ...', 'First, I prioritized ... based on risk. I decided not to ... I told the team which risks ...', 'We released on time, and ...', 'I learned that ...']) },
+    { id: 'h5', group: 'star', chip: '5', code: 'Historia 5', short: 'Mejora de un proceso', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a time you improved a process.',
+      think: '¿Qué proceso era lento o fallaba? ¿Cómo lo mediste? ¿Qué propusiste y cómo convenciste al equipo? ¿Qué número cambió?',
+      parts: STAR_PARTS(['At the time, our regression used to take ... The team was spending ... on ...', 'My goal was to ...', 'I started by measuring ... Then I proposed ... I set up ...', 'This cut ... from ... to ... The team still uses ...', 'What I learned was that ...']) },
+    { id: 'h6', group: 'star', chip: '6', code: 'Historia 6', short: 'Herramienta nueva', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a time you had to learn a new tool quickly.',
+      think: '¿Qué herramienta? ¿Por qué había que aprenderla rápido? ¿Cómo la aprendiste? ¿Qué entregaste al final?',
+      parts: STAR_PARTS(['When I joined ..., the team had just moved to ... I had never used it before.', 'I had ... weeks to ...', 'I went through the official docs. I built a small ... to practice. I asked ... to review my code.', 'Within ... weeks, I was ... Now I ...', 'This showed me that ...']) },
+    { id: 'h7', group: 'star', chip: '7', code: 'Historia 7', short: 'Frenar un release', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a time you pushed back on a release.',
+      think: '¿Qué encontraste? ¿Quién quería salir igual y por qué? ¿Qué datos mostraste? ¿Qué propusiste en lugar de decir solo que no?',
+      parts: STAR_PARTS(['The day before the release, I found that ... The product manager wanted to release anyway because ...', 'I had to decide whether ...', 'I explained the risk with data: ... I suggested ... (a feature flag, a one-day delay, a hotfix plan)', 'We decided to ... A week later, ...', 'I learned that saying no works better when ...']) },
+    { id: 'h8a', group: 'star', chip: '8A', code: 'Historia 8A', short: 'Ayudar a alguien', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a time you helped a teammate.',
+      think: '¿A quién ayudaste y con qué? ¿Qué hiciste concretamente? ¿Cómo sabés que sirvió?',
+      parts: STAR_PARTS(['A new tester joined the team and was struggling with ...', 'I offered to ...', 'I paired with them on ... I wrote a short guide on ... I reviewed their first ...', 'After ... weeks, they were ... on their own.', 'Helping them taught me ...']) },
+    { id: 'h8b', group: 'star', chip: '8B', code: 'Historia 8B', short: 'Feedback crítico', type: 'star', min: 120, max: 180,
+      q: 'Tell me about a time you received critical feedback.',
+      think: '¿Qué te dijeron? ¿Cómo reaccionaste en el momento? ¿Qué cambiaste después?',
+      parts: STAR_PARTS(['In a one-on-one, my lead told me that my ... were ...', 'I wanted to ...', 'First, I asked for specific examples. Then I ...', "A few months later, ... Since then, I've ...", 'I realized that ...']) }
+  ];
+  var EXAMPLE = {
+    S: 'In my previous role, I was testing a new payment flow two days before a major release. The developers had already marked the feature as done, and the team was under a lot of pressure.',
+    T: 'My job was to run the final regression and give the go or no-go for the release.',
+    A: "While I was running some edge cases, I noticed that payments with certain currencies were rounded incorrectly. First, I reproduced the issue with different amounts to make sure it wasn't a data problem. Then I wrote a clear bug report with steps, logs and the expected values, and I flagged it as a blocker in the stand-up. I also paired with the developer to find the root cause, and I added an automated test for that case.",
+    R: 'As a result, we fixed it before the release and avoided incorrect charges to thousands of users. Since then, the team has added currency edge cases to the regression suite.',
+    L: 'What I learned was that edge cases deserve time even when the deadline is tight.'
+  };
+  var KEY = 'star-story-builder-v1';
+
+  function blank() {
+    var d = { current: 'h1', stories: {} };
+    STORIES.forEach(function (s) { d.stories[s.id] = { text: {}, time: null, corrected: false, aloud: false, example: false }; });
+    d.stories.h1.text = Object.assign({}, EXAMPLE);
+    d.stories.h1.example = true;
+    return d;
+  }
+  var state = blank();
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) {
+      var saved = JSON.parse(raw);
+      if (saved && saved.stories) {
+        Object.keys(state.stories).forEach(function (id) { if (saved.stories[id]) state.stories[id] = Object.assign(state.stories[id], saved.stories[id]); });
+        if (saved.current && state.stories[saved.current]) state.current = saved.current;
+      }
+    }
+  } catch (e) {}
+  var saveT = null;
+  function flush() { clearTimeout(saveT); try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function save() {
+    clearTimeout(saveT);
+    saveT = setTimeout(flush, 250);
+  }
+  window.addEventListener('pagehide', flush);
+
+  function $(id) { return document.getElementById(id); }
+  function byId(id) { for (var i = 0; i < STORIES.length; i++) if (STORIES[i].id === id) return STORIES[i]; }
+  function words(t) { var m = (t || '').trim().match(/[A-Za-z0-9'’%-]+/g); return m ? m.length : 0; }
+  function fmt(sec) { sec = Math.max(0, Math.round(sec)); return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function fullText(s, st) { return s.parts.map(function (p) { return (st.text[p.k] || '').trim(); }).filter(Boolean).join(' '); }
+  function isWritten(s, st) {
+    if (st.example) return false;
+    return s.parts.every(function (p) { return words(st.text[p.k]) >= 4; });
+  }
+  function status(s) {
+    var st = state.stories[s.id];
+    if (st.time && !st.example) return 'timed';
+    if (isWritten(s, st)) return 'written';
+    return '';
+  }
+
+  // Picker
+  function renderPicker() {
+    ['tmay', 'star'].forEach(function (g) {
+      var box = $('pick-' + g);
+      Array.prototype.slice.call(box.querySelectorAll('.chip')).forEach(function (n) { n.remove(); });
+      STORIES.filter(function (s) { return s.group === g; }).forEach(function (s) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'chip'; b.id = 'chip-' + s.id;
+        b.setAttribute('aria-pressed', String(s.id === state.current));
+        b.setAttribute('aria-label', s.code + (s.short ? ': ' + s.short : ''));
+        b.title = s.short || s.code;
+        b.innerHTML = '<i class="st ' + status(s) + '"></i>' + esc(s.chip);
+        b.addEventListener('click', function () { select(s.id); });
+        box.appendChild(b);
+      });
+    });
+  }
+
+  // Editor
+  function renderEditor() {
+    var s = byId(state.current), st = state.stories[s.id];
+    $('ed-code').textContent = s.code + (s.short ? ' · ' + s.short : '');
+    $('ed-question').textContent = s.q;
+    $('ed-think').textContent = 'Para pensar: ' + s.think;
+    $('ed-example').hidden = !st.example;
+    $('ed-tip').textContent = s.type === 'star'
+      ? 'Meta: entre 2 y 3 minutos dicha en voz alta. La Action es la parte más larga: cerca del 60% de la historia.'
+      : 'Meta: entre 60 y 90 segundos dicho en voz alta.';
+    var box = $('ed-parts');
+    box.innerHTML = '';
+    s.parts.forEach(function (p) {
+      var wrap = document.createElement('div');
+      wrap.className = 'part';
+      var tid = 'part-' + s.id + '-' + p.k;
+      wrap.innerHTML =
+        '<div class="badge ' + p.k + '" aria-hidden="true">' + esc(p.k === 'L' ? '+' : p.k) + '</div>' +
+        '<div class="part-body">' +
+          '<div class="part-head"><label class="part-name" for="' + tid + '">' + esc(p.name) + '</label><span class="part-tense">' + esc(p.tense) + '</span></div>' +
+          '<p class="starter">' + esc(p.starter) + '</p>' +
+          '<textarea id="' + tid + '" spellcheck="true" lang="en"></textarea>' +
+          '<span class="wc" id="wc-' + p.k + '"></span>' +
+        '</div>';
+      box.appendChild(wrap);
+      var ta = wrap.querySelector('textarea');
+      ta.value = st.text[p.k] || '';
+      ta.placeholder = 'Write it in English...';
+      autosize(ta);
+      ta.addEventListener('input', function () {
+        autosize(ta);
+        st.text[p.k] = ta.value;
+        save();
+        update();
+      });
+    });
+    $('c-corrected').checked = !!st.corrected;
+    $('c-aloud').checked = !!st.aloud;
+    $('copybox').hidden = true;
+    $('toast').textContent = '';
+    resetTimer();
+    update();
+  }
+
+  function update() {
+    var s = byId(state.current), st = state.stories[s.id];
+    var counts = {}, total = 0;
+    s.parts.forEach(function (p) { counts[p.k] = words(st.text[p.k]); total += counts[p.k]; var w = $('wc-' + p.k); if (w) w.textContent = counts[p.k] + ' palabras'; });
+    var sec = total / WPM * 60;
+    $('m-time').textContent = fmt(sec);
+    $('m-words').textContent = total + (total === 1 ? ' palabra' : ' palabras');
+    var maxScale = s.max * 1.5;
+    $('m-zone').style.left = (s.min / maxScale * 100) + '%';
+    $('m-zone').style.width = ((s.max - s.min) / maxScale * 100) + '%';
+    $('m-fill').style.width = Math.min(100, sec / maxScale * 100) + '%';
+    $('m-scale').innerHTML = '<span>0:00</span><span>' + fmt(s.min) + '</span><span>' + fmt(s.max) + '</span><span>' + fmt(maxScale) + '</span>';
+    var v = $('m-verdict');
+    if (total === 0) { v.textContent = 'Empezá a escribir para ver la duración.'; v.className = 'verdict'; }
+    else if (sec < s.min) { v.textContent = 'Corta: le faltan unas ' + Math.ceil((s.min - sec) / 60 * WPM) + ' palabras para llegar a ' + fmt(s.min) + '.'; v.className = 'verdict warn'; }
+    else if (sec > s.max) { v.textContent = 'Larga: sacale unas ' + Math.ceil((sec - s.max) / 60 * WPM) + ' palabras.'; v.className = 'verdict warn'; }
+    else { v.textContent = 'Dentro de la meta.'; v.className = 'verdict ok'; }
+
+    var mixWrap = $('m-mix-wrap');
+    mixWrap.hidden = s.type !== 'star';
+    if (s.type === 'star') {
+      var parts = { S: counts.S, T: counts.T, A: counts.A, R: counts.R + counts.L };
+      var sum = parts.S + parts.T + parts.A + parts.R;
+      var mix = $('m-mix');
+      mix.innerHTML = '';
+      ['S', 'T', 'A', 'R'].forEach(function (k) {
+        var pct = sum ? parts[k] / sum * 100 : 25;
+        var sp = document.createElement('span');
+        sp.className = k; sp.style.width = pct + '%';
+        sp.textContent = pct >= 14 ? k + ' ' + Math.round(pct) + '%' : '';
+        mix.appendChild(sp);
+      });
+      var aPct = sum ? Math.round(parts.A / sum * 100) : 0;
+      $('m-mix-note').textContent = !sum ? 'Acá vas a ver cuánto ocupa cada parte.'
+        : aPct < 45 ? 'La Action ocupa el ' + aPct + '%. Contá más pasos de lo que hiciste vos (meta: cerca del 60%).'
+        : aPct > 75 ? 'La Action ocupa el ' + aPct + '%. Dale un poco más de lugar al contexto o al resultado.'
+        : 'La Action ocupa el ' + aPct + '%. Buen equilibrio.';
+    }
+    renderChecks(s, st);
+    renderPicker();
+    renderTracker();
+  }
+
+  // Quick review
+  var NUM = /\d|\b(one|two|three|four|five|six|seven|eight|nine|ten|twice|half|double|dozens?|hundreds?|thousands?)\b/i;
+  var RULES = [
+    { re: /\b(have|has|haven't|hasn't|i've|we've|they've)\s+(?:already\s+|just\s+|never\s+)?(\w+ed|been|done|made|found|written|built|led|taken|seen|gone|run|set|caught|taught|spent|had|got|gotten)\b[^.?!]{0,60}\b(yesterday|ago|last (week|month|year|sprint|quarter|night|friday|monday)|in (19|20)\d\d)\b/i,
+      msg: 'Present Perfect con un momento terminado (<em>yesterday, last..., ago, in 2023</em>). Con un momento terminado va Past Simple.' },
+    { re: /\b(yesterday|ago|last (week|month|year|sprint|quarter)|in (19|20)\d\d),?\s+(i|we|they|the team)\s+(have|has)\b/i,
+      msg: 'Present Perfect con un momento terminado. Con un momento terminado va Past Simple.' },
+    { re: /\bsince\s+(\d+|one|two|three|four|five|six|seven|eight|nine|ten|a few|many|several)\s+(years?|months?|weeks?|days?)\b/i,
+      msg: '<em>since</em> va con un punto de inicio (<em>since 2021</em>). Con una duración va <em>for</em> (<em>for five years</em>).' },
+    { re: /\b(i'?m|i am|i work|we work|we are|we're)\b[^.?!]{0,40}\bsince\b/i,
+      msg: 'Algo que empezó en el pasado y sigue hoy va en Present Perfect: <em>I\'ve worked / I\'ve been working ... since</em>.' },
+    { re: /\b(didn't|did not|doesn't|does not)\s+(?!(?:need|embed|proceed|succeed|exceed|feed|speed|shred)\b)(\w+ed|knew|went|did|made|found|wrote|took|saw|had|was|were|thought|told|got|came|ran|began|built|caught|taught|felt|left|lost|met|paid|said|sent|spent|understood)\b/i,
+      msg: 'Después de <em>didn\'t</em> el verbo va en forma base: <em>I didn\'t check</em>, no <em>I didn\'t checked</em>.' },
+    { re: /\b(did|do|does|doing|done)\s+(?:a|an|the|my|some|many|a lot of|that)?\s*mistakes?\b/i,
+      msg: 'Con <em>mistake</em> va <em>make</em>: <em>I made a mistake</em>.' },
+    { re: /\b(suggest|suggests|suggested|recommend|recommended)\s+to\s+(?!(?:me|him|her|them|us|my|the|our|his|their|everyone|everybody)\b)\w+/i,
+      msg: '<em>suggest</em> va con -ing o con <em>that</em>: <em>I suggested delaying</em> o <em>I suggested that we delay</em>.' },
+    { re: /\bsince then,?\s+(i|we|they|the team|our team|the company)\s+(?!(?:have|has|haven't|hasn't|had|always|never|still)\b)\w+/i,
+      msg: 'Después de <em>since then</em> suele ir Present Perfect: <em>Since then, the team has added...</em>' },
+    { re: /\bhave\s+\d+\s+years\s+(working|of working)\b/i,
+      msg: 'Decí <em>I\'ve been working for 5 years</em> o <em>I have 5 years of experience</em>.' },
+    { re: /\b(i'?m|i am|we'?re|we are)\s+agree\b/i, msg: '<em>agree</em> es verbo: <em>I agree</em>.' },
+    { re: /\bexplain(ed|s)?\s+me\b/i, msg: '<em>explain</em> no lleva a la persona directo: <em>explain to me</em>.' },
+    { re: /\bdepend(s|ed|ing)?\s+of\b/i, msg: 'Es <em>depend on</em>.' },
+    { re: /\bactually\b/i, msg: 'Ojo: <em>actually</em> es "en realidad", no "actualmente". Para "actualmente" va <em>currently</em> o <em>right now</em>.', soft: true }
+  ];
+  function renderChecks(s, st) {
+    var list = $('checks');
+    var all = fullText(s, st);
+    var out = [];
+    if (all) {
+      RULES.forEach(function (r) { if (r.re.test(all)) out.push(r.msg); });
+      if (s.type === 'star') {
+        var a = st.text.A || '';
+        var we = (a.match(/\bwe\b/gi) || []).length, i = (a.match(/\bI\b/g) || []).length;
+        if (words(a) > 0 && we > i) out.push('En la Action usaste <em>we</em> ' + we + ' veces y <em>I</em> ' + i + '. Contá lo que hiciste vos.');
+        var res = (st.text.R || '') + ' ' + (st.text.L || '');
+        if (words(st.text.R) > 3 && !NUM.test(res)) out.push('El Result no tiene ningún número. Sumá uno: tiempo, porcentaje o cantidad.');
+      } else {
+        if (!NUM.test(all)) out.push('No tiene ningún número. Sumá años de experiencia o un logro medible.');
+        if (words(st.text['3']) > 3 && !/\b(i've|i have|i’ve)\s+(been|\w+ed|built|led|worked|written|done|taught|grown)\b/i.test(st.text['3'])) out.push('En la experiencia acumulada no aparece Present Perfect (<em>I\'ve worked, I\'ve built</em>).');
+      }
+    }
+    list.innerHTML = '';
+    if (!all) { list.innerHTML = '<li class="clear">Cuando escribas, acá aparecen avisos sobre errores típicos.</li>'; return; }
+    if (!out.length) { list.innerHTML = '<li class="clear">Sin avisos. Igual mandámela para corregir: esta revisión solo mira errores típicos.</li>'; return; }
+    out.forEach(function (m) { var li = document.createElement('li'); li.innerHTML = m; list.appendChild(li); });
+  }
+
+  // Tracker
+  function renderTracker() {
+    var tb = $('tracker');
+    tb.innerHTML = '';
+    STORIES.forEach(function (s) {
+      var st = state.stories[s.id];
+      var tr = document.createElement('tr');
+      tr.className = 'pick'; tr.tabIndex = 0;
+      var written = isWritten(s, st);
+      tr.innerHTML = '<td>' + esc(s.code + (s.short ? '. ' + s.short : '')) + '</td>' +
+        '<td class="' + (written ? 'yes' : 'no') + '">' + (written ? 'Sí' : 'No') + '</td>' +
+        '<td class="' + (st.corrected ? 'yes' : 'no') + '">' + (st.corrected ? 'Sí' : 'No') + '</td>' +
+        '<td class="' + (st.aloud ? 'yes' : 'no') + '">' + (st.aloud ? 'Sí' : 'No') + '</td>' +
+        '<td class="num">' + (st.time && !st.example ? fmt(st.time) : '–') + '</td>';
+      tr.addEventListener('click', function () { select(s.id); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      tr.addEventListener('keydown', function (e) { if (e.key === 'Enter') { select(s.id); window.scrollTo({ top: 0 }); } });
+      tb.appendChild(tr);
+    });
+  }
+
+  function autosize(ta) { ta.style.height = 'auto'; ta.style.height = Math.max(84, ta.scrollHeight + 2) + 'px'; }
+  window.addEventListener('resize', function () { Array.prototype.forEach.call(document.querySelectorAll('.part textarea'), autosize); });
+  function select(id) { state.current = id; save(); renderEditor(); }
+
+  // Timer
+  var tStart = 0, tAcc = 0, tRun = false, tTick = null;
+  function tNow() { return tAcc + (tRun ? (Date.now() - tStart) / 1000 : 0); }
+  function tRender() {
+    var s = byId(state.current), sec = tNow();
+    var d = $('t-display');
+    d.textContent = fmt(sec);
+    d.style.color = sec === 0 ? '' : (sec >= s.min && sec <= s.max ? 'var(--ok)' : 'var(--warn)');
+  }
+  function resetTimer() {
+    tRun = false; tAcc = 0; clearInterval(tTick);
+    $('t-start').textContent = 'Empezar';
+    $('t-save').disabled = true;
+    tRender();
+    lastLine();
+  }
+  function lastLine() {
+    var s = byId(state.current), st = state.stories[s.id];
+    if (st.time && !st.example) {
+      var ok = st.time >= s.min && st.time <= s.max;
+      $('t-last').textContent = 'Último tiempo guardado: ' + fmt(st.time) + (ok ? ', dentro de la meta.' : ', fuera de la meta (' + fmt(s.min) + ' a ' + fmt(s.max) + ').');
+    } else {
+      $('t-last').textContent = 'Todavía no guardaste un tiempo para esta historia. Decila en voz alta sin leer y cronometrate.';
+    }
+  }
+  $('t-start').addEventListener('click', function () {
+    if (tRun) {
+      tAcc = tNow(); tRun = false; clearInterval(tTick);
+      this.textContent = 'Seguir';
+      $('t-save').disabled = tAcc < 1;
+    } else {
+      tStart = Date.now(); tRun = true;
+      tTick = setInterval(tRender, 250);
+      this.textContent = 'Pausar';
+      $('t-save').disabled = true;
+    }
+    tRender();
+  });
+  $('t-reset').addEventListener('click', resetTimer);
+  $('t-save').addEventListener('click', function () {
+    var st = state.stories[state.current];
+    if (st.example) { $('toast').textContent = 'Primero borrá el ejemplo y escribí tu historia.'; return; }
+    st.time = Math.round(tAcc);
+    flush();
+    $('toast').textContent = 'Tiempo guardado: ' + fmt(st.time) + '.';
+    resetTimer();
+    update();
+  });
+  $('c-corrected').addEventListener('change', function () { state.stories[state.current].corrected = this.checked; save(); update(); });
+  $('c-aloud').addEventListener('change', function () { state.stories[state.current].aloud = this.checked; save(); update(); });
+
+  // Example and reset
+  $('btn-clear-example').addEventListener('click', function () {
+    var st = state.stories[state.current];
+    st.text = {}; st.example = false; st.time = null;
+    save(); renderEditor();
+  });
+  var resetArmed = null;
+  $('btn-reset').addEventListener('click', function () {
+    var b = this;
+    if (!resetArmed) {
+      b.textContent = 'Tocá de nuevo para confirmar';
+      resetArmed = setTimeout(function () { resetArmed = null; b.textContent = 'Borrar esta historia'; }, 4000);
+      return;
+    }
+    clearTimeout(resetArmed); resetArmed = null;
+    b.textContent = 'Borrar esta historia';
+    state.stories[state.current] = { text: {}, time: null, corrected: false, aloud: false, example: false };
+    save(); renderEditor();
+    $('toast').textContent = 'Historia borrada.';
+  });
+
+  // Copy
+  function storyBlock(s) {
+    var st = state.stories[s.id], t = fullText(s, st);
+    if (!t || st.example) return '';
+    return s.code + '. ' + s.q.replace(/ \(.*\)$/, '') + '\n\n' + t;
+  }
+  function copy(text, okMsg) {
+    var box = $('copybox'), ta = $('copy-text');
+    function fallback() { box.hidden = false; ta.value = text; ta.focus(); ta.select(); $('toast').textContent = ''; }
+    if (!text) { $('toast').textContent = 'No hay nada escrito para copiar todavía.'; box.hidden = true; return; }
+    try {
+      navigator.clipboard.writeText(text).then(function () { box.hidden = true; $('toast').textContent = okMsg; }, fallback);
+    } catch (e) { fallback(); }
+  }
+  $('btn-copy').addEventListener('click', function () {
+    var s = byId(state.current);
+    if (state.stories[s.id].example) { $('toast').textContent = 'Esto es el ejemplo. Escribí tu historia y después copiala.'; return; }
+    copy(storyBlock(s), 'Copiada. Pegala en el chat para que te la corrija.');
+  });
+  $('btn-copy-all').addEventListener('click', function () {
+    var all = STORIES.map(storyBlock).filter(Boolean).join('\n\n---\n\n');
+    copy(all, 'Copiadas todas las historias escritas.');
+  });
+
+  renderEditor();
+})();
+</script>
+
+</body></html>

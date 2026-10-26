@@ -1,0 +1,25 @@
+R9 · What's the difference between black-box and white-box testing?
+
+── Reporte · R9 ────────────────────────────────────────
+Duración     0:45   (objetivo 0:40 a 2:00: bien)
+Palabras     44 · 72 por minuto · lento: está bien pensar, pero buscá más fluidez
+Muletillas   0
+
+Tiempos verbales que usaste (aproximado)
+  Present Simple 2
+  Tu respuesta modelo usa: present simple para la definición, past simple para tu ejemplo (I did, read, used). Read en pasado se pronuncia "red".
+
+No encontré errores de los que el coach sabe detectar. Igual pasale la respuesta a Claude.
+  > Tu respuesta modelo usa Past Simple (I built..., I decided...) y vos no lo usaste.
+
+Palabras clave del modelo: usaste ninguna
+  Podés sumar: Accusys, Java, C#
+
+Lo que dijiste
+Okay, in a black box testing, sorry, you have to see the input and the output, so you don't see the code that does the job, okay? In a black box you have multiple forms to test, it has the test coverage, it's the
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+R9: Okay, in a black box testing, sorry, you have to see the input and the output, so you don't see the code that does the job, okay? In a black box you have multiple forms to test, it has the test coverage, it's the
+(Pregunta: What's the difference between black-box and white-box testing? · 0:45 · 72 palabras por minuto · respuesta hablada, transcripta con el coach)

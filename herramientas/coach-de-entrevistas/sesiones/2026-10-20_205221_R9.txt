@@ -1,0 +1,25 @@
+R9 · What's the difference between black-box and white-box testing?
+
+── Reporte · R9 ────────────────────────────────────────
+Duración     1:52   (objetivo 0:40 a 2:00: bien)
+Palabras     181 · 98 por minuto · un poco lento
+Muletillas   0
+
+Tiempos verbales que usaste (aproximado)
+  Present Simple 6 · Present Continuous 1
+  Tu respuesta modelo usa: present simple para la definición, past simple para tu ejemplo (I did, read, used). Read en pasado se pronuncia "red".
+
+No encontré errores de los que el coach sabe detectar. Igual pasale la respuesta a Claude.
+  > Tu respuesta modelo usa Past Simple (I built..., I decided...) y vos no lo usaste.
+
+Palabras clave del modelo: usaste ninguna
+  Podés sumar: Accusys, Java, C#
+
+Lo que dijiste
+Okay, in the black box testing, the difference between black box testing and white box testing is that in the black box you don't see the code that execute the logic you want to see. You try to understand it by the input and output, you don't see the box. So, you have different ways, sorry, different ways of black box, black box testing. For example you have the key balance partitioning, the boundary value analysis, decisions, table testing and state transition testing. All these types of black box testing only see the input and the output and that's the way testing it and in the white box you have you can see the code and want to understand the execute and what they really do for example you have the statement testing that about what you do is see the code understand it understand it, sorry, and you have to do that every sentence it's a shiketal and it's also the branch testing that what you do is transitioning for every node of the function for example or that things
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+R9: Okay, in the black box testing, the difference between black box testing and white box testing is that in the black box you don't see the code that execute the logic you want to see. You try to understand it by the input and output, you don't see the box. So, you have different ways, sorry, different ways of black box, black box testing. For example you have the key balance partitioning, the boundary value analysis, decisions, table testing and state transition testing. All these types of black box testing only see the input and the output and that's the way testing it and in the white box you have you can see the code and want to understand the execute and what they really do for example you have the statement testing that about what you do is see the code understand it understand it, sorry, and you have to do that every sentence it's a shiketal and it's also the branch testing that what you do is transitioning for every node of the function for example or that things
+(Pregunta: What's the difference between black-box and white-box testing? · 1:52 · 98 palabras por minuto · respuesta hablada, transcripta con el coach)

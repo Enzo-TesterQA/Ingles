@@ -1,0 +1,3277 @@
+[
+ {
+  "id": "ps1",
+  "nivel": 1,
+  "tags": [
+   "ps"
+  ],
+  "kind": "f",
+  "rule": "Rutina + he/she/it: verbo + s.",
+  "prompt": "Our pipeline usually ___ (take) about 20 minutes.",
+  "answers": [
+   "takes"
+  ],
+  "model": "Our pipeline usually takes about 20 minutes."
+ },
+ {
+  "id": "ps2",
+  "nivel": 1,
+  "tags": [
+   "ps"
+  ],
+  "kind": "f",
+  "rule": "Negativa en tercera persona: doesn't + verbo base.",
+  "prompt": "The QA team ___ (not / work) on weekends.",
+  "answers": [
+   "doesn't work",
+   "does not work"
+  ],
+  "model": "The QA team doesn't work on weekends."
+ },
+ {
+  "id": "ps3",
+  "nivel": 1,
+  "tags": [
+   "ps"
+  ],
+  "kind": "f",
+  "rule": "Pregunta en Present Simple: Does + sujeto + verbo base.",
+  "prompt": "___ (the suite / run) in parallel?",
+  "answers": [
+   "does the suite run"
+  ],
+  "model": "Does the suite run in parallel?"
+ },
+ {
+  "id": "ps4",
+  "nivel": 1,
+  "tags": [
+   "ps"
+  ],
+  "kind": "c",
+  "rule": "Para describir cómo funciona un sistema se usa Present Simple.",
+  "prompt": "The agent ___ the vector store before it answers.  (checks / is checking / has checked)",
+  "answers": [
+   "checks"
+  ],
+  "model": "The agent checks the vector store before it answers."
+ },
+ {
+  "id": "ps5",
+  "nivel": 1,
+  "tags": [
+   "ps"
+  ],
+  "kind": "x",
+  "rule": "he/she/it lleva doesn't, y el verbo queda en base (sin s).",
+  "prompt": "She don't write unit tests.",
+  "wrong": "She don't write unit tests.",
+  "model": "She doesn't write unit tests."
+ },
+ {
+  "id": "ps6",
+  "nivel": 1,
+  "tags": [
+   "ps"
+  ],
+  "kind": "f",
+  "rule": "Frecuencia (usually) con I: verbo base.",
+  "prompt": "I usually ___ (write) API tests with RestAssured.",
+  "answers": [
+   "write"
+  ],
+  "model": "I usually write API tests with RestAssured."
+ },
+ {
+  "id": "ps7",
+  "nivel": 1,
+  "tags": [
+   "ps"
+  ],
+  "kind": "x",
+  "rule": "Sujeto singular (the test) en presente: fails.",
+  "prompt": "The test fail on Safari but not on Chrome.",
+  "wrong": "The test fail on Safari but not on Chrome.",
+  "model": "The test fails on Safari but not on Chrome."
+ },
+ {
+  "id": "pc1",
+  "nivel": 1,
+  "tags": [
+   "pc"
+  ],
+  "kind": "f",
+  "rule": "Algo que pasa ahora mismo: am/is/are + -ing.",
+  "prompt": "Hold on, I ___ (run) the smoke tests right now.",
+  "answers": [
+   "am running"
+  ],
+  "model": "Hold on, I am running the smoke tests right now."
+ },
+ {
+  "id": "pc2",
+  "nivel": 1,
+  "tags": [
+   "pc"
+  ],
+  "kind": "f",
+  "rule": "Algo temporal de esta etapa (this sprint): Present Continuous.",
+  "prompt": "This sprint we ___ (migrate) our tests to Playwright.",
+  "answers": [
+   "are migrating"
+  ],
+  "model": "This sprint we are migrating our tests to Playwright."
+ },
+ {
+  "id": "pc3",
+  "nivel": 1,
+  "tags": [
+   "pc"
+  ],
+  "kind": "f",
+  "rule": "Negativa en continuo: isn't / aren't + -ing.",
+  "prompt": "The build ___ (not / pass) at the moment.",
+  "answers": [
+   "isn't passing",
+   "is not passing"
+  ],
+  "model": "The build isn't passing at the moment."
+ },
+ {
+  "id": "pc4",
+  "nivel": 1,
+  "tags": [
+   "pc"
+  ],
+  "kind": "c",
+  "rule": "Know es un verbo de estado: no se usa en continuo.",
+  "prompt": "I ___ Python and TypeScript.  (know / am knowing / knowing)",
+  "answers": [
+   "know"
+  ],
+  "model": "I know Python and TypeScript."
+ },
+ {
+  "id": "pc5",
+  "nivel": 1,
+  "tags": [
+   "pc"
+  ],
+  "kind": "c",
+  "rule": "Plan con día y hora en agenda: Present Continuous.",
+  "prompt": "I ___ the product owner tomorrow at 10, it's in my calendar.  (am meeting / meet / met)",
+  "answers": [
+   "am meeting"
+  ],
+  "model": "I am meeting the product owner tomorrow at 10, it's in my calendar."
+ },
+ {
+  "id": "pc6",
+  "nivel": 1,
+  "tags": [
+   "pc"
+  ],
+  "kind": "x",
+  "rule": "El continuo necesita el verbo to be: I'm working.",
+  "prompt": "I working on the flaky test.",
+  "wrong": "I working on the flaky test.",
+  "model": "I'm working on the flaky test."
+ },
+ {
+  "id": "pc7",
+  "nivel": 1,
+  "tags": [
+   "pc"
+  ],
+  "kind": "f",
+  "rule": "Pregunta en continuo: Are + sujeto + -ing.",
+  "prompt": "___ (you / work) on the payment module this sprint?",
+  "answers": [
+   "are you working"
+  ],
+  "model": "Are you working on the payment module this sprint?"
+ },
+ {
+  "id": "spc1",
+  "nivel": 1,
+  "tags": [
+   "ps",
+   "pc"
+  ],
+  "kind": "c",
+  "rule": "Algo que pasa siempre: Present Simple.",
+  "prompt": "The pipeline ___ on every pull request.  (runs / is running)",
+  "answers": [
+   "runs"
+  ],
+  "model": "The pipeline runs on every pull request."
+ },
+ {
+  "id": "spc2",
+  "nivel": 1,
+  "tags": [
+   "ps",
+   "pc"
+  ],
+  "kind": "c",
+  "rule": "Algo en curso en este momento: Present Continuous.",
+  "prompt": "Don't merge yet, the pipeline ___.  (is running / runs)",
+  "answers": [
+   "is running"
+  ],
+  "model": "Don't merge yet, the pipeline is running."
+ },
+ {
+  "id": "spc3",
+  "nivel": 1,
+  "tags": [
+   "ps",
+   "pc"
+  ],
+  "kind": "c",
+  "rule": "Tu rol estable: Present Simple.",
+  "prompt": "I ___ as a QA Automation Engineer at a fintech company.  (work / am work)",
+  "answers": [
+   "work"
+  ],
+  "model": "I work as a QA Automation Engineer at a fintech company."
+ },
+ {
+  "id": "spc4",
+  "nivel": 1,
+  "tags": [
+   "ps",
+   "pc"
+  ],
+  "kind": "c",
+  "rule": "Tendencia actual (these days): Present Continuous.",
+  "prompt": "More teams ___ AI agents for test generation these days.  (are adopting / adopt every day)",
+  "answers": [
+   "are adopting"
+  ],
+  "model": "More teams are adopting AI agents for test generation these days."
+ },
+ {
+  "id": "pp1",
+  "nivel": 1,
+  "tags": [
+   "pp"
+  ],
+  "kind": "f",
+  "rule": "Logro acumulado hasta hoy (so far): have + participio.",
+  "prompt": "I ___ (automate) more than 300 test cases so far.",
+  "answers": [
+   "have automated"
+  ],
+  "model": "I have automated more than 300 test cases so far."
+ },
+ {
+  "id": "pp2",
+  "nivel": 1,
+  "tags": [
+   "pp"
+  ],
+  "kind": "f",
+  "rule": "Yet en negativa va con Present Perfect: haven't + participio.",
+  "prompt": "We ___ (not / find) the root cause yet.",
+  "answers": [
+   "haven't found",
+   "have not found"
+  ],
+  "model": "We haven't found the root cause yet."
+ },
+ {
+  "id": "pp3",
+  "nivel": 1,
+  "tags": [
+   "pp"
+  ],
+  "kind": "f",
+  "rule": "Ever (alguna vez en tu vida): Have + sujeto + ever + participio.",
+  "prompt": "___ (you / ever / work) with Kubernetes?",
+  "answers": [
+   "have you ever worked"
+  ],
+  "model": "Have you ever worked with Kubernetes?"
+ },
+ {
+  "id": "pp4",
+  "nivel": 1,
+  "tags": [
+   "pp"
+  ],
+  "kind": "f",
+  "rule": "Just = recién, con resultado ahora: have just + participio.",
+  "prompt": "I ___ (just / fix) the checkout test, you can rerun the pipeline.",
+  "answers": [
+   "have just fixed"
+  ],
+  "model": "I have just fixed the checkout test, you can rerun the pipeline."
+ },
+ {
+  "id": "pp5",
+  "nivel": 1,
+  "tags": [
+   "pp"
+  ],
+  "kind": "f",
+  "rule": "Acción reciente con resultado visible ahora: has + participio (break-broke-broken).",
+  "prompt": "Someone ___ (break) the staging build, nothing deploys.",
+  "answers": [
+   "has broken"
+  ],
+  "model": "Someone has broken the staging build, nothing deploys."
+ },
+ {
+  "id": "pp6",
+  "nivel": 1,
+  "tags": [
+   "pp"
+  ],
+  "kind": "f",
+  "rule": "Todavía no (yet): hasn't been + participio.",
+  "prompt": "The fix ___ (not / be) deployed yet.",
+  "answers": [
+   "hasn't been",
+   "has not been"
+  ],
+  "model": "The fix hasn't been deployed yet."
+ },
+ {
+  "id": "pa1",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "Momento terminado (last sprint): Past Simple. find-found.",
+  "prompt": "Last sprint we ___ (find) a memory leak in the payment service.",
+  "answers": [
+   "found"
+  ],
+  "model": "Last sprint we found a memory leak in the payment service."
+ },
+ {
+  "id": "pa2",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "Last night: Past Simple, verbo regular + ed.",
+  "prompt": "The deploy ___ (fail) last night because of a missing env variable.",
+  "answers": [
+   "failed"
+  ],
+  "model": "The deploy failed last night because of a missing env variable."
+ },
+ {
+  "id": "pa3",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "Negativa en pasado: didn't + verbo base.",
+  "prompt": "I ___ (not / write) the test plan yesterday.",
+  "answers": [
+   "didn't write",
+   "did not write"
+  ],
+  "model": "I didn't write the test plan yesterday."
+ },
+ {
+  "id": "pa4",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "Pregunta en pasado: Did + sujeto + verbo base.",
+  "prompt": "___ (you / run) the smoke tests after the release?",
+  "answers": [
+   "did you run"
+  ],
+  "model": "Did you run the smoke tests after the release?"
+ },
+ {
+  "id": "pa5",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "Trabajo anterior: Past Simple. lead-led.",
+  "prompt": "At my previous company I ___ (lead) the migration to GitHub Actions.",
+  "answers": [
+   "led"
+  ],
+  "model": "At my previous company I led the migration to GitHub Actions."
+ },
+ {
+  "id": "pa6",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "x",
+  "rule": "Did ya marca el pasado: el verbo va en base (fix).",
+  "prompt": "Did you fixed the bug?",
+  "wrong": "Did you fixed the bug?",
+  "model": "Did you fix the bug?"
+ },
+ {
+  "id": "pa7",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "x",
+  "rule": "Después de didn't, verbo base: find.",
+  "prompt": "I didn't found the issue.",
+  "wrong": "I didn't found the issue.",
+  "model": "I didn't find the issue."
+ },
+ {
+  "id": "pa8",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "catch-caught-caught (irregular).",
+  "prompt": "We ___ (catch) the bug before it reached production.",
+  "answers": [
+   "caught"
+  ],
+  "model": "We caught the bug before it reached production."
+ },
+ {
+  "id": "pa9",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "write-wrote-written (irregular).",
+  "prompt": "I ___ (write) a script to clean the test data last week.",
+  "answers": [
+   "wrote"
+  ],
+  "model": "I wrote a script to clean the test data last week."
+ },
+ {
+  "id": "pa10",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "break-broke-broken (irregular).",
+  "prompt": "The new commit ___ (break) the login flow on Monday.",
+  "answers": [
+   "broke"
+  ],
+  "model": "The new commit broke the login flow on Monday."
+ },
+ {
+  "id": "pa11",
+  "nivel": 1,
+  "tags": [
+   "past"
+  ],
+  "kind": "f",
+  "rule": "choose-chose-chosen (irregular).",
+  "prompt": "We ___ (choose) Playwright because of its auto-waiting.",
+  "answers": [
+   "chose"
+  ],
+  "model": "We chose Playwright because of its auto-waiting."
+ },
+ {
+  "id": "cpp1",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "Yesterday es un momento terminado: Past Simple.",
+  "prompt": "I ___ the bug yesterday.  (fixed / have fixed)",
+  "answers": [
+   "fixed"
+  ],
+  "model": "I fixed the bug yesterday."
+ },
+ {
+  "id": "cpp2",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "In my last project es un período cerrado: Past Simple.",
+  "prompt": "In my last project I ___ the regression time by 60%.  (reduced / have reduced)",
+  "answers": [
+   "reduced"
+  ],
+  "model": "In my last project I reduced the regression time by 60%."
+ },
+ {
+  "id": "cpp3",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "Ever, experiencia hasta hoy: Present Perfect.",
+  "prompt": "___ with LLM evaluations?  (Have you ever worked / Did you ever work)",
+  "answers": [
+   "Have you ever worked"
+  ],
+  "model": "Have you ever worked with LLM evaluations?"
+ },
+ {
+  "id": "cpp4",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "Período abierto (this sprint): Present Perfect.",
+  "prompt": "We ___ three critical bugs this sprint, and it isn't over yet.  (have found / found)",
+  "answers": [
+   "have found"
+  ],
+  "model": "We have found three critical bugs this sprint, and it isn't over yet."
+ },
+ {
+  "id": "cpp5",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "Last sprint terminó: Past Simple.",
+  "prompt": "We ___ three critical bugs last sprint.  (found / have found)",
+  "answers": [
+   "found"
+  ],
+  "model": "We found three critical bugs last sprint."
+ },
+ {
+  "id": "cpp6",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "Since + punto de inicio que llega hasta hoy: Present Perfect.",
+  "prompt": "I ___ in QA since 2019.  (have worked / worked / work)",
+  "answers": [
+   "have worked"
+  ],
+  "model": "I have worked in QA since 2019."
+ },
+ {
+  "id": "cpp7",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "Período con principio y fin en el pasado: Past Simple.",
+  "prompt": "I ___ in QA from 2015 to 2019, then I switched to development.  (worked / have worked)",
+  "answers": [
+   "worked"
+  ],
+  "model": "I worked in QA from 2015 to 2019, then I switched to development."
+ },
+ {
+  "id": "cpp8",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "When pregunta por un momento concreto: Past Simple.",
+  "prompt": "When ___ automation?  (did you start / have you started)",
+  "answers": [
+   "did you start"
+  ],
+  "model": "When did you start automation?"
+ },
+ {
+  "id": "cpp9",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "x",
+  "rule": "Con una fecha (in 2021) va Past Simple.",
+  "prompt": "I have joined the company in 2021.",
+  "wrong": "I have joined the company in 2021.",
+  "model": "I joined the company in 2021."
+ },
+ {
+  "id": "cpp10",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "x",
+  "rule": "Hace X que... = Present Perfect + for (duración) / since (inicio).",
+  "prompt": "I work here since five years.",
+  "wrong": "I work here since five years.",
+  "model": "I've worked here for five years."
+ },
+ {
+  "id": "cpp11",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "Resultado que importa ahora, sin fecha: Present Perfect.",
+  "prompt": "I ___ the release notes. Do you want to review them?  (have finished / finished yesterday at)",
+  "answers": [
+   "have finished"
+  ],
+  "model": "I have finished the release notes. Do you want to review them?"
+ },
+ {
+  "id": "pc_1",
+  "nivel": 1,
+  "tags": [
+   "pastc"
+  ],
+  "kind": "f",
+  "rule": "Acción en progreso interrumpida: was/were + -ing.",
+  "prompt": "I ___ (review) the logs when the alert went off.",
+  "answers": [
+   "was reviewing"
+  ],
+  "model": "I was reviewing the logs when the alert went off."
+ },
+ {
+  "id": "pc_2",
+  "nivel": 1,
+  "tags": [
+   "pastc"
+  ],
+  "kind": "f",
+  "rule": "Pregunta en Past Continuous: Was/Were + sujeto + -ing.",
+  "prompt": "What ___ (you / test) when the app crashed?",
+  "answers": [
+   "were you testing"
+  ],
+  "model": "What were you testing when the app crashed?"
+ },
+ {
+  "id": "pc_3",
+  "nivel": 1,
+  "tags": [
+   "pastc"
+  ],
+  "kind": "f",
+  "rule": "Negativa: wasn't / weren't + -ing.",
+  "prompt": "The monitoring ___ (not / work) during the outage.",
+  "answers": [
+   "wasn't working",
+   "was not working"
+  ],
+  "model": "The monitoring wasn't working during the outage."
+ },
+ {
+  "id": "pc_4",
+  "nivel": 1,
+  "tags": [
+   "pastc"
+  ],
+  "kind": "f",
+  "rule": "En progreso en un momento exacto del pasado: were + -ing.",
+  "prompt": "At 9 pm we ___ (still / deploy) the hotfix.",
+  "answers": [
+   "were still deploying"
+  ],
+  "model": "At 9 pm we were still deploying the hotfix."
+ },
+ {
+  "id": "cpc1",
+  "nivel": 1,
+  "tags": [
+   "past",
+   "pastc"
+  ],
+  "kind": "c",
+  "rule": "La acción larga de fondo va en Past Continuous.",
+  "prompt": "We ___ the regression suite when the server went down.  (were running / ran)",
+  "answers": [
+   "were running"
+  ],
+  "model": "We were running the regression suite when the server went down."
+ },
+ {
+  "id": "cpc2",
+  "nivel": 1,
+  "tags": [
+   "past",
+   "pastc"
+  ],
+  "kind": "c",
+  "rule": "La acción corta que interrumpe va en Past Simple.",
+  "prompt": "The server ___ while we were running the tests.  (crashed / was crashing)",
+  "answers": [
+   "crashed"
+  ],
+  "model": "The server crashed while we were running the tests."
+ },
+ {
+  "id": "cpc3",
+  "nivel": 1,
+  "tags": [
+   "past",
+   "pastc"
+  ],
+  "kind": "c",
+  "rule": "Hábito del pasado: Past Simple (o used to), no continuo.",
+  "prompt": "At my old job I ___ tests every day.  (wrote / was writing)",
+  "answers": [
+   "wrote"
+  ],
+  "model": "At my old job I wrote tests every day."
+ },
+ {
+  "id": "cpc4",
+  "nivel": 1,
+  "tags": [
+   "past",
+   "pastc"
+  ],
+  "kind": "c",
+  "rule": "While + acción en progreso: Past Continuous.",
+  "prompt": "While I ___ the test cases, the devs fixed the API.  (was writing / wrote)",
+  "answers": [
+   "was writing"
+  ],
+  "model": "While I was writing the test cases, the devs fixed the API."
+ },
+ {
+  "id": "cpc5",
+  "nivel": 1,
+  "tags": [
+   "past",
+   "pastc"
+  ],
+  "kind": "c",
+  "rule": "Contexto de fondo de una historia: Past Continuous.",
+  "prompt": "I ___ on a fintech app when I first used Cypress.  (was working / worked)",
+  "answers": [
+   "was working"
+  ],
+  "model": "I was working on a fintech app when I first used Cypress."
+ },
+ {
+  "id": "ppf1",
+  "nivel": 1,
+  "tags": [
+   "pastp"
+  ],
+  "kind": "f",
+  "rule": "Antes de otro pasado (when I joined): had + participio.",
+  "prompt": "When I joined, the company ___ (never / use) any automation framework.",
+  "answers": [
+   "had never used"
+  ],
+  "model": "When I joined, the company had never used any automation framework."
+ },
+ {
+  "id": "ppf2",
+  "nivel": 1,
+  "tags": [
+   "pastp"
+  ],
+  "kind": "f",
+  "rule": "La causa ocurrió antes del fallo: Past Perfect.",
+  "prompt": "The release failed because someone ___ (change) the config manually.",
+  "answers": [
+   "had changed"
+  ],
+  "model": "The release failed because someone had changed the config manually."
+ },
+ {
+  "id": "ppf3",
+  "nivel": 1,
+  "tags": [
+   "pastp"
+  ],
+  "kind": "f",
+  "rule": "By the time + pasado: had already + participio.",
+  "prompt": "By the time the PM asked, I ___ (already / report) the issue.",
+  "answers": [
+   "had already reported"
+  ],
+  "model": "By the time the PM asked, I had already reported the issue."
+ },
+ {
+  "id": "ppf4",
+  "nivel": 1,
+  "tags": [
+   "pastp",
+   "past"
+  ],
+  "kind": "c",
+  "rule": "Sin otro pasado de referencia alcanza con Past Simple.",
+  "prompt": "In 2019 I ___ in QA.  (started / had started)",
+  "answers": [
+   "started"
+  ],
+  "model": "In 2019 I started in QA."
+ },
+ {
+  "id": "ppf5",
+  "nivel": 1,
+  "tags": [
+   "pastp"
+  ],
+  "kind": "c",
+  "rule": "Pasó antes de otro pasado (we caught it): Past Perfect.",
+  "prompt": "The bug ___ production before we caught it.  (had reached / has reached)",
+  "answers": [
+   "had reached"
+  ],
+  "model": "The bug had reached production before we caught it."
+ },
+ {
+  "id": "ppc1",
+  "nivel": 1,
+  "tags": [
+   "ppc"
+  ],
+  "kind": "f",
+  "rule": "Since + acción que sigue: Present Perfect Continuous (o Present Perfect).",
+  "prompt": "I ___ (work) with Playwright since 2022.",
+  "answers": [
+   "have been working",
+   "have worked"
+  ],
+  "model": "I have been working with Playwright since 2022."
+ },
+ {
+  "id": "ppc2",
+  "nivel": 1,
+  "tags": [
+   "ppc"
+  ],
+  "kind": "f",
+  "rule": "Actividad que explica el estado actual (all morning): have been + -ing.",
+  "prompt": "Sorry for the delay, I ___ (debug) the CI runners all morning.",
+  "answers": [
+   "have been debugging"
+  ],
+  "model": "Sorry for the delay, I have been debugging the CI runners all morning."
+ },
+ {
+  "id": "ppc3",
+  "nivel": 1,
+  "tags": [
+   "ppc"
+  ],
+  "kind": "f",
+  "rule": "How long + hasta hoy: Have you been + -ing.",
+  "prompt": "How long ___ (you / work) in QA?",
+  "answers": [
+   "have you been working",
+   "have you worked"
+  ],
+  "model": "How long have you been working in QA?"
+ },
+ {
+  "id": "ppc4",
+  "nivel": 1,
+  "tags": [
+   "ppc"
+  ],
+  "kind": "f",
+  "rule": "Problema que viene durando: has been + -ing.",
+  "prompt": "This test ___ (fail) intermittently for a week.",
+  "answers": [
+   "has been failing"
+  ],
+  "model": "This test has been failing intermittently for a week."
+ },
+ {
+  "id": "cppc1",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "ppc"
+  ],
+  "kind": "c",
+  "rule": "Cantidad o resultado: Present Perfect.",
+  "prompt": "I ___ 50 test cases today.  (have written / have been writing)",
+  "answers": [
+   "have written"
+  ],
+  "model": "I have written 50 test cases today."
+ },
+ {
+  "id": "cppc2",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "ppc"
+  ],
+  "kind": "c",
+  "rule": "Duración o proceso: Present Perfect Continuous.",
+  "prompt": "I ___ test cases all day, I'm exhausted.  (have been writing / have written)",
+  "answers": [
+   "have been writing"
+  ],
+  "model": "I have been writing test cases all day, I'm exhausted."
+ },
+ {
+  "id": "cppc3",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "ppc"
+  ],
+  "kind": "c",
+  "rule": "Know es de estado: nunca en continuo.",
+  "prompt": "I ___ our tech lead for years.  (have known / have been knowing)",
+  "answers": [
+   "have known"
+  ],
+  "model": "I have known our tech lead for years."
+ },
+ {
+  "id": "cppc4",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "ppc"
+  ],
+  "kind": "c",
+  "rule": "Porcentaje o cantidad terminada: Present Perfect.",
+  "prompt": "We ___ 80% of the suite so far.  (have migrated / have been migrating)",
+  "answers": [
+   "have migrated"
+  ],
+  "model": "We have migrated 80% of the suite so far."
+ },
+ {
+  "id": "cppc5",
+  "nivel": 1,
+  "tags": [
+   "pp",
+   "ppc"
+  ],
+  "kind": "c",
+  "rule": "Proceso que sigue: Present Perfect Continuous.",
+  "prompt": "We ___ the suite since July and we're not done yet.  (have been migrating / have migrated)",
+  "answers": [
+   "have been migrating"
+  ],
+  "model": "We have been migrating the suite since July and we're not done yet."
+ },
+ {
+  "id": "ppfc1",
+  "nivel": 1,
+  "tags": [
+   "pastpc"
+  ],
+  "kind": "f",
+  "rule": "Duración antes de otro pasado: had been + -ing.",
+  "prompt": "The test ___ (fail) for days before anyone noticed.",
+  "answers": [
+   "had been failing"
+  ],
+  "model": "The test had been failing for days before anyone noticed."
+ },
+ {
+  "id": "ppfc2",
+  "nivel": 1,
+  "tags": [
+   "pastpc"
+  ],
+  "kind": "f",
+  "rule": "Venía haciéndolo hasta otro momento pasado: had been + -ing.",
+  "prompt": "I ___ (work) as a manual tester for two years when I moved to automation.",
+  "answers": [
+   "had been working"
+  ],
+  "model": "I had been working as a manual tester for two years when I moved to automation."
+ },
+ {
+  "id": "ppfc3",
+  "nivel": 1,
+  "tags": [
+   "pastpc"
+  ],
+  "kind": "c",
+  "rule": "Referencia en pasado (was slow): had been + -ing.",
+  "prompt": "The pipeline was slow because the tests ___ sequentially for months.  (had been running / have been running)",
+  "answers": [
+   "had been running"
+  ],
+  "model": "The pipeline was slow because the tests had been running sequentially for months."
+ },
+ {
+  "id": "w1",
+  "nivel": 1,
+  "tags": [
+   "will"
+  ],
+  "kind": "c",
+  "rule": "Decisión tomada en el momento: will.",
+  "prompt": "The build is red? OK, I ___ a look right now.  ('ll take / 'm going to take)",
+  "answers": [
+   "'ll take"
+  ],
+  "model": "The build is red? OK, I'll take a look right now."
+ },
+ {
+  "id": "w2",
+  "nivel": 1,
+  "tags": [
+   "will"
+  ],
+  "kind": "f",
+  "rule": "Promesa o predicción negativa: won't + verbo base.",
+  "prompt": "Don't worry, this change ___ (not / affect) the existing tests.",
+  "answers": [
+   "won't affect",
+   "will not affect"
+  ],
+  "model": "Don't worry, this change won't affect the existing tests."
+ },
+ {
+  "id": "w3",
+  "nivel": 1,
+  "tags": [
+   "will"
+  ],
+  "kind": "x",
+  "rule": "Después de when / if con sentido futuro se usa presente.",
+  "prompt": "When the build will finish, I'll deploy.",
+  "wrong": "When the build will finish, I'll deploy.",
+  "model": "When the build finishes, I'll deploy."
+ },
+ {
+  "id": "w4",
+  "nivel": 1,
+  "tags": [
+   "will"
+  ],
+  "kind": "c",
+  "rule": "Predicción u opinión (I think): will.",
+  "prompt": "I think AI agents ___ how we write tests.  (will change / change)",
+  "answers": [
+   "will change"
+  ],
+  "model": "I think AI agents will change how we write tests."
+ },
+ {
+  "id": "w5",
+  "nivel": 1,
+  "tags": [
+   "will"
+  ],
+  "kind": "f",
+  "rule": "Promesa: will + verbo base.",
+  "prompt": "I ___ (send) you the test report by the end of the day, I promise.",
+  "answers": [
+   "will send"
+  ],
+  "model": "I will send you the test report by the end of the day, I promise."
+ },
+ {
+  "id": "g1",
+  "nivel": 1,
+  "tags": [
+   "goingto"
+  ],
+  "kind": "c",
+  "rule": "Plan ya decidido: going to.",
+  "prompt": "We ___ contract testing next quarter, it's already in the roadmap.  (are going to adopt / will adopt)",
+  "answers": [
+   "are going to adopt"
+  ],
+  "model": "We are going to adopt contract testing next quarter, it's already in the roadmap."
+ },
+ {
+  "id": "g2",
+  "nivel": 1,
+  "tags": [
+   "goingto"
+  ],
+  "kind": "c",
+  "rule": "Predicción con evidencia que ves ahora: going to.",
+  "prompt": "Look at those error rates! The deploy ___.  (is going to fail / will fail)",
+  "answers": [
+   "is going to fail"
+  ],
+  "model": "Look at those error rates! The deploy is going to fail."
+ },
+ {
+  "id": "g3",
+  "nivel": 1,
+  "tags": [
+   "goingto"
+  ],
+  "kind": "f",
+  "rule": "Intención decidida antes de hablar: am/is/are going to + verbo.",
+  "prompt": "I ___ (refactor) the page objects this week, I decided it yesterday.",
+  "answers": [
+   "am going to refactor"
+  ],
+  "model": "I am going to refactor the page objects this week, I decided it yesterday."
+ },
+ {
+  "id": "g4",
+  "nivel": 1,
+  "tags": [
+   "goingto"
+  ],
+  "kind": "x",
+  "rule": "Going to necesita el verbo to be: I'm going to.",
+  "prompt": "I going to test it tomorrow.",
+  "wrong": "I going to test it tomorrow.",
+  "model": "I'm going to test it tomorrow."
+ },
+ {
+  "id": "g5",
+  "nivel": 1,
+  "tags": [
+   "goingto"
+  ],
+  "kind": "f",
+  "rule": "Pregunta: Are + sujeto + going to + verbo.",
+  "prompt": "___ (you / automate) the mobile flows too?",
+  "answers": [
+   "are you going to automate"
+  ],
+  "model": "Are you going to automate the mobile flows too?"
+ },
+ {
+  "id": "g6",
+  "nivel": 1,
+  "tags": [
+   "goingto",
+   "will"
+  ],
+  "kind": "c",
+  "rule": "Ofrecimiento espontáneo: will.",
+  "prompt": "\"Can someone review my PR?\" \"Sure, I ___ it.\"  ('ll review / 'm going to review)",
+  "answers": [
+   "'ll review"
+  ],
+  "model": "\"Can someone review my PR?\" \"Sure, I'll review it.\""
+ },
+ {
+  "id": "fc1",
+  "nivel": 1,
+  "tags": [
+   "futc"
+  ],
+  "kind": "f",
+  "rule": "En progreso en un momento futuro: will be + -ing.",
+  "prompt": "At 10 am we ___ (deploy) to production, so avoid merging.",
+  "answers": [
+   "will be deploying"
+  ],
+  "model": "At 10 am we will be deploying to production, so avoid merging."
+ },
+ {
+  "id": "fc2",
+  "nivel": 1,
+  "tags": [
+   "futc"
+  ],
+  "kind": "c",
+  "rule": "Pregunta amable sobre planes: Will + sujeto + be + -ing.",
+  "prompt": "___ the staging environment this afternoon?  (Will you be using / Will you using)",
+  "answers": [
+   "Will you be using"
+  ],
+  "model": "Will you be using the staging environment this afternoon?"
+ },
+ {
+  "id": "fc3",
+  "nivel": 1,
+  "tags": [
+   "futc"
+  ],
+  "kind": "x",
+  "rule": "Future Continuous: will + be + -ing.",
+  "prompt": "I will working on it tomorrow.",
+  "wrong": "I will working on it tomorrow.",
+  "model": "I'll be working on it tomorrow."
+ },
+ {
+  "id": "fp1",
+  "nivel": 1,
+  "tags": [
+   "futp"
+  ],
+  "kind": "f",
+  "rule": "By + momento futuro, algo terminado: will have + participio.",
+  "prompt": "By Friday we ___ (fix) all the blockers.",
+  "answers": [
+   "will have fixed"
+  ],
+  "model": "By Friday we will have fixed all the blockers."
+ },
+ {
+  "id": "fp2",
+  "nivel": 1,
+  "tags": [
+   "futp"
+  ],
+  "kind": "f",
+  "rule": "Negativa: won't have + participio.",
+  "prompt": "We ___ (not / finish) the migration by the release date.",
+  "answers": [
+   "won't have finished",
+   "will not have finished"
+  ],
+  "model": "We won't have finished the migration by the release date."
+ },
+ {
+  "id": "fp3",
+  "nivel": 1,
+  "tags": [
+   "futp"
+  ],
+  "kind": "c",
+  "rule": "Deadline (by the end of...): Future Perfect.",
+  "prompt": "By the end of the sprint, I ___ the whole checkout flow.  (will have automated / will be automating)",
+  "answers": [
+   "will have automated"
+  ],
+  "model": "By the end of the sprint, I will have automated the whole checkout flow."
+ },
+ {
+  "id": "fpc1",
+  "nivel": 1,
+  "tags": [
+   "futpc"
+  ],
+  "kind": "f",
+  "rule": "Duración hasta un momento futuro: will have been + -ing.",
+  "prompt": "In March I ___ (work) in QA for five years.",
+  "answers": [
+   "will have been working"
+  ],
+  "model": "In March I will have been working in QA for five years."
+ },
+ {
+  "id": "fpc2",
+  "nivel": 1,
+  "tags": [
+   "futpc"
+  ],
+  "kind": "c",
+  "rule": "By + futuro + for + duración: will have been + -ing.",
+  "prompt": "By Friday this bug ___ us for two weeks.  (will have been blocking / will block)",
+  "answers": [
+   "will have been blocking"
+  ],
+  "model": "By Friday this bug will have been blocking us for two weeks."
+ },
+ {
+  "id": "u1",
+  "nivel": 1,
+  "tags": [
+   "usedto"
+  ],
+  "kind": "c",
+  "rule": "Estado del pasado (have): used to, nunca would.",
+  "prompt": "We ___ a dedicated QA environment, but they shut it down.  (used to have / would have)",
+  "answers": [
+   "used to have"
+  ],
+  "model": "We used to have a dedicated QA environment, but they shut it down."
+ },
+ {
+  "id": "u2",
+  "nivel": 1,
+  "tags": [
+   "usedto"
+  ],
+  "kind": "x",
+  "rule": "Para hábitos actuales se usa usually, no use to.",
+  "prompt": "I use to write my test cases in Jira.",
+  "wrong": "I use to write my test cases in Jira.",
+  "model": "I usually write my test cases in Jira."
+ },
+ {
+  "id": "u3",
+  "nivel": 1,
+  "tags": [
+   "usedto"
+  ],
+  "kind": "x",
+  "rule": "Con didn't, use to va sin d.",
+  "prompt": "We didn't used to have CI.",
+  "wrong": "We didn't used to have CI.",
+  "model": "We didn't use to have CI."
+ },
+ {
+  "id": "u4",
+  "nivel": 1,
+  "tags": [
+   "usedto"
+  ],
+  "kind": "c",
+  "rule": "Acción repetida en una historia del pasado: would (o used to).",
+  "prompt": "Every release, we ___ spend two days on manual regression.  (would / used)",
+  "answers": [
+   "would"
+  ],
+  "model": "Every release, we would spend two days on manual regression."
+ },
+ {
+  "id": "u5",
+  "nivel": 1,
+  "tags": [
+   "usedto"
+  ],
+  "kind": "c",
+  "rule": "Estado (be): used to.",
+  "prompt": "I ___ a manual tester before I moved to automation.  (used to be / would be)",
+  "answers": [
+   "used to be"
+  ],
+  "model": "I used to be a manual tester before I moved to automation."
+ },
+ {
+  "id": "u6",
+  "nivel": 1,
+  "tags": [
+   "usedto"
+  ],
+  "kind": "x",
+  "rule": "Be used to (estar acostumbrado) + -ing.",
+  "prompt": "I'm used to work with tight deadlines.",
+  "wrong": "I'm used to work with tight deadlines.",
+  "model": "I'm used to working with tight deadlines."
+ },
+ {
+  "id": "u7",
+  "nivel": 1,
+  "tags": [
+   "usedto"
+  ],
+  "kind": "f",
+  "rule": "Algo que antes era así y ya no: used to + verbo base.",
+  "prompt": "Our pipeline ___ (take) over an hour, now it takes 15 minutes. (use: used to)",
+  "answers": [
+   "used to take"
+  ],
+  "model": "Our pipeline used to take over an hour, now it takes 15 minutes."
+ },
+ {
+  "id": "o-ps1",
+  "t": "ps",
+  "q": "What do you usually do first when a test fails?",
+  "model": "I usually check the logs and the screenshots first.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ps2",
+  "t": "ps",
+  "q": "How often does your team release to production?",
+  "model": "Our team releases to production every two weeks.",
+  "rule": "Con he/she/it o un equipo (our team), el presente lleva -s: releases.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ps3",
+  "t": "ps",
+  "q": "What tools does your team use for API testing?",
+  "model": "We use Postman and RestAssured for API testing.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ps4",
+  "t": "ps",
+  "q": "What does a QA Automation Engineer do?",
+  "model": "A QA Automation Engineer designs and maintains automated tests.",
+  "rule": "Para describir un rol o cómo funciona algo: Present Simple con -s (designs, maintains).",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ps5",
+  "t": "ps",
+  "q": "When does your pipeline run?",
+  "model": "It runs on every pull request and every night at 2 am.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ps6",
+  "t": "ps",
+  "q": "Do you prefer manual or automated testing?",
+  "model": "I prefer automated testing, but I still do some exploratory testing.",
+  "rule": "Prefer es un verbo de estado: siempre en simple (I prefer), nunca I'm preferring.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ps7",
+  "t": "ps",
+  "kind": "tr",
+  "q": "Say it about your tech lead: I review the pull requests every morning.",
+  "model": "My tech lead reviews the pull requests every morning.",
+  "need": "\\breviews\\b",
+  "need_msg": "Con he/she o my tech lead va -s: reviews.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-ps8",
+  "t": "ps",
+  "kind": "tr",
+  "q": "Make it negative: The test passes on Safari.",
+  "model": "The test doesn't pass on Safari.",
+  "need": "\\bdoes not pass\\b",
+  "need_msg": "Negativa con he/she/it: doesn't + verbo base (doesn't pass).",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pc1",
+  "t": "pc",
+  "q": "What are you working on this week?",
+  "model": "This week I'm automating the checkout tests.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pc2",
+  "t": "pc",
+  "q": "What are you learning at the moment?",
+  "model": "At the moment I'm learning how to test LLM agents.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pc3",
+  "t": "pc",
+  "q": "Why can't you join the call right now?",
+  "model": "Sorry, I'm running the regression suite right now.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pc4",
+  "t": "pc",
+  "q": "What is your team doing about flaky tests these days?",
+  "model": "These days we're adding better waits to the flaky tests.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pc5",
+  "t": "pc",
+  "alt": [
+   "goingto"
+  ],
+  "q": "What are you doing tomorrow at ten?",
+  "model": "Tomorrow at ten I'm meeting the product owner.",
+  "rule": "Un plan con día y hora en agenda: Present Continuous (I'm meeting) o going to.",
+  "kind": "q",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pc6",
+  "t": "pc",
+  "kind": "tr",
+  "q": "Say it in Present Continuous, it's happening now: I write the test plan.",
+  "model": "I'm writing the test plan right now.",
+  "need": "\\bam writing\\b",
+  "need_msg": "Am + writing (write pierde la e: writing).",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa1",
+  "t": "past",
+  "q": "What did you do yesterday at work?",
+  "model": "Yesterday I reviewed two pull requests and fixed a flaky test.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa2",
+  "t": "past",
+  "q": "When did you start working in QA?",
+  "model": "I started working in QA in 2019.",
+  "rule": "When pregunta por un momento terminado: Past Simple (I started).",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa3",
+  "t": "past",
+  "q": "What was the last bug you found?",
+  "model": "The last bug I found was a broken redirect in the login flow.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa4",
+  "t": "past",
+  "q": "Why did you choose Playwright?",
+  "model": "We chose Playwright because it waits for elements automatically.",
+  "rule": "Choose es irregular: chose (pasado), chosen (participio).",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa5",
+  "t": "past",
+  "q": "Where did you work before your current job?",
+  "model": "Before my current job, I worked at a fintech company.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa6",
+  "t": "past",
+  "q": "How did you fix the last failing pipeline?",
+  "model": "I found a missing environment variable and added it to the config.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa7",
+  "t": "past",
+  "q": "What went wrong in your last release?",
+  "model": "A migration script failed, so we rolled back the release.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa8",
+  "t": "past",
+  "kind": "tr",
+  "q": "Say it in Past Simple, with yesterday: I write the report.",
+  "model": "I wrote the report yesterday.",
+  "need": "\\bwrote\\b",
+  "need_msg": "Write es irregular: write, wrote, written. Va wrote.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa9",
+  "t": "past",
+  "kind": "tr",
+  "q": "Make it negative: I found the root cause.",
+  "model": "I didn't find the root cause.",
+  "need": "\\bdid not find\\b",
+  "need_msg": "Negativa en pasado: didn't + verbo base (didn't find).",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa10",
+  "t": "past",
+  "kind": "tr",
+  "q": "Say it in Past Simple: We catch the bug before the release.",
+  "model": "We caught the bug before the release.",
+  "need": "\\bcaught\\b",
+  "need_msg": "Catch es irregular: catch, caught, caught.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pa11",
+  "t": "past",
+  "kind": "tr",
+  "q": "Make it a question: You ran the smoke tests.",
+  "model": "Did you run the smoke tests?",
+  "need": "\\bdid you run\\b",
+  "need_msg": "Pregunta en pasado: Did + sujeto + verbo base (Did you run).",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp1",
+  "t": "pp",
+  "q": "How many test cases have you automated this year?",
+  "model": "I've automated more than 300 test cases this year.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp2",
+  "t": "pp",
+  "q": "Have you ever worked with Kubernetes?",
+  "model": "Yes, I've worked with Kubernetes on two projects.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp3",
+  "t": "pp",
+  "q": "What tools have you used for mobile testing?",
+  "model": "I've used Appium and BrowserStack for mobile testing.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp4",
+  "t": "pp",
+  "q": "Have you found the root cause yet?",
+  "model": "No, we haven't found the root cause yet.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp5",
+  "t": "pp",
+  "q": "What have you achieved so far this month?",
+  "model": "So far this month I've automated the whole login flow.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp6",
+  "t": "pp",
+  "q": "How long have you known your tech lead?",
+  "model": "I've known my tech lead for three years.",
+  "rule": "Know es de estado: Present Perfect simple (I've known), nunca I've been knowing.",
+  "avoid": "\\bbeen knowing\\b",
+  "avoid_msg": "Know es un verbo de estado: I've known, no I've been knowing.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp7",
+  "t": "pp",
+  "q": "Have you ever tested an AI agent?",
+  "model": "Yes, I've tested a RAG chatbot for a client.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp8",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Say it in Present Perfect, with just: I fixed the checkout test.",
+  "model": "I've just fixed the checkout test.",
+  "need": "\\bhave just fixed\\b",
+  "need_msg": "Just va entre have y el participio: I've just fixed.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp9",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Say it in Present Perfect, with already: We deployed the hotfix.",
+  "model": "We've already deployed the hotfix.",
+  "need": "\\bhave already deployed\\b",
+  "need_msg": "Already va entre have y el participio: we've already deployed.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp10",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Ask it in Present Perfect, with ever: Did you work with Cypress?",
+  "model": "Have you ever worked with Cypress?",
+  "need": "\\bhave you ever worked\\b",
+  "need_msg": "Pregunta de experiencia: Have you ever + participio (worked)?",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pp11",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Say it in Present Perfect, with never: I don't use Selenium Grid. Not once.",
+  "model": "I've never used Selenium Grid.",
+  "need": "\\bhave never used\\b",
+  "need_msg": "Never va entre have y el participio: I've never used.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-ppc1",
+  "t": "ppc",
+  "alt": [
+   "pp"
+  ],
+  "q": "How long have you been working in QA?",
+  "model": "I've been working in QA for seven years.",
+  "need": "\\b(?:for|since)\\b",
+  "need_msg": "Para la duración: for + cantidad (for seven years) o since + inicio (since 2019).",
+  "kind": "q",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ppc2",
+  "t": "ppc",
+  "q": "What have you been doing all morning?",
+  "model": "I've been debugging the CI runners all morning.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ppc3",
+  "t": "ppc",
+  "q": "You look tired. What have you been doing?",
+  "model": "I've been writing test cases all day.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ppc4",
+  "t": "ppc",
+  "q": "How long has this test been failing?",
+  "model": "It's been failing intermittently for a week.",
+  "need": "\\b(?:for|since)\\b",
+  "need_msg": "Duración: for a week / since Monday.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ppc5",
+  "t": "ppc",
+  "alt": [
+   "pp"
+  ],
+  "q": "How long have you been learning English?",
+  "model": "I've been learning English for two years.",
+  "need": "\\b(?:for|since)\\b",
+  "need_msg": "Duración: for two years / since 2024.",
+  "kind": "q",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-ppc6",
+  "t": "ppc",
+  "alt": [
+   "pp"
+  ],
+  "kind": "tr",
+  "q": "Say it with since: I started working with Playwright in 2022, and I still do.",
+  "model": "I've been working with Playwright since 2022.",
+  "need": "\\bsince\\b",
+  "need_msg": "Con un punto de inicio va since: since 2022.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastc1",
+  "t": "pastc",
+  "q": "What were you doing when the production alert went off?",
+  "model": "I was reviewing the logs when the alert went off.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastc2",
+  "t": "pastc",
+  "q": "What was your team working on when you joined?",
+  "model": "When I joined, the team was migrating the tests to Cypress.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastc3",
+  "t": "pastc",
+  "q": "What were you testing when the app crashed?",
+  "model": "I was testing the checkout flow when the app crashed.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastc4",
+  "t": "pastc",
+  "q": "What were you doing this time last year?",
+  "model": "This time last year I was working as a manual tester.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastc5",
+  "t": "pastc",
+  "kind": "tr",
+  "q": "Join them with while: I wrote the test cases. The developers fixed the API.",
+  "model": "While I was writing the test cases, the developers fixed the API.",
+  "need": "\\bwhile\\b",
+  "need_msg": "Empezá con while: While I was writing...",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastp1",
+  "t": "pastp",
+  "mix": false,
+  "q": "Had you used any automation tools before your current job?",
+  "model": "Yes, I had used Selenium before I joined this company.",
+  "kind": "q",
+  "alt": [],
+  "nivel": 2
+ },
+ {
+  "id": "o-pastp2",
+  "t": "pastp",
+  "mix": false,
+  "q": "Why did the release fail?",
+  "model": "It failed because someone had changed the config manually.",
+  "kind": "q",
+  "alt": [],
+  "nivel": 2
+ },
+ {
+  "id": "o-pastp3",
+  "t": "pastp",
+  "q": "What had you already done when the PM asked about the issue?",
+  "model": "When the PM asked, I had already reported the issue.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastp4",
+  "t": "pastp",
+  "kind": "tr",
+  "q": "Join them with by the time: I reported the bug. Then the client called.",
+  "model": "By the time the client called, I had already reported the bug.",
+  "need": "\\bby the time\\b",
+  "need_msg": "Empezá con by the time: By the time the client called, I had...",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastp5",
+  "t": "pastp",
+  "mix": false,
+  "q": "What had your team tried before you found the real cause?",
+  "model": "We had tried three different fixes before we found the real cause.",
+  "kind": "q",
+  "alt": [],
+  "nivel": 2
+ },
+ {
+  "id": "o-pastpc1",
+  "t": "pastpc",
+  "q": "How long had you been working as a manual tester when you moved to automation?",
+  "model": "I had been working as a manual tester for two years when I moved to automation.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-pastpc2",
+  "t": "pastpc",
+  "kind": "tr",
+  "q": "Say it in Past Perfect Continuous: The test failed for days. Then someone noticed.",
+  "model": "The test had been failing for days before someone noticed.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-w1",
+  "t": "will",
+  "alt": [
+   "goingto"
+  ],
+  "q": "The build is red. What will you do?",
+  "model": "I'll check the failed job and rerun it.",
+  "rule": "Decisión que tomás en el momento: will (I'll check).",
+  "kind": "q",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-w2",
+  "t": "will",
+  "q": "Do you think AI will replace manual testers?",
+  "model": "I think AI will change our work, but it won't replace testers.",
+  "rule": "Predicción u opinión (I think): will.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-w3",
+  "t": "will",
+  "alt": [
+   "goingto"
+  ],
+  "q": "When will you send me the test report?",
+  "model": "I'll send you the report by the end of the day.",
+  "kind": "q",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-w4",
+  "t": "will",
+  "q": "Can someone review my pull request?",
+  "model": "Sure, I'll review it after lunch.",
+  "rule": "Ofrecerte en el momento: will (I'll review it).",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-w5",
+  "t": "will",
+  "q": "What will you do if the deploy fails?",
+  "model": "If the deploy fails, I'll roll it back.",
+  "rule": "Primer condicional: if + presente, will + verbo (If it fails, I'll roll it back).",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-w6",
+  "t": "will",
+  "kind": "tr",
+  "q": "Promise it with will: I send you the logs.",
+  "model": "I'll send you the logs in five minutes.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-g1",
+  "t": "goingto",
+  "alt": [
+   "pc"
+  ],
+  "q": "What are you going to learn next?",
+  "model": "I'm going to learn more about contract testing.",
+  "kind": "q",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-g2",
+  "t": "goingto",
+  "alt": [
+   "pc"
+  ],
+  "q": "What is your team going to do next quarter?",
+  "model": "Next quarter we're going to automate the mobile flows.",
+  "kind": "q",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-g3",
+  "t": "goingto",
+  "alt": [
+   "pc"
+  ],
+  "q": "What are you going to do after this interview?",
+  "model": "I'm going to review my notes and rest a bit.",
+  "kind": "q",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-g4",
+  "t": "goingto",
+  "kind": "tr",
+  "q": "Say it with going to, it's already a plan: I refactor the page objects next week.",
+  "model": "I'm going to refactor the page objects next week.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-g5",
+  "t": "goingto",
+  "q": "Look at those error rates. What's going to happen?",
+  "model": "The deploy is going to fail.",
+  "rule": "Predicción con evidencia que ves ahora: going to.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-fc1",
+  "t": "futc",
+  "mix": false,
+  "q": "What will you be doing tomorrow at ten?",
+  "model": "Tomorrow at ten I'll be deploying to production.",
+  "kind": "q",
+  "alt": [],
+  "nivel": 2
+ },
+ {
+  "id": "o-fc2",
+  "t": "futc",
+  "kind": "tr",
+  "q": "Say it in Future Continuous: I work on it tomorrow morning.",
+  "model": "I'll be working on it tomorrow morning.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-fp1",
+  "t": "futp",
+  "q": "What will you have finished by Friday?",
+  "model": "By Friday I'll have finished the checkout tests.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-fp2",
+  "t": "futp",
+  "kind": "tr",
+  "q": "Say it in Future Perfect, with by the end of the sprint: We fix all the blockers.",
+  "model": "By the end of the sprint we'll have fixed all the blockers.",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "o-fpc1",
+  "t": "futpc",
+  "q": "By March, how long will you have been working in QA?",
+  "model": "By March I'll have been working in QA for eight years.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-u1",
+  "t": "usedto",
+  "q": "How did your team use to test before automation?",
+  "model": "We used to test everything manually before every release.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-u2",
+  "t": "usedto",
+  "q": "What did you use to do before you worked in QA?",
+  "model": "I used to work in tech support before I moved to QA.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-u3",
+  "t": "usedto",
+  "q": "Did you use to write test cases in Excel?",
+  "model": "Yes, we used to write them in Excel, but now we use Xray.",
+  "kind": "q",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "o-u4",
+  "t": "usedto",
+  "kind": "tr",
+  "q": "Say it with used to, you don't do it anymore: I ran the regression manually.",
+  "model": "I used to run the regression manually.",
+  "need": "\\bused to run\\b",
+  "need_msg": "Used to + verbo base: used to run (no used to ran).",
+  "alt": [],
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps1",
+  "t": "ps",
+  "kind": "q",
+  "q": "What time does your daily stand-up start?",
+  "model": "Our daily stand-up starts at nine thirty.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps2",
+  "t": "ps",
+  "kind": "q",
+  "q": "How long does your regression suite take?",
+  "model": "The full regression suite takes about forty minutes.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps3",
+  "t": "ps",
+  "kind": "q",
+  "q": "Who writes the acceptance criteria in your team?",
+  "model": "The product owner writes the acceptance criteria.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps4",
+  "t": "ps",
+  "kind": "q",
+  "q": "How do you report a bug?",
+  "model": "I write a ticket in Jira with the steps, the expected result and a screenshot.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps5",
+  "t": "ps",
+  "kind": "q",
+  "q": "What does your framework do when a test fails?",
+  "model": "It takes a screenshot and attaches it to the report.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps6",
+  "t": "ps",
+  "kind": "q",
+  "q": "Which browsers do you support?",
+  "model": "We support Chrome, Firefox, Safari and Edge.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps7",
+  "t": "ps",
+  "kind": "q",
+  "q": "How often do you update your test data?",
+  "model": "We update the test data once a week.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps8",
+  "t": "ps",
+  "kind": "q",
+  "q": "What do you like most about QA?",
+  "model": "I like finding problems before our users do.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps9",
+  "t": "ps",
+  "kind": "q",
+  "q": "Where does your team keep the test cases?",
+  "model": "We keep the test cases in Xray, inside Jira.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps10",
+  "t": "ps",
+  "kind": "tr",
+  "q": "Say it about the pipeline: I run on every merge.",
+  "model": "The pipeline runs on every merge.",
+  "alt": [],
+  "need": "\\bruns\\b",
+  "need_msg": "Con un sujeto singular (the pipeline) va -s: runs.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps11",
+  "t": "ps",
+  "kind": "tr",
+  "q": "Make it a question: She writes the API tests.",
+  "model": "Does she write the API tests?",
+  "alt": [],
+  "need": "\\bdoes she write\\b",
+  "need_msg": "Pregunta con he/she: Does + sujeto + verbo base (Does she write).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-ps12",
+  "t": "ps",
+  "kind": "tr",
+  "q": "Make it negative: Our team works on weekends.",
+  "model": "Our team doesn't work on weekends.",
+  "alt": [],
+  "need": "\\bdoes not work\\b",
+  "need_msg": "Negativa con un sujeto singular: doesn't + verbo base (doesn't work).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc1",
+  "t": "pc",
+  "kind": "q",
+  "q": "What is your team testing this sprint?",
+  "model": "This sprint we're testing the new payment gateway.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc2",
+  "t": "pc",
+  "kind": "q",
+  "q": "Which course are you taking right now?",
+  "model": "Right now I'm taking a course on Playwright with TypeScript.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc3",
+  "t": "pc",
+  "kind": "q",
+  "q": "Why is the staging environment so slow today?",
+  "model": "It's slow because the team is running load tests on it.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc4",
+  "t": "pc",
+  "kind": "q",
+  "q": "What are you reading these days?",
+  "model": "These days I'm reading a book about software testing.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc5",
+  "t": "pc",
+  "kind": "q",
+  "q": "What technology is your company adopting this year?",
+  "model": "This year my company is adopting AI agents for test generation.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc6",
+  "t": "pc",
+  "kind": "q",
+  "q": "Who are you pairing with this week?",
+  "model": "This week I'm pairing with a backend developer.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc7",
+  "t": "pc",
+  "kind": "q",
+  "q": "What are you improving in your test suite at the moment?",
+  "model": "At the moment I'm improving the reports of the test suite.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc8",
+  "t": "pc",
+  "kind": "tr",
+  "q": "Say it in Present Continuous, it's happening now: The build fails.",
+  "model": "The build is failing right now.",
+  "alt": [],
+  "need": "\\bis failing\\b",
+  "need_msg": "Sujeto singular + is + -ing: the build is failing.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc9",
+  "t": "pc",
+  "kind": "tr",
+  "q": "Make it a question in Present Continuous: You work on the login bug.",
+  "model": "Are you working on the login bug?",
+  "alt": [],
+  "need": "\\bare you working\\b",
+  "need_msg": "Pregunta en continuo: Are + sujeto + -ing (Are you working).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pc10",
+  "t": "pc",
+  "kind": "tr",
+  "q": "Make it negative, right now: We deploy to production.",
+  "model": "We aren't deploying to production right now.",
+  "alt": [],
+  "need": "\\bare not deploying\\b",
+  "need_msg": "Negativa en continuo: aren't + -ing (we aren't deploying).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-past1",
+  "t": "past",
+  "kind": "q",
+  "q": "What was your first job in tech?",
+  "model": "My first job in tech was in a support team.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past2",
+  "t": "past",
+  "kind": "q",
+  "q": "What did you learn in your last project?",
+  "model": "In my last project I learned a lot about API contracts.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past3",
+  "t": "past",
+  "kind": "q",
+  "q": "How did you find your current job?",
+  "model": "I found my current job on LinkedIn.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past4",
+  "t": "past",
+  "kind": "q",
+  "q": "When did you write your first automated test?",
+  "model": "I wrote my first automated test in 2020.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past5",
+  "t": "past",
+  "kind": "q",
+  "q": "What did the developers say about your last bug report?",
+  "model": "They said the report was very clear.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past6",
+  "t": "past",
+  "kind": "q",
+  "q": "Why did you leave your previous company?",
+  "model": "I left because I wanted to grow in test automation.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past7",
+  "t": "past",
+  "kind": "q",
+  "q": "What was the hardest bug you fixed last month?",
+  "model": "Last month I fixed a race condition in the checkout flow.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past8",
+  "t": "past",
+  "kind": "q",
+  "q": "How long did the last release take?",
+  "model": "The last release took almost three hours.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past9",
+  "t": "past",
+  "kind": "q",
+  "q": "Did you attend the sprint review yesterday?",
+  "model": "Yes, I attended it and I showed the new test dashboard.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past10",
+  "t": "past",
+  "kind": "q",
+  "q": "What did your team decide in the last retrospective?",
+  "model": "We decided to run the smoke tests before every merge.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past11",
+  "t": "past",
+  "kind": "q",
+  "q": "Where did you study programming?",
+  "model": "I studied programming online and in a bootcamp.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-past12",
+  "t": "past",
+  "kind": "tr",
+  "q": "Say it in Past Simple, with last week: I teach the new tester our framework.",
+  "model": "Last week I taught the new tester our framework.",
+  "alt": [],
+  "need": "\\btaught\\b",
+  "need_msg": "Teach es irregular: teach, taught, taught.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-past13",
+  "t": "past",
+  "kind": "tr",
+  "q": "Say it in Past Simple, with yesterday: We buy a new device for mobile testing.",
+  "model": "Yesterday we bought a new device for mobile testing.",
+  "alt": [],
+  "need": "\\bbought\\b",
+  "need_msg": "Buy es irregular: buy, bought, bought.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-past14",
+  "t": "past",
+  "kind": "tr",
+  "q": "Say it in Past Simple: The new commit breaks the login page.",
+  "model": "The new commit broke the login page.",
+  "alt": [],
+  "need": "\\bbroke\\b",
+  "need_msg": "Break es irregular: break, broke, broken.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-past15",
+  "t": "past",
+  "kind": "tr",
+  "q": "Make it a question: The tests passed.",
+  "model": "Did the tests pass?",
+  "alt": [],
+  "need": "\\bdid the tests pass\\b",
+  "need_msg": "Pregunta en pasado: Did + sujeto + verbo base (Did the tests pass).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-past16",
+  "t": "past",
+  "kind": "tr",
+  "q": "Make it negative: I sent the report.",
+  "model": "I didn't send the report.",
+  "alt": [],
+  "need": "\\bdid not send\\b",
+  "need_msg": "Negativa en pasado: didn't + verbo base (didn't send).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp1",
+  "t": "pp",
+  "kind": "q",
+  "q": "Have you ever led a QA team?",
+  "model": "Yes, I've led a small QA team of three people.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp2",
+  "t": "pp",
+  "kind": "q",
+  "q": "How many bugs have you reported this week?",
+  "model": "I've reported five bugs this week.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp3",
+  "t": "pp",
+  "kind": "q",
+  "q": "Have you finished the test plan yet?",
+  "model": "Yes, I've already finished the test plan.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp4",
+  "t": "pp",
+  "kind": "q",
+  "q": "Which programming languages have you used at work?",
+  "model": "I've used Java, Python and TypeScript at work.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp5",
+  "t": "pp",
+  "kind": "q",
+  "q": "Have you ever worked with a remote team?",
+  "model": "Yes, I've worked with remote teams in three countries.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp6",
+  "t": "pp",
+  "kind": "q",
+  "q": "What has changed in your team since you joined?",
+  "model": "Since I joined, we've automated most of the regression.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp7",
+  "t": "pp",
+  "kind": "q",
+  "q": "Have you ever broken production?",
+  "model": "Yes, I've broken production once, and I learned a lot from it.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp8",
+  "t": "pp",
+  "kind": "q",
+  "q": "Has your company started using AI tools?",
+  "model": "Yes, my company has started using AI tools for code reviews.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp9",
+  "t": "pp",
+  "kind": "q",
+  "q": "How many certifications have you got?",
+  "model": "I've got two certifications, ISTQB and one in AWS.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp10",
+  "t": "pp",
+  "kind": "q",
+  "q": "Have you read the new requirements yet?",
+  "model": "No, I haven't read them yet.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp11",
+  "t": "pp",
+  "kind": "q",
+  "q": "What is the most interesting tool you have tried this year?",
+  "model": "This year I've tried an AI agent that writes test cases.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp12",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Say it in Present Perfect, with yet: We didn't find the cause.",
+  "model": "We haven't found the cause yet.",
+  "alt": [],
+  "need": "\\bhave not found\\b",
+  "need_msg": "Negativa en Present Perfect: haven't + participio (found), y yet al final.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp13",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Say it in Present Perfect: She writes the release notes. They're ready now.",
+  "model": "She has written the release notes.",
+  "alt": [],
+  "need": "\\bhas written\\b",
+  "need_msg": "Con she va has, y write tiene participio irregular: has written.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp14",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Say it in Present Perfect, with already: I tell the developers.",
+  "model": "I've already told the developers.",
+  "alt": [],
+  "need": "\\bhave already told\\b",
+  "need_msg": "Already entre have y el participio; tell es irregular: told.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp15",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Ask about experience, in Present Perfect: Do you use Docker?",
+  "model": "Have you ever used Docker?",
+  "alt": [],
+  "need": "\\bhave you (?:ever )?used\\b",
+  "need_msg": "Experiencia: Have you ever + participio (used)?",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pp16",
+  "t": "pp",
+  "kind": "tr",
+  "q": "Say it in Present Perfect, with just: The pipeline goes green.",
+  "model": "The pipeline has just gone green.",
+  "alt": [],
+  "need": "\\bhas just gone\\b",
+  "need_msg": "Go es irregular: go, went, gone. Va has just gone.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-ppc1",
+  "t": "ppc",
+  "kind": "q",
+  "q": "How long have you been using Playwright?",
+  "model": "I've been using Playwright for two years.",
+  "alt": [
+   "pp"
+  ],
+  "need": "\\b(?:for|since)\\b",
+  "need_msg": "Duración: for + cantidad o since + inicio.",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ppc2",
+  "t": "ppc",
+  "kind": "q",
+  "q": "What have you been working on lately?",
+  "model": "Lately I've been working on our API test suite.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ppc3",
+  "t": "ppc",
+  "kind": "q",
+  "q": "How long has your team been running tests in the cloud?",
+  "model": "We've been running tests in the cloud since last year.",
+  "alt": [
+   "pp"
+  ],
+  "need": "\\b(?:for|since)\\b",
+  "need_msg": "Duración: since last year / for a year.",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ppc4",
+  "t": "ppc",
+  "kind": "q",
+  "q": "Why are your eyes so red?",
+  "model": "I've been looking at logs all afternoon.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ppc5",
+  "t": "ppc",
+  "kind": "q",
+  "q": "How long have you been waiting for the new environment?",
+  "model": "I've been waiting for it since Monday.",
+  "alt": [],
+  "need": "\\b(?:for|since)\\b",
+  "need_msg": "Duración: since Monday / for three days.",
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-ppc6",
+  "t": "ppc",
+  "kind": "tr",
+  "q": "Say it with for: I started learning Python three months ago, and I'm still learning.",
+  "model": "I've been learning Python for three months.",
+  "alt": [
+   "pp"
+  ],
+  "need": "\\bfor\\b",
+  "need_msg": "Con una cantidad de tiempo va for: for three months.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-ppc7",
+  "t": "ppc",
+  "kind": "tr",
+  "q": "Say it in Present Perfect Continuous: The API returns errors since this morning.",
+  "model": "The API has been returning errors since this morning.",
+  "alt": [],
+  "need": "\\bhas been returning\\b",
+  "need_msg": "Con un sujeto singular: has been + -ing (has been returning).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-ppc8",
+  "t": "ppc",
+  "kind": "tr",
+  "q": "Ask it in Present Perfect Continuous: How long do you work here?",
+  "model": "How long have you been working here?",
+  "alt": [
+   "pp"
+  ],
+  "need": "\\bhave you been working\\b|\\bhave you worked\\b",
+  "need_msg": "How long + have you been working...? (no How long do you work).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastc1",
+  "t": "pastc",
+  "kind": "q",
+  "q": "What were you doing when your manager called you?",
+  "model": "I was reviewing a pull request when my manager called me.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastc2",
+  "t": "pastc",
+  "kind": "q",
+  "q": "What was happening when the server went down?",
+  "model": "We were running the nightly tests when the server went down.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastc3",
+  "t": "pastc",
+  "kind": "q",
+  "q": "What were you studying when you got your first QA job?",
+  "model": "I was studying systems engineering when I got my first QA job.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastc4",
+  "t": "pastc",
+  "kind": "q",
+  "q": "Who were you talking to when the build broke?",
+  "model": "I was talking to the tech lead when the build broke.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastc5",
+  "t": "pastc",
+  "kind": "q",
+  "q": "What was the team doing at five pm yesterday?",
+  "model": "At five pm yesterday the team was preparing the release.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastc6",
+  "t": "pastc",
+  "kind": "q",
+  "q": "What were you working on before lunch?",
+  "model": "Before lunch I was working on the flaky login test.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastc7",
+  "t": "pastc",
+  "kind": "tr",
+  "q": "Join them with when: I tested the app. It crashed.",
+  "model": "I was testing the app when it crashed.",
+  "alt": [],
+  "need": "\\bwhen\\b",
+  "need_msg": "Acción de fondo en Past Continuous + when + acción corta en Past Simple.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastc8",
+  "t": "pastc",
+  "kind": "tr",
+  "q": "Say it in Past Continuous: At midnight we deployed the hotfix.",
+  "model": "At midnight we were deploying the hotfix.",
+  "alt": [],
+  "need": "\\bwere deploying\\b",
+  "need_msg": "Con we: were + -ing (we were deploying).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastp1",
+  "t": "pastp",
+  "kind": "q",
+  "q": "Had you heard of Playwright before you joined this team?",
+  "model": "No, I had never heard of Playwright before I joined.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastp2",
+  "t": "pastp",
+  "kind": "q",
+  "q": "What had happened before you arrived at the office?",
+  "model": "When I arrived, the nightly build had already failed.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastp3",
+  "t": "pastp",
+  "kind": "q",
+  "q": "Why was the client angry?",
+  "model": "The client was angry because we had missed the deadline.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastp4",
+  "t": "pastp",
+  "kind": "tr",
+  "q": "Join them with before: The developers fixed the bug. Then I tested it.",
+  "model": "The developers had fixed the bug before I tested it.",
+  "alt": [],
+  "need": "\\bbefore\\b",
+  "need_msg": "Lo que pasó primero va en Past Perfect: had fixed... before I tested.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastp5",
+  "t": "pastp",
+  "kind": "tr",
+  "q": "Join them with when: The meeting finished. Then I arrived.",
+  "model": "When I arrived, the meeting had already finished.",
+  "alt": [],
+  "need": "\\bhad (?:already )?finished\\b",
+  "need_msg": "Lo anterior va con had + participio: had already finished.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastp6",
+  "t": "pastp",
+  "kind": "tr",
+  "q": "Say it in Past Perfect, with never: Before this job, I didn't use Jira.",
+  "model": "Before this job, I had never used Jira.",
+  "alt": [],
+  "need": "\\bhad never used\\b",
+  "need_msg": "Never entre had y el participio: had never used.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastpc1",
+  "t": "pastpc",
+  "kind": "q",
+  "q": "How long had the test been failing when you noticed it?",
+  "model": "It had been failing for three days when I noticed it.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastpc2",
+  "t": "pastpc",
+  "kind": "q",
+  "q": "What had you been doing before you got the alert?",
+  "model": "I had been reviewing test results before I got the alert.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-pastpc3",
+  "t": "pastpc",
+  "kind": "tr",
+  "q": "Say it in Past Perfect Continuous: We waited for two hours. Then the build finished.",
+  "model": "We had been waiting for two hours when the build finished.",
+  "alt": [],
+  "need": "\\bhad been waiting\\b",
+  "need_msg": "Duración antes de otro pasado: had been + -ing (had been waiting).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-will1",
+  "t": "will",
+  "kind": "q",
+  "q": "The login test is failing. Who will check it?",
+  "model": "I'll check it right after this meeting.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-will2",
+  "t": "will",
+  "kind": "q",
+  "q": "Do you think the release will be on time?",
+  "model": "I think it will be on time if we fix the blockers today.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-will3",
+  "t": "will",
+  "kind": "q",
+  "q": "What will you say if the client asks for a demo?",
+  "model": "I'll say yes and prepare a short demo.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-will4",
+  "t": "will",
+  "kind": "q",
+  "q": "How will AI change QA in five years?",
+  "model": "I think AI will write most of the basic test cases.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-will5",
+  "t": "will",
+  "kind": "q",
+  "q": "Can you help me with this flaky test?",
+  "model": "Sure, I'll take a look at it now.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-will6",
+  "t": "will",
+  "kind": "tr",
+  "q": "Make it negative, it's a promise: This change affects the existing tests.",
+  "model": "This change won't affect the existing tests.",
+  "alt": [],
+  "need": "\\bwill not affect\\b",
+  "need_msg": "Negativa con will: won't + verbo base (won't affect).",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-will7",
+  "t": "will",
+  "kind": "tr",
+  "q": "Say it with when, it's the future: The build will finish, and I'll deploy.",
+  "model": "When the build finishes, I'll deploy.",
+  "alt": [],
+  "need": "\\bwhen the build finishes\\b",
+  "need_msg": "Después de when con sentido futuro va presente: when the build finishes.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-goingto1",
+  "t": "goingto",
+  "kind": "q",
+  "q": "What are you going to automate next sprint?",
+  "model": "Next sprint I'm going to automate the refund flow.",
+  "alt": [
+   "pc"
+  ],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-goingto2",
+  "t": "goingto",
+  "kind": "q",
+  "q": "What is your company going to launch this year?",
+  "model": "This year my company is going to launch a new mobile app.",
+  "alt": [
+   "pc"
+  ],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-goingto3",
+  "t": "goingto",
+  "kind": "q",
+  "q": "Where are you going to work in two years?",
+  "model": "In two years I'm going to work as an AI QA engineer.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-goingto4",
+  "t": "goingto",
+  "kind": "q",
+  "q": "The sky is black. What's going to happen?",
+  "model": "It's going to rain soon.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-goingto5",
+  "t": "goingto",
+  "kind": "tr",
+  "q": "Make it a question with going to: You test the mobile flows.",
+  "model": "Are you going to test the mobile flows?",
+  "alt": [],
+  "need": "\\bare you going to test\\b",
+  "need_msg": "Pregunta con going to: Are you going to + verbo base?",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-goingto6",
+  "t": "goingto",
+  "kind": "tr",
+  "q": "Make it negative with going to: We migrate the tests this year.",
+  "model": "We aren't going to migrate the tests this year.",
+  "alt": [],
+  "need": "\\bare not going to migrate\\b",
+  "need_msg": "Negativa: aren't going to + verbo base.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-futc1",
+  "t": "futc",
+  "kind": "tr",
+  "q": "Say it in Future Continuous: At three pm I interview a candidate.",
+  "model": "At three pm I'll be interviewing a candidate.",
+  "alt": [],
+  "need": "\\bwill be interviewing\\b",
+  "need_msg": "Algo en curso en un momento del futuro: will be + -ing.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-futc2",
+  "t": "futc",
+  "kind": "q",
+  "q": "Will you be using the staging environment this afternoon?",
+  "model": "Yes, I'll be using it for the regression tests.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-futp1",
+  "t": "futp",
+  "kind": "q",
+  "q": "How many test cases will you have automated by December?",
+  "model": "By December I'll have automated about five hundred test cases.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-futp2",
+  "t": "futp",
+  "kind": "tr",
+  "q": "Say it in Future Perfect, with by Monday: I finish the report.",
+  "model": "By Monday I'll have finished the report.",
+  "alt": [],
+  "need": "\\bwill have finished\\b",
+  "need_msg": "Terminado antes de un momento del futuro: will have + participio.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-usedto1",
+  "t": "usedto",
+  "kind": "q",
+  "q": "What tools did you use to work with before Playwright?",
+  "model": "I used to work with Selenium before Playwright.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-usedto2",
+  "t": "usedto",
+  "kind": "q",
+  "q": "How did you use to deploy before you had CI?",
+  "model": "We used to deploy manually every Friday night.",
+  "alt": [],
+  "mix": true,
+  "nivel": 2
+ },
+ {
+  "id": "n-usedto3",
+  "t": "usedto",
+  "kind": "tr",
+  "q": "Say it with used to, it's not true anymore: I am a manual tester.",
+  "model": "I used to be a manual tester.",
+  "alt": [],
+  "need": "\\bused to be\\b",
+  "need_msg": "Un estado del pasado que ya no es así: used to be.",
+  "mix": false,
+  "nivel": 2
+ },
+ {
+  "id": "n-usedto4",
+  "t": "usedto",
+  "kind": "tr",
+  "q": "Make it negative with used to: We had code reviews.",
+  "model": "We didn't use to have code reviews.",
+  "alt": [],
+  "need": "\\bdid not use to have\\b",
+  "need_msg": "Negativa: didn't use to + verbo base (sin d en use).",
+  "mix": false,
+  "nivel": 2
+ }
+]

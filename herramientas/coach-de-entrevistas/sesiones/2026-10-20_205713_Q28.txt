@@ -1,0 +1,22 @@
+Q28 · Tell me about a time you pushed back on a release.
+
+── Reporte · Q28 ───────────────────────────────────────
+Duración     2:35   (objetivo 1:30 a 3:00: bien)
+Palabras     188 · 75 por minuto · lento: está bien pensar, pero buscá más fluidez
+Muletillas   0
+Pausas largas 1: 2.1 s antes de "make"
+
+Tiempos verbales que usaste (aproximado)
+  Present Simple 11 · Past Simple 6 · Past Continuous 2 · Futuro (will / going to) 1
+
+No encontré errores de los que el coach sabe detectar. Igual pasale la respuesta a Claude.
+  > No escuché un resultado claro. Cerrá con As a result... y un número o un impacto.
+
+Lo que dijiste
+Yes, of course. In words, it's the way of the cycle time of development. It was very, very quickly, so you maybe can make mistakes and a time when we were to make a production push and all the things I find that something of the risk matrix it have an error that produced that all the configurations before the implement or the release makes that every person, their risk, sorry I don't remember the risk mark, make it to zero. So you lost all the data for that persons so I was in the release production with the Dutch leads and the CTO and I tell them to to stop and I was understanding all the problem and I release push it to other side but when there is a problem you can't stay quiet because that's a problem to the future if I if I stay quiet that release was going to deploy in production and all that person will have all his data lost and that it's a matter of problem that if I say it and post target it the release for one day
+
+────────────────────────────────────────────────────────
+
+Para pegar en el chat:
+Q28: Yes, of course. In words, it's the way of the cycle time of development. It was very, very quickly, so you maybe can make mistakes and a time when we were to make a production push and all the things I find that something of the risk matrix it have an error that produced that all the configurations before the implement or the release makes that every person, their risk, sorry I don't remember the risk mark, make it to zero. So you lost all the data for that persons so I was in the release production with the Dutch leads and the CTO and I tell them to to stop and I was understanding all the problem and I release push it to other side but when there is a problem you can't stay quiet because that's a problem to the future if I if I stay quiet that release was going to deploy in production and all that person will have all his data lost and that it's a matter of problem that if I say it and post target it the release for one day
+(Pregunta: Tell me about a time you pushed back on a release. · 2:35 · 75 palabras por minuto · respuesta hablada, transcripta con el coach)
