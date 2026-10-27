@@ -26,6 +26,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 import coach as C  # noqa: E402  (coach.py se registra como "coach" antes de importarnos)
+import posesivos  # noqa: E402
 
 DATA = HERE / "tiempos.json"
 OUT = C.SESSIONS / "tiempos"
@@ -37,7 +38,7 @@ NAMES = {
     "ppc": "Present Perfect Continuous", "past": "Past Simple", "pastc": "Past Continuous",
     "pastp": "Past Perfect", "pastpc": "Past Perfect Continuous", "will": "Futuro con will",
     "goingto": "Futuro con going to", "futc": "Future Continuous", "futp": "Future Perfect",
-    "futpc": "Future Perfect Continuous", "usedto": "Used to", "would": "Would",
+    "futpc": "Future Perfect Continuous", "usedto": "Used to", "would": "Would", "pos": "Posesivos y pronombres",
 }
 ORDER = list(NAMES)
 FORM = {
@@ -56,10 +57,11 @@ FORM = {
     "futpc": "Will have been + -ing (I'll have been working). Duración hasta un momento del futuro.",
     "usedto": "Used to + verbo base (I used to test manually). Hábitos o estados del pasado que ya no siguen.",
     "would": "Would + verbo base. Hábitos repetidos en una historia del pasado, o condicional.",
+    "pos": "my / mine, his / her / its / their, its vs it's, 's, sujeto obligatorio (it) y he/she/it + s.",
 }
 APUNTE = {"ps": "L1", "pc": "L2", "past": "L4", "pp": "L5-L7", "ppc": "L8-L9", "pastc": "L10", "pastp": "L11",
           "pastpc": "L12", "will": "L13", "goingto": "L13", "futc": "L14", "futp": "L14", "futpc": "L14",
-          "usedto": "L15", "would": "L15"}
+          "usedto": "L15", "would": "L15", "pos": "doc 14"}
 
 # ---------------------------------------------------------------- verbos
 
@@ -527,6 +529,8 @@ def tense_rule_errors(text):
 
 
 def target_of(item):
+    if item.get("tema") == "pos":
+        return "pos"
     if item["nivel"] == 2:
         return item["t"]
     if item.get("target"):
@@ -563,6 +567,8 @@ def x_regions(item):
 
 def grade(item, said):
     """-> dict(veredicto, motivo, regla, tiempos, avisos)"""
+    if item.get("tema") == "pos":
+        return posesivos.grade(item, said)
     target = target_of(item)
     toks = tokens(said)
     found, flags = detect(said)
@@ -663,7 +669,13 @@ def show_prompt(item, k, total, level):
     if level != 3:
         head += f" · {NAMES[target]}"
     print(C.rule_line(head))
-    if item["nivel"] == 1:
+    if item.get("tema") == "pos":
+        print(C.dim({"x": "Corregí el error y decí la oración completa:",
+                     "tr": "Transformá la oración y decila completa:"}.get(item["kind"],
+                    "Decí la oración completa con la opción correcta:")))
+        if item.get("escribir"):
+            print(C.dim("Este se escribe: its / it's (o your / you're, el apóstrofo) suenan igual."))
+    elif item["nivel"] == 1:
         if item["kind"] == "x":
             print(C.dim("Corregí el error y decí la oración completa:"))
         elif item["kind"] == "c":
@@ -851,6 +863,8 @@ def run_series(items, level, args, tense=None, errors_only=False):
         pool = [i for i in items if i["nivel"] == 2]
     elif level == 3:
         pool = [i for i in items if i["nivel"] == 2 and i.get("mix")]
+    elif level == 4:
+        pool = [i for i in items if i["nivel"] == 4]
     else:
         pool = items
     n = args.cantidad or SERIES
@@ -872,6 +886,12 @@ def run_series(items, level, args, tense=None, errors_only=False):
         if spoken_q and not args.sin_voz:
             C.speak(item["q"])
         audio, said, manual = None, None, False
+        if item.get("escribir") and not args.texto:
+            said, manual = ask_said("Escribí la oración completa (Enter para saltear) > "), True
+            said = said or None
+            if said is None:
+                k += 1
+                continue
         while said is None:
             if args.texto:
                 said = C.ask("> ")
@@ -963,8 +983,12 @@ def finish(log, level, serie_id, stamp):
         worst = Counter(e["res"]["objetivo"] for e in log if e["res"]["veredicto"] == MAL).most_common(1)
         if worst and worst[0][1] >= 2:
             t = worst[0][0]
-            print(C.warn(f"\n  > Fallaste {worst[0][1]} veces en {NAMES[t]}. Repasá la lección {APUNTE.get(t, '')} "
-                         f"del cuaderno y hacé otra serie con la opción 4."))
+            if t == "pos":
+                print(C.warn(f"\n  > Fallaste {worst[0][1]} veces en posesivos y pronombres. Repasá el doc 14 "
+                             f"(14-posesivos-pronombres) y hacé otra serie con la opción 8."))
+            else:
+                print(C.warn(f"\n  > Fallaste {worst[0][1]} veces en {NAMES[t]}. Repasá la lección {APUNTE.get(t, '')} "
+                             f"del cuaderno y hacé otra serie con la opción 4."))
     text, chat = qa_text(log, level, stamp)
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / f"{serie_id}_tiempos.txt"
@@ -980,9 +1004,10 @@ def finish(log, level, serie_id, stamp):
 
 def qa_text(log, level, stamp):
     cnt = Counter(e["res"]["veredicto"] for e in log)
-    lines = [f"Práctica de tiempos verbales · {stamp.strftime('%Y-%m-%d %H:%M')} · Nivel {level} · {len(log)} respuestas",
+    tema = "posesivos y pronombres" if level == 4 else "tiempos verbales"
+    lines = [f"Práctica de {tema} · {stamp.strftime('%Y-%m-%d %H:%M')} · Nivel {level} · {len(log)} respuestas",
              f"Resultado del coach: {cnt[BIEN]} bien, {cnt[CASI]} casi, {cnt[MAL]} mal", ""]
-    chat = ["Corregime esta serie de tiempos verbales (unidad 2). Son respuestas habladas de una oración, "
+    chat = [f"Corregime esta serie de {tema}" + (" (doc 14)" if level == 4 else " (unidad 2)") + ". Son respuestas habladas de una oración, "
             "transcriptas por el coach; la transcripción puede tener errores de Whisper.", ""]
     for n, e in enumerate(log, 1):
         it, res = e["item"], e["res"]
@@ -1050,9 +1075,10 @@ def load_items():
 def menu(args):
     items = load_items()
     g = sum(1 for i in items if i["nivel"] == 1)
+    npos = sum(1 for i in items if i["nivel"] == 4)
     print()
     print(C.bold("Coach de tiempos verbales"))
-    print(C.dim(f"{g} oraciones guiadas (Tense Runner) y {len(items) - g} preguntas abiertas. Series de {args.cantidad or SERIES}."))
+    print(C.dim(f"{g} oraciones guiadas (Tense Runner), {len(items) - g - npos} preguntas abiertas y {npos} de posesivos. Series de {args.cantidad or SERIES}."))
     if args.nivel:
         run_series(items, args.nivel, args)
     while True:
@@ -1064,9 +1090,12 @@ def menu(args):
         print("  5  Repasar mis errores")
         print("  6  Ver mi progreso por tiempo")
         print("  7  Probar el micrófono")
+        print("  8  Posesivos y pronombres (doc 14)")
         print("  0  Volver")
         op = C.ask("> ")
-        if op in ("1", "2", "3"):
+        if op == "8":
+            run_series(items, 4, args)
+        elif op in ("1", "2", "3"):
             run_series(items, int(op), args)
         elif op == "4":
             t = choose_tense(items)

@@ -3273,5 +3273,830 @@
   "need_msg": "Negativa: didn't use to + verbo base (sin d en use).",
   "mix": false,
   "nivel": 2
+ },
+ {
+  "id": "pos-01",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "El sujeto es obligatorio en inglés, aunque sea it.",
+  "prompt": "Represents the time that passes.",
+  "model": "It represents the time that passes.",
+  "answers": [
+   "it represents"
+  ],
+  "bad": [
+   "it represent the"
+  ],
+  "wrong": "Represents the time that passes."
+ },
+ {
+  "id": "pos-02",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "El sujeto es obligatorio: It fails...",
+  "prompt": "Fails on Safari but works on Chrome.",
+  "model": "It fails on Safari but works on Chrome.",
+  "answers": [
+   "it fails"
+  ],
+  "bad": [],
+  "wrong": "Fails on Safari but works on Chrome."
+ },
+ {
+  "id": "pos-03",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "Sujeto obligatorio (it). Y important to me suena más natural.",
+  "prompt": "Is very important for me.",
+  "model": "It's very important to me.",
+  "answers": [
+   "it's very important",
+   "it's important"
+  ],
+  "bad": [],
+  "wrong": "Is very important for me."
+ },
+ {
+  "id": "pos-04",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "Para decir que algo existe: there is / there are.",
+  "prompt": "Have two critical bugs in staging.",
+  "model": "There are two critical bugs in staging.",
+  "answers": [
+   "there are two"
+  ],
+  "bad": [
+   "have two"
+  ],
+  "wrong": "Have two critical bugs in staging."
+ },
+ {
+  "id": "pos-05",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "El sujeto es obligatorio: It was...",
+  "prompt": "Was a really hard sprint.",
+  "model": "It was a really hard sprint.",
+  "answers": [
+   "it was"
+  ],
+  "bad": [],
+  "wrong": "Was a really hard sprint."
+ },
+ {
+  "id": "pos-06",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Tiempo y duración: el sujeto es it (It takes...).",
+  "prompt": "Say it again with a subject: Takes about twenty minutes to run.",
+  "model": "It takes about twenty minutes to run.",
+  "answers": [
+   "it takes"
+  ],
+  "bad": []
+ },
+ {
+  "id": "pos-07",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "El posesivo va antes del sustantivo: my, nunca \"of me\".",
+  "prompt": "The first object of me is my wedding ring.",
+  "model": "My first object is my wedding ring.",
+  "answers": [
+   "my first object"
+  ],
+  "bad": [
+   "object of me"
+  ],
+  "wrong": "The first object of me is my wedding ring."
+ },
+ {
+  "id": "pos-08",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "El posesivo va antes del sustantivo: my laptop.",
+  "prompt": "The laptop of me is very slow.",
+  "model": "My laptop is very slow.",
+  "answers": [
+   "my laptop"
+  ],
+  "bad": [
+   "laptop of me"
+  ],
+  "wrong": "The laptop of me is very slow."
+ },
+ {
+  "id": "pos-09",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "Sin sustantivo después: mine, yours, his, hers, ours, theirs.",
+  "prompt": "This laptop isn't the company's. It's ___. (my / mine)",
+  "model": "This laptop isn't the company's. It's mine.",
+  "answers": [
+   "it's mine"
+  ],
+  "bad": [
+   "it's my"
+  ]
+ },
+ {
+  "id": "pos-10",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "La única forma con of: a friend of mine / of yours.",
+  "prompt": "Lucía is a friend of me.",
+  "model": "Lucía is a friend of mine.",
+  "answers": [
+   "friend of mine"
+  ],
+  "bad": [
+   "friend of me"
+  ],
+  "wrong": "Lucía is a friend of me."
+ },
+ {
+  "id": "pos-11",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "Ropa y accesorios propios: posesivo, no artículo.",
+  "prompt": "I always wear the watch at work.",
+  "model": "I always wear my watch at work.",
+  "answers": [
+   "wear my watch"
+  ],
+  "bad": [
+   "wear the watch"
+  ],
+  "wrong": "I always wear the watch at work."
+ },
+ {
+  "id": "pos-12",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "Uno al otro: each other.",
+  "prompt": "We support us in the difficult moments.",
+  "model": "We support each other in difficult moments.",
+  "answers": [
+   "support each other"
+  ],
+  "bad": [
+   "support us"
+  ],
+  "wrong": "We support us in the difficult moments."
+ },
+ {
+  "id": "pos-13",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Sin sustantivo después: mine.",
+  "prompt": "Answer with mine: Is this branch yours?",
+  "model": "Yes, this branch is mine.",
+  "answers": [
+   "is mine",
+   "it's mine"
+  ],
+  "bad": [
+   "is my"
+  ]
+ },
+ {
+  "id": "pos-14",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "c",
+  "rule": "Cosas, planetas, apps y animales: its.",
+  "prompt": "Saturn is famous for ___ rings. (his / its)",
+  "model": "Saturn is famous for its rings.",
+  "answers": [
+   "for its rings",
+   "for it's rings"
+  ],
+  "bad": [
+   "his rings"
+  ]
+ },
+ {
+  "id": "pos-15",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "c",
+  "rule": "El posesivo depende del dueño: ella = her.",
+  "prompt": "My wife wears ___ wedding ring every day. (his / her)",
+  "model": "My wife wears her wedding ring every day.",
+  "answers": [
+   "wears her"
+  ],
+  "bad": [
+   "wears his"
+  ]
+ },
+ {
+  "id": "pos-16",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "c",
+  "rule": "El dueño es un hombre: his.",
+  "prompt": "Martín forgot to update ___ test data. (his / her / its)",
+  "model": "Martín forgot to update his test data.",
+  "answers": [
+   "update his"
+  ],
+  "bad": [
+   "update her"
+  ]
+ },
+ {
+  "id": "pos-17",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "c",
+  "rule": "Una cosa (la API): its.",
+  "prompt": "The API changed ___ response format. (his / its / their)",
+  "model": "The API changed its response format.",
+  "answers": [
+   "changed its",
+   "changed it's"
+  ],
+  "bad": [
+   "changed his",
+   "changed their"
+  ]
+ },
+ {
+  "id": "pos-18",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "c",
+  "rule": "Varios dueños: their (antes del sustantivo).",
+  "prompt": "The developers pushed ___ changes on Friday. (his / their / theirs)",
+  "model": "The developers pushed their changes on Friday.",
+  "answers": [
+   "pushed their",
+   "pushed there"
+  ],
+  "bad": [
+   "pushed his",
+   "pushed theirs"
+  ]
+ },
+ {
+  "id": "pos-19",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "c",
+  "rule": "Persona sin género conocido: their en singular.",
+  "prompt": "Each user can change ___ password. (his / their)",
+  "model": "Each user can change their password.",
+  "answers": [
+   "change their",
+   "change there"
+  ],
+  "bad": [
+   "change his"
+  ]
+ },
+ {
+  "id": "pos-20",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "El dueño manda: tu hija = her.",
+  "prompt": "My daughter loves his Riolu plush.",
+  "model": "My daughter loves her Riolu plush.",
+  "answers": [
+   "loves her"
+  ],
+  "bad": [
+   "loves his"
+  ],
+  "wrong": "My daughter loves his Riolu plush."
+ },
+ {
+  "id": "pos-21",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Una cosa: its.",
+  "prompt": "Describe the app: The app lost the session after the update. (use its)",
+  "model": "The app lost its session after the update.",
+  "answers": [
+   "lost its",
+   "lost it's"
+  ],
+  "bad": [
+   "lost his"
+  ]
+ },
+ {
+  "id": "pos-22",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "it's = it is. its = de eso.",
+  "prompt": "___ a Pokémon named Riolu. (Its / It's)",
+  "model": "It's a Pokémon named Riolu.",
+  "answers": [
+   "it's a"
+  ],
+  "bad": [
+   "its a"
+  ],
+  "escribir": true
+ },
+ {
+  "id": "pos-23",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "Posesivo de una cosa: its, sin apóstrofo.",
+  "prompt": "The service lost ___ connection to the database. (its / it's)",
+  "model": "The service lost its connection to the database.",
+  "answers": [
+   "lost its connection"
+  ],
+  "bad": [
+   "lost it's"
+  ],
+  "escribir": true
+ },
+ {
+  "id": "pos-24",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "It's = it has (it has been).",
+  "prompt": "___ been flaky since the last deploy. (Its / It's)",
+  "model": "It's been flaky since the last deploy.",
+  "answers": [
+   "it's been"
+  ],
+  "bad": [
+   "its been"
+  ],
+  "escribir": true
+ },
+ {
+  "id": "pos-25",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "Posesivo: its. Probá el truco: \"because of it is documentation\" no tiene sentido.",
+  "prompt": "I like this framework because of ___ documentation. (its / it's)",
+  "model": "I like this framework because of its documentation.",
+  "answers": [
+   "of its documentation"
+  ],
+  "bad": [
+   "of it's"
+  ],
+  "escribir": true
+ },
+ {
+  "id": "pos-26",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "you're = you are. your = tu.",
+  "prompt": "___ right, ___ fix works. (Your / You're)",
+  "model": "You're right, your fix works.",
+  "answers": [
+   "you're right your fix"
+  ],
+  "bad": [
+   "your right"
+  ],
+  "escribir": true
+ },
+ {
+  "id": "pos-27",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "whose = de quién. who's = who is.",
+  "prompt": "___ PR broke the build? (Whose / Who's)",
+  "model": "Whose PR broke the build?",
+  "answers": [
+   "whose pr"
+  ],
+  "bad": [
+   "who's pr"
+  ],
+  "escribir": true
+ },
+ {
+  "id": "pos-28",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Dueño + 's + cosa: my daughter's plush.",
+  "prompt": "Say it with 's: The plush of my daughter is a Pokémon.",
+  "model": "My daughter's plush is a Pokémon.",
+  "answers": [
+   "daughter's plush",
+   "daughter's stuffed"
+  ],
+  "bad": [
+   "plush of my daughter"
+  ]
+ },
+ {
+  "id": "pos-29",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Dueño + 's + cosa: my father's watch.",
+  "prompt": "Say it with 's: The watch of my father is very old.",
+  "model": "My father's watch is very old.",
+  "answers": [
+   "father's watch",
+   "dad's watch"
+  ],
+  "bad": [
+   "watch of my father"
+  ]
+ },
+ {
+  "id": "pos-30",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Nombre propio + 's: Enzo's PR.",
+  "prompt": "Say it with 's: The pull request of Enzo is ready.",
+  "model": "Enzo's pull request is ready.",
+  "answers": [
+   "enzo's pull request",
+   "enzo's pr"
+  ],
+  "bad": [
+   "request of enzo"
+  ]
+ },
+ {
+  "id": "pos-31",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "De quién es algo: belongs to o 's. from = origen.",
+  "prompt": "This plush is from my daughter. (quiero decir que es de ella)",
+  "model": "This plush belongs to my daughter.",
+  "answers": [
+   "belongs to my daughter",
+   "is my daughter's"
+  ],
+  "bad": [
+   "is from my"
+  ],
+  "wrong": "This plush is from my daughter."
+ },
+ {
+  "id": "pos-32",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Plural con -s: solo apóstrofo (developers').",
+  "prompt": "Write it with an apostrophe: the comments of the developers were useful.",
+  "model": "The developers' comments were useful.",
+  "answers": [
+   "developers' comments"
+  ],
+  "bad": [
+   "developer's comments",
+   "comments of the developers"
+  ],
+  "escribir": true
+ },
+ {
+  "id": "pos-33",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Plural irregular (sin -s): + 's.",
+  "prompt": "Say it with 's: The toys of the children are everywhere.",
+  "model": "The children's toys are everywhere.",
+  "answers": [
+   "children's toys"
+  ],
+  "bad": [
+   "childrens toys",
+   "toys of the children"
+  ]
+ },
+ {
+  "id": "pos-34",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "Como sujeto va I, y al final.",
+  "prompt": "Me and my team automated the regression suite.",
+  "model": "My team and I automated the regression suite.",
+  "answers": [
+   "my team and i"
+  ],
+  "bad": [
+   "me and my team"
+  ],
+  "wrong": "Me and my team automated the regression suite."
+ },
+ {
+  "id": "pos-35",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "Después de preposición: me, him, her, us, them.",
+  "prompt": "Between you and ___, the deadline isn't realistic. (I / me)",
+  "model": "Between you and me, the deadline isn't realistic.",
+  "answers": [
+   "you and me"
+  ],
+  "bad": [
+   "you and i"
+  ]
+ },
+ {
+  "id": "pos-36",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "Objeto: us.",
+  "prompt": "The QA lead asked ___ for a report. (we / us)",
+  "model": "The QA lead asked us for a report.",
+  "answers": [
+   "asked us"
+  ],
+  "bad": [
+   "asked we"
+  ]
+ },
+ {
+  "id": "pos-37",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "f",
+  "rule": "Sujeto y objeto son la misma persona: myself.",
+  "prompt": "I taught ___ Playwright. (me / myself)",
+  "model": "I taught myself Playwright.",
+  "answers": [
+   "taught myself"
+  ],
+  "bad": [
+   "taught me"
+  ]
+ },
+ {
+  "id": "pos-38",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "Sujeto it + verbo con -s: it has.",
+  "prompt": "Its have a little planet in it.",
+  "model": "It has a little planet in it.",
+  "answers": [
+   "it has"
+  ],
+  "bad": [
+   "it have",
+   "its have"
+  ],
+  "wrong": "Its have a little planet in it."
+ },
+ {
+  "id": "pos-39",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "El verbo concuerda con the test (= it): covers.",
+  "prompt": "The test that cover the login is failing.",
+  "model": "The test that covers the login is failing.",
+  "answers": [
+   "that covers"
+  ],
+  "bad": [
+   "that cover the"
+  ],
+  "wrong": "The test that cover the login is failing."
+ },
+ {
+  "id": "pos-40",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "La -s va solo con he / she / it.",
+  "prompt": "We really likes Lego and Pokémon.",
+  "model": "We really like Lego and Pokémon.",
+  "answers": [
+   "we really like"
+  ],
+  "bad": [
+   "we really likes",
+   "we likes"
+  ],
+  "wrong": "We really likes Lego and Pokémon."
+ },
+ {
+  "id": "pos-41",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "Pregunta indirecta: sujeto + verbo, sin invertir.",
+  "prompt": "I don't know what is the problem.",
+  "model": "I don't know what the problem is.",
+  "answers": [
+   "what the problem is"
+  ],
+  "bad": [
+   "what is the problem"
+  ],
+  "wrong": "I don't know what is the problem."
+ },
+ {
+  "id": "pos-42",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "x",
+  "rule": "Dentro de otra frase: sujeto + verbo (every moment is).",
+  "prompt": "It shows how important is every moment.",
+  "model": "It shows how important every moment is.",
+  "answers": [
+   "important every moment is"
+  ],
+  "bad": [
+   "important is every"
+  ],
+  "wrong": "It shows how important is every moment."
+ },
+ {
+  "id": "pos-43",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Usá el sujeto it y el posesivo its (sin apóstrofo).",
+  "prompt": "Tell me about your watch in one sentence. Use It and its.",
+  "model": "It's a nice watch, and its face has a small Saturn.",
+  "answers": [
+   "its"
+  ],
+  "bad": [],
+  "escribir": true
+ },
+ {
+  "id": "pos-44",
+  "nivel": 4,
+  "tema": "pos",
+  "tags": [
+   "pos"
+  ],
+  "kind": "tr",
+  "rule": "Como sujeto: My team and I...",
+  "prompt": "Tell me something your team did. Start with My team and I.",
+  "model": "My team and I automated the whole regression suite.",
+  "answers": [
+   "my team and i"
+  ],
+  "bad": [
+   "me and my team"
+  ]
  }
 ]

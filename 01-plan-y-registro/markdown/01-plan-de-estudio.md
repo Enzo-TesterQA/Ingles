@@ -22,6 +22,7 @@ El orden va de la base (tiempos verbales) a la entrevista completa. Los material
 | 10 | [Pronunciación para entrevistas técnicas](https://claude.ai/code/artifact/bbea45fc-0366-45d6-ab45-c70ed1095500) | Palabras técnicas, -ed, acento, sonidos difíciles, símbolos y shadowing | 10 minutos de shadowing, 3 veces por semana |
 | 11 | [Interview Booth](https://claude.ai/artifact/5NUrLTSj2JnUQh8k1F5c6M) | Simulador: pregunta, respuesta y feedback automático en 4 partes + repregunta. Para entrevistas completas: [Guiones de simulacros](https://claude.ai/code/artifact/bfa0eb30-7460-44aa-83a6-0bf396ddc45f), 8 simulacros con repreguntas y hoja de evaluación | Viernes, desde la fase 2 |
 | 12 | [Registro de errores](https://claude.ai/code/artifact/698db23a-b10e-41b2-ab8c-f2e6543eb8ff) | Tabla de tus errores frecuentes con estado y foco del mes | Siempre; se revisa cada viernes |
+| 14 | [Posesivos y pronombres](https://claude.ai/artifact/A4PQKmaXr4gZnLSPu3v7QB) | my / mine, its / it's, his / her / its, 's y sujeto obligatorio, desde tu tarea de los tres objetos. 6 bloques de ejercicios | Repaso urgente, lunes de gramática |
 
 ## Rutina semanal
 

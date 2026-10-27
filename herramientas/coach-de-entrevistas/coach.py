@@ -1155,7 +1155,8 @@ def main():
     ap.add_argument("--sin-voz", action="store_true", help="no leer las preguntas en voz alta")
     ap.add_argument("--sin-muletillas", action="store_true", help="no pedirle a Whisper que conserve las muletillas")
     ap.add_argument("--tiempos", action="store_true", help="práctica de tiempos verbales (oraciones cortas)")
-    ap.add_argument("--nivel", type=int, choices=[1, 2, 3], help="con --tiempos: arranca directo una serie de ese nivel")
+    ap.add_argument("--nivel", type=int, choices=[1, 2, 3, 4],
+                    help="con --tiempos: arranca directo una serie de ese nivel (4 = posesivos y pronombres)")
     ap.add_argument("--cantidad", type=int, help="con --tiempos: preguntas por serie (10 por defecto)")
     ap.add_argument("--sin-autocorte", action="store_true",
                     help="con --tiempos: no cortar la grabación al hacer silencio (cortás con Enter)")
